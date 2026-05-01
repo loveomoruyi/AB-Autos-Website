@@ -15,6 +15,7 @@
 
   // Set slow-motion playback rate (0.5 = half speed)
   heroVideo.playbackRate = 0.5;
+    heroVideo.loop = true;
 
   // Add active class to show video
   heroVideo.classList.add('active');
@@ -29,6 +30,7 @@
     setTimeout(function() {
       heroVideo.src = videoSources[currentIndex];
       heroVideo.playbackRate = 0.5;
+    heroVideo.loop = true;
       heroVideo.load();
       heroVideo.play().then(function() {
         heroVideo.classList.add('active');
@@ -53,6 +55,7 @@
   heroVideo.addEventListener('play', function() {
     if (heroVideo.playbackRate !== 0.5) {
       heroVideo.playbackRate = 0.5;
+    heroVideo.loop = true;
     }
   });
 
@@ -62,6 +65,7 @@
     currentIndex = (currentIndex + 1) % videoSources.length;
     heroVideo.src = videoSources[currentIndex];
     heroVideo.playbackRate = 0.5;
+    heroVideo.loop = true;
     heroVideo.load();
     heroVideo.play().catch(function(){});
     heroVideo.classList.add('active');
