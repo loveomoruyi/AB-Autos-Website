@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
+  <div class="signature-badge signature-top-left">Built by Love Omoruyi with Vision</div>
   <!-- ================= HERO SECTION ================= -->
 <section class="hero-section">
 
@@ -27,7 +28,7 @@
       </li>
 
       <li class="dropdown">
-        <a id="services-link" href="#">Service ▾</a>
+        <a id="services-link" href="#">Service â–¾</a>
         <ul class="dropdown-menu">
           <li><a id="tire-link" href="#">Tire Service</a></li>
           <li><a id="autobody-link" href="#">Autobody Service</a></li>
@@ -317,7 +318,7 @@ your vehicle?</h1>
     <div class="dash-box"><span>1</span></div>
     <div class="step-text">
       <h3>Tell us about your car</h3>
-      <p>Tell us your car’s specific features and condition.</p>
+      <p>Tell us your carâ€™s specific features and condition.</p>
     </div>
   </div>
 
@@ -346,7 +347,7 @@ your vehicle?</h1>
  <!-- ================= NEED CAR SECTION ================= -->
 <section class="need-car-section">
   <div class="need-text">
-    <h1>Need a Car or a Quick Fix? Let’s Talk.</h1>
+    <h1>Need a Car or a Quick Fix? Letâ€™s Talk.</h1>
     <p>
       Have questions about rentals, buying a car, or scheduling service?<br>
       Our team is ready to help you find the right option fast.
@@ -391,7 +392,7 @@ your vehicle?</h1>
   </div>
 
   <div class="footer-text">
-    <h1>© 2025 AB Autoz. All rights reserved.</h1>
+    <h1>Â© 2025 AB Autoz. All rights reserved.</h1>
   </div>
 </footer>
 
@@ -480,8 +481,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="days-header">${dayNames.map(d=>`<div>${d}</div>`).join("")}</div>
         <div class="days-grid">${days.join("")}</div>
         <div class="month-controls">
-          <button class="arrow-btn" data-dir="prev">◀</button>
-          <button class="arrow-btn" data-dir="next">▶</button>
+          <button class="arrow-btn" data-dir="prev">â—€</button>
+          <button class="arrow-btn" data-dir="next">â–¶</button>
         </div>
       </div>
     `;
@@ -725,7 +726,7 @@ document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
   }
 
   ABAutozBackend.saveVisitRequest(data);
-  alert("Request sent! We’ll contact you shortly.");
+  alert("Request sent! Weâ€™ll contact you shortly.");
   e.target.reset();
 });
 
@@ -733,5 +734,6 @@ document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
 
 </script>
 
+<div class="signature-badge signature-bottom-left">Built by Love Omoruyi with Vision</div>
 </body>
 </html>
