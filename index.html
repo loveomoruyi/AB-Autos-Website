@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AB Autoz</title>
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+<body>
+  <!-- ================= HERO SECTION ================= -->
+<section class="hero-section">
+
+  <header class="hero-header">
+    <div class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a id="rentals-link" href="#">Rentals</a></li>
+      <li><a id="garage-link" href="#">Garage</a></li>
+      <li><a id="gallery-link" href="#">Gallery</a></li>
+
+      <li>
+        <a id="logo-link" href="#" class="logo"></a>
+      </li>
+
+      <li class="dropdown">
+        <a id="services-link" href="#">Service ▾</a>
+        <ul class="dropdown-menu">
+          <li><a id="tire-link" href="#">Tire Service</a></li>
+          <li><a id="autobody-link" href="#">Autobody Service</a></li>
+          <li><a id="dealership-link" href="#">Dealership Service</a></li>
+        </ul>
+      </li>
+
+      <li><a id="about-link" href="#">About us</a></li>
+      <li><a id="contact-link" href="#">Contact</a></li>
+    </ul>
+  </header>
+
+  <div class="text">
+    <h1>Drive Your Dreams with <span class="t-color">AB Autoz</span></h1>
+  </div>
+
+     <!-- ================= BOOKING SECTION ================= -->
+  <section class="booking-section">
+    <div class="button-container">
+
+      <!-- Pick Up -->
+      <div class="location">
+        <h3>Pick Up</h3>
+        <div class="dropdown">
+          <input type="search" placeholder="Search Location" class="big-input" id="pickup-location" />
+          <ul class="dropdown-list" id="pickup-list"></ul>
+        </div>
+      </div>
+
+      <!-- Drop Off -->
+      <div class="location">
+        <h3>Drop Off</h3>
+        <div class="dropdown">
+          <input type="search" placeholder="Search Location" class="big-input" id="dropoff-location" />
+          <ul class="dropdown-list" id="dropoff-list"></ul>
+        </div>
+      </div>
+
+      <!-- Pick Up Date -->
+      <div class="return">
+        <h3>Pick Up Date</h3>
+        <div class="input-group" id="pickup-picker">
+          <span><img src="./image/Vector (4).png" alt=""></span>
+          <span id="pickup-date">Oct 18th</span>
+          <div class="popup" id="pickup-calendar"></div>
+        </div>
+
+        <div class="input-group" id="pickup-time-picker">
+          <span id="pickup-time">12:00 PM</span>
+          <div class="popup" id="pickup-time-popup"></div>
+        </div>
+      </div>
+
+      <!-- Return Date -->
+      <div class="return-date">
+        <h3>Return Date</h3>
+        <div class="input-group" id="return-picker">
+          <span><img src="./image/Vector (4).png" alt=""></span>
+          <span id="return-date">Oct 18th</span>
+          <div class="popup" id="return-calendar"></div>
+        </div>
+
+        <div class="input-group" id="return-time-picker">
+          <span id="return-time">12:00 PM</span>
+          <div class="popup" id="return-time-popup"></div>
+        </div>
+      </div>
+
+      <!-- Button -->
+      <div class="show-car">
+        <button type="button">Show Car</button>
+      </div>
+
+    </div>
+  </section>
+</section>
+
+  <!-- Second Section -->
+  <section class="second-section">
+    <h1>Your Complete Automotive Solution</h1>
+    <div class="second-container">
+      <div class="card-1">
+        <h2>Flexible Car Rentals</h2>
+        <p>From daily trips to long-term rentals,
+choose from our diverse fleet of <br>
+well-maintained vehicles.</p>
+<button>Book Now</button>
+      </div>
+      <div class="card-2">
+        <h2>Quality Vehicles for Sale</h2>
+        <p>Transparent pricing, flexible payment options, and full documentation support.</p>
+<button>Buy Now</button>
+      </div>
+      <div class="card-3">
+        <h2>Expert Auto Repairs</h2>
+        <p>Certified technicians, modern equipment, and parts ensure your vehicle gets the care it deserves.</p>
+<button>Book Now</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Collection Section -->
+<section class="collection-section">
+  <div class="hold-h1">
+    <h2>Explore our Collections</h2>
+  </div>
+
+  <div class="collection-container">
+    <!-- Image Area -->
+    <div class="image-area">
+      <!-- One box only -->
+      <div class="car-slide active">
+        <h1>ECONOMY</h1>
+        <div
+          class="car-image"
+          style="background-image: url('./image/image 7.png');"
+        ></div>
+      </div>
+
+      <div class="car-slide">
+        <h1>SEDANS</h1>
+        <div
+          class="car-image"
+          style="background-image: url('./image/6e5e10da-0515-4e94-a390-9f544e2d5efc 1.png');"
+        ></div>
+      </div>
+
+      <div class="car-slide">
+        <h1>SUVS</h1>
+        <div
+          class="car-image"
+          style="background-image: url('./image/image 8.png');"
+        ></div>
+      </div>
+
+      <div class="car-slide">
+        <h1>LUXURY</h1>
+        <div
+          class="car-image"
+          style="background-image: url('./image/image 9.png');"
+        ></div>
+      </div>
+
+      <div class="car-slide">
+        <h1>SPORTS</h1>
+        <div
+          class="car-image"
+          style="background-image: url('./image/image 10.png');"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="text-area">
+      <div class="flex-box category-btn" data-index="0">Economy</div>
+      <div class="flex-box category-btn" data-index="1">Sedans</div>
+      <div class="flex-box category-btn" data-index="2">SUVs</div>
+      <div class="flex-box category-btn" data-index="3">Luxury</div>
+      <div class="flex-box category-btn" data-index="4">Sport Cars</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- OUR FLEET SECTION -->
+<section class="our-fleet" id="our-fleet">
+  <div class="fleet-text">
+    <div class="hold-fleet">
+      <h2>Our Fleet</h2>
+    </div>
+    <div class="hold-link">
+      <a href="#">See all <span><img src="./image/Vector (3).png" alt=""></span></a>
+      <div class="border"></div>
+    </div>
+  </div>
+
+  <div class="fleet-image">
+
+    <!-- Fleet Item 1 -->
+    <div class="flex-fleet">
+      <div class="flex-fleet-image">
+        <img src="./image/Rectangle 3.png" alt="2025 Lamborghini Aventador SVJ Roadster">
+      </div>
+      <div class="flex-fleet-text">
+        <h2>2025 Lamborghini Aventador SVJ Roadster</h2>
+        <div class="fleet-info">
+          <div class="cash">$1,527,999</div>
+          <div class="date"><span><img src="./image/Vector (2).png" alt=""></span> 2025</div>
+        </div>
+        <button class="btn view-details" 
+          data-name="2025 Lamborghini Aventador SVJ Roadster"
+          data-image="./image/Rectangle 3.png"
+          data-price="$1,527,999"
+          data-year="2025"
+          data-engine="6.5L V12"
+          data-hp="770 HP"
+          data-speed="217 mph"
+          data-desc="Experience the ultimate blend of performance and design with the Lamborghini Aventador SVJ Roadster. This masterpiece features a V12 engine, superior aerodynamics, and an iconic open-top experience.">
+          View Details
+        </button>
+      </div>
+    </div>
+
+    <!-- Fleet Item 2 -->
+    <div class="flex-fleet">
+      <div class="flex-fleet-image">
+        <img src="./image/Rectangle 3 (1).png" alt="2023 Lamborghini Aventador SVJ Roadster">
+      </div>
+      <div class="flex-fleet-text">
+        <h2>2023 Lamborghini Aventador SVJ Roadster</h2>
+        <div class="fleet-info">
+          <div class="cash">$997,999</div>
+          <div class="date"><span><img src="./image/Vector (2).png" alt=""></span> 2023</div>
+        </div>
+        <button class="btn view-details" 
+          data-name="2023 Lamborghini Aventador SVJ Roadster"
+          data-image="./image/Rectangle 3 (1).png"
+          data-price="$997,999"
+          data-year="2023"
+          data-engine="6.5L V12"
+          data-hp="760 HP"
+          data-speed="215 mph"
+          data-desc="A refined evolution of Lamborghini excellence, the 2023 Aventador SVJ offers precision handling and striking aerodynamics for those who crave performance and prestige.">
+          View Details
+        </button>
+      </div>
+    </div>
+
+    <!-- Fleet Item 3 -->
+    <div class="flex-fleet">
+      <div class="flex-fleet-image">
+        <img src="./image/Rectangle 3 (2).png" alt="2021 Lamborghini Aventador SVJ Roadster">
+      </div>
+      <div class="flex-fleet-text">
+        <h2>2021 Lamborghini Aventador SVJ Roadster</h2>
+        <div class="fleet-info">
+          <div class="cash">$827,999</div>
+          <div class="date"><span><img src="./image/Vector (2).png" alt=""></span> 2021</div>
+        </div>
+        <button class="btn view-details" 
+          data-name="2021 Lamborghini Aventador SVJ Roadster"
+          data-image="./image/Rectangle 3 (2).png"
+          data-price="$827,999"
+          data-year="2021"
+          data-engine="6.5L V12"
+          data-hp="750 HP"
+          data-speed="213 mph"
+          data-desc="The 2021 SVJ Roadster embodies Lamborghini's racing DNA, combining pure power, exclusivity, and aggressive styling for an unmatched driving experience.">
+          View Details
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POPUP PANEL (keep it outside the section for correct layering) -->
+<!-- OUR FLEET POPUP -->
+<div class="fleet-popup-overlay">
+  <div class="fleet-popup">
+    <span class="fleet-close-btn">&times;</span>
+    <img src="" alt="Car image" class="fleet-popup-img">
+    <h2 class="fleet-popup-name"></h2>
+    <p class="fleet-popup-price"></p>
+    <p class="fleet-popup-year"></p>
+    <p class="fleet-popup-engine"></p>
+    <p class="fleet-popup-hp"></p>
+    <p class="fleet-popup-speed"></p>
+    <p class="fleet-popup-desc"></p>
+    <button class="fleet-book-now">Book Now</button>
+  </div>
+</div>
+
+
+
+ <!-- planning section -->
+  <section class="planning-section">
+    <div class="planning-hold">
+    <div class="planning-image">
+  <img src="./image/Rectangle 4.png" alt="Car planning preview">
+</div>
+
+    <div class="planning-text">
+      <h1>Planning to sell or trade <br>
+your vehicle?</h1>
+<section class="steps-section">
+  <div class="step-box">
+    <div class="dash-box"><span>1</span></div>
+    <div class="step-text">
+      <h3>Tell us about your car</h3>
+      <p>Tell us your car’s specific features and condition.</p>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="dash-box"><span>2</span></div>
+    <div class="step-text">
+      <h3>Get an Offer</h3>
+      <p>Our sales team will work to get you the best possible price for your vehicle, guaranteed!</p>
+    </div>
+  </div>
+
+  <div class="step-box">
+    <div class="dash-box"><span>3</span></div>
+    <div class="step-text">
+      <h3>Get top Dollar</h3>
+      <p>Same day cash payment, no listing fees or commissions. Zero risk transaction.</p>
+    </div>
+  </div>
+
+  <button class="step-btn">Sell my Car</button>
+</section>
+    </div>
+    </div>
+  </section>
+
+ <!-- ================= NEED CAR SECTION ================= -->
+<section class="need-car-section">
+  <div class="need-text">
+    <h1>Need a Car or a Quick Fix? Let’s Talk.</h1>
+    <p>
+      Have questions about rentals, buying a car, or scheduling service?<br>
+      Our team is ready to help you find the right option fast.
+    </p>
+  </div>
+
+  <div class="need-form">
+    <form class="booking-form">
+
+      <div class="form-row">
+        <button type="button" class="form-btn">
+          <span><img src="./image/Vector (4).png" alt=""></span> Choose Date
+        </button>
+
+        <button type="button" class="form-btn">
+          <span><img src="./image/Group 8.png" alt=""></span> Choose Time
+        </button>
+      </div>
+
+      <input type="text" class="form-input" placeholder="Email Address or Phone no." />
+
+      <textarea class="form-textarea" placeholder="Write your message here"></textarea>
+
+      <button class="form-btn-2">Book Visit</button>
+
+    </form>
+  </div>
+</section>
+
+   <!-- footer -->
+<footer>
+  <div class="footer-container">
+    <div class="footer-logo">
+      <img
+        src="./image/6fe57389916ebe8b674628caacb1bc7f982a4e59.png"
+        alt="AB Autoz Logo"
+      />
+      <!-- <h1>+1 832-764-4160</h1> -->
+    </div>
+
+    <button class="back-to-top">Back to Top</button>
+  </div>
+
+  <div class="footer-text">
+    <h1>© 2025 AB Autoz. All rights reserved.</h1>
+  </div>
+</footer>
+
+
+<script src="./js/backend.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  // ------------------ Page Load Animation ------------------
+  document.body.classList.add("page-enter");
+
+  // ------------------ Navigation ------------------
+  const pageMap = {
+    "rentals-link": "rental.html",
+    "garage-link": "garage.html",
+    "gallery-link": "gallery.html",
+    "services-link": "service.html",
+    "about-link": "aboutus.html",
+    "contact-link": "contact.html",
+    "logo-link": "index.html",
+    "tire-link":  "tire-service.html",
+    "autobody-link": "autobody.html",
+    "dealership-link": "dealership.html"
+    
+  };
+
+  const navLinks = document.querySelectorAll(".nav-links a, #logo-link");
+
+  navLinks.forEach(link => {
+    link.addEventListener("click", e => {
+      e.preventDefault();
+      const page = pageMap[link.id];
+      if (!page) return;
+      document.body.classList.add("page-exit");
+      setTimeout(() => {
+        window.location.assign(page);
+      }, 500);
+    });
+  });
+
+  // ------------------ Hamburger Menu ------------------
+  const hamburger = document.querySelector(".hamburger");
+  const navMenu = document.querySelector(".hero-header > ul");
+  if(hamburger && navMenu){
+    hamburger.addEventListener("click", ()=>{
+      hamburger.classList.toggle("active");
+      navMenu.classList.toggle("active");
+    });
+  }
+
+  
+
+  // ------------------ Calendar ------------------
+  const monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const dayNames = ["M","T","W","T","F","S","S"];
+  let pickupDate = new Date(2025,9,18), returnDate = new Date(2025,9,18);
+  let pickupMonth = new Date(2025,9), returnMonth = new Date(2025,9);
+
+  const pickupSpan = document.getElementById("pickup-date");
+  const returnSpan = document.getElementById("return-date");
+  const pickupCal = document.getElementById("pickup-calendar");
+  const returnCal = document.getElementById("return-calendar");
+
+  function formatDate(date){
+    const month = monthNames[date.getMonth()].slice(0,3);
+    return `${month} ${date.getDate()}th`;
+  }
+  function getDaysInMonth(date){ return new Date(date.getFullYear(), date.getMonth()+1, 0).getDate(); }
+  function getFirstDayOfMonth(date){ return (new Date(date.getFullYear(), date.getMonth(),1).getDay()+6)%7; }
+
+  function renderCalendar(container, currentMonth, selectedDate, onSelect){
+    const daysInMonth = getDaysInMonth(currentMonth);
+    const firstDay = getFirstDayOfMonth(currentMonth);
+    const days = [];
+    for(let i=0;i<firstDay;i++) days.push("<div></div>");
+    for(let d=1; d<=daysInMonth; d++){
+      const isSelected = selectedDate.getDate()===d &&
+        selectedDate.getMonth()===currentMonth.getMonth() &&
+        selectedDate.getFullYear()===currentMonth.getFullYear();
+      days.push(`<button class="${isSelected?"selected":""}" data-day="${d}">${d}</button>`);
+    }
+    container.innerHTML = `
+      <div class="calendar">
+        <h3>${monthNames[currentMonth.getMonth()]} ${currentMonth.getFullYear()}</h3>
+        <div class="days-header">${dayNames.map(d=>`<div>${d}</div>`).join("")}</div>
+        <div class="days-grid">${days.join("")}</div>
+        <div class="month-controls">
+          <button class="arrow-btn" data-dir="prev">◀</button>
+          <button class="arrow-btn" data-dir="next">▶</button>
+        </div>
+      </div>
+    `;
+
+    container.querySelectorAll(".days-grid button").forEach(btn=>{
+      btn.addEventListener("click", ()=>onSelect(Number(btn.dataset.day)));
+    });
+
+    container.querySelectorAll(".arrow-btn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const dir = btn.dataset.dir;
+        if(container.id==="pickup-calendar"){
+          pickupMonth = new Date(pickupMonth.getFullYear(), pickupMonth.getMonth()+(dir==="next"?1:-1));
+          renderPickupCalendar();
+        } else {
+          returnMonth = new Date(returnMonth.getFullYear(), returnMonth.getMonth()+(dir==="next"?1:-1));
+          renderReturnCalendar();
+        }
+      });
+    });
+  }
+
+  function renderPickupCalendar(){ renderCalendar(pickupCal,pickupMonth,pickupDate,(day)=>{
+    pickupDate = new Date(pickupMonth.getFullYear(), pickupMonth.getMonth(), day);
+    pickupSpan.textContent = formatDate(pickupDate);
+    pickupCal.classList.remove("active");
+  }); }
+  function renderReturnCalendar(){ renderCalendar(returnCal,returnMonth,returnDate,(day)=>{
+    returnDate = new Date(returnMonth.getFullYear(), returnMonth.getMonth(), day);
+    returnSpan.textContent = formatDate(returnDate);
+    returnCal.classList.remove("active");
+  }); }
+
+  renderPickupCalendar();
+  renderReturnCalendar();
+
+  // ------------------ Time Picker ------------------
+  const pickupTimePopup = document.getElementById("pickup-time-popup");
+  const returnTimePopup = document.getElementById("return-time-popup");
+  const pickupTimeSpan = document.getElementById("pickup-time");
+  const returnTimeSpan = document.getElementById("return-time");
+
+  function generateTimes(){
+    const times=[],suffix=["AM","PM"];
+    for(let i=0;i<24;i++){
+      const h=i%12===0?12:i%12;
+      const s=suffix[Math.floor(i/12)];
+      times.push(`${h}:00 ${s}`, `${h}:30 ${s}`);
+    }
+    return times;
+  }
+
+  function renderTimeGrid(container, span){
+    const times = generateTimes();
+    container.innerHTML=`<h3>Select Time</h3><div class="time-grid">${times.map(t=>`<div class="time-option ${t===span.textContent?"selected":""}">${t}</div>`).join("")}</div>`;
+    container.querySelectorAll(".time-option").forEach(opt=>{
+      opt.addEventListener("click", ()=>{
+        span.textContent = opt.textContent;
+        container.classList.remove("active");
+      });
+    });
+  }
+
+  renderTimeGrid(pickupTimePopup, pickupTimeSpan);
+  renderTimeGrid(returnTimePopup, returnTimeSpan);
+
+  function closeAllPopups(){ document.querySelectorAll(".popup").forEach(p=>p.classList.remove("active")); }
+  [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].forEach(picker=>{
+    picker.addEventListener("click", e=>{
+      e.stopPropagation();
+      const popup = picker.querySelector(".popup");
+      const isActive = popup.classList.contains("active");
+      closeAllPopups();
+      if(!isActive) popup.classList.add("active");
+    });
+  });
+
+  document.body.addEventListener("click", closeAllPopups);
+
+  // ------------------ Location Dropdowns ------------------
+  const pickupInput = document.getElementById("pickup-location");
+  const dropoffInput = document.getElementById("dropoff-location");
+  const pickupList = document.getElementById("pickup-list");
+  const dropoffList = document.getElementById("dropoff-list");
+  const locations = ["Lagos Airport","Abuja Central","Port Harcourt Terminal","Enugu Station","Kano Garage","Ibadan Junction","Benin City Center","Owerri Downtown"];
+
+  function showDropdown(input,list){
+    const query = input.value.toLowerCase();
+    const filtered = locations.filter(l=>l.toLowerCase().includes(query));
+    list.innerHTML = filtered.map(loc=>`<li>${loc}</li>`).join("");
+    list.classList.add("active");
+    list.querySelectorAll("li").forEach(item=>{
+      item.addEventListener("click", ()=>{
+        input.value = item.textContent;
+        list.classList.remove("active");
+      });
+    });
+  }
+
+  [pickupInput, dropoffInput].forEach(input=>{
+    const list = input===pickupInput?pickupList:dropoffList;
+    input.addEventListener("input", ()=>showDropdown(input,list));
+    input.addEventListener("focus", ()=>showDropdown(input,list));
+  });
+
+  document.body.addEventListener("click", e=>{
+    if(!e.target.closest(".dropdown")){
+      pickupList.classList.remove("active");
+      dropoffList.classList.remove("active");
+    }
+  });
+
+  // ------------------ Car Slideshow ------------------
+  const carSlides = document.querySelectorAll(".car-slide");
+  const carButtons = document.querySelectorAll(".category-btn");
+  let currentSlide = 0;
+  let slideInterval;
+
+  function showCarSlide(index){
+    carSlides.forEach((slide,i)=>slide.classList.toggle("active",i===index));
+    carButtons.forEach((btn,i)=>btn.classList.toggle("active",i===index));
+    currentSlide = index;
+  }
+
+  function nextCarSlide(){ showCarSlide((currentSlide+1)%carSlides.length); }
+  function startSlideShow(){ slideInterval=setInterval(nextCarSlide,5000); }
+
+  carButtons.forEach((btn,index)=>{
+    btn.addEventListener("click", ()=>{
+      clearInterval(slideInterval);
+      showCarSlide(index);
+      startSlideShow();
+    });
+  });
+
+  showCarSlide(0);
+  startSlideShow();
+
+  // ------------------ Fleet Popup (slide-in from left inside our-fleet) ------------------
+  const fleetButtons = document.querySelectorAll(".view-details");
+  const popupOverlay = document.querySelector(".fleet-popup-overlay");
+  const popup = document.querySelector(".fleet-popup");
+  const closeBtn = document.querySelector(".fleet-close-btn");
+  const bookNowBtn = document.querySelector(".fleet-book-now");
+
+  const popupImg = document.querySelector(".fleet-popup-img");
+  const popupName = document.querySelector(".fleet-popup-name");
+  const popupPrice = document.querySelector(".fleet-popup-price");
+  const popupYear = document.querySelector(".fleet-popup-year");
+  const popupEngine = document.querySelector(".fleet-popup-engine");
+  const popupHp = document.querySelector(".fleet-popup-hp");
+  const popupSpeed = document.querySelector(".fleet-popup-speed");
+  const popupDesc = document.querySelector(".fleet-popup-desc");
+
+  fleetButtons.forEach(button=>{
+    button.addEventListener("click", ()=>{
+      popupName.textContent = button.dataset.name;
+      popupImg.src = button.dataset.image;
+      popupPrice.textContent = `Price: ${button.dataset.price}`;
+      popupYear.textContent = `Year: ${button.dataset.year}`;
+      popupEngine.textContent = `Engine: ${button.dataset.engine}`;
+      popupHp.textContent = `Power: ${button.dataset.hp}`;
+      popupSpeed.textContent = `Top Speed: ${button.dataset.speed}`;
+      popupDesc.textContent = button.dataset.desc;
+
+      const fleetSection = document.getElementById("our-fleet");
+      if(fleetSection){
+        fleetSection.style.position = "relative"; // ensure relative container
+        fleetSection.appendChild(popupOverlay);
+        popupOverlay.style.display="flex";
+        requestAnimationFrame(()=>popup.classList.add("show"));
+        fleetSection.scrollIntoView({behavior:"smooth", block:"center"});
+      }
+    });
+  });
+
+  const closePopup = ()=>{
+    popup.classList.remove("show");
+    setTimeout(()=>popupOverlay.style.display="none", 400);
+  };
+
+  closeBtn.addEventListener("click", closePopup);
+  popupOverlay.addEventListener("click", e=>{
+    if(e.target === popupOverlay) closePopup();
+  });
+
+  bookNowBtn.addEventListener("click", ()=>{
+    closePopup();
+    const bookingSection = document.querySelector(".need-car-section");
+    if(bookingSection) bookingSection.scrollIntoView({behavior:"smooth", block:"start"});
+  });
+
+});
+
+bookNowBtn.addEventListener("click", () => {
+  const booking = {
+    name: popupName.textContent,
+    price: popupPrice.textContent,
+    year: popupYear.textContent
+  };
+
+  ABAutozBackend.saveFleetBooking(booking);
+  alert("Car reserved successfully!");
+  closePopup();
+});
+
+
+/* ---------- SAVE MAIN BOOKING ---------- */
+document.querySelector(".show-car button")?.addEventListener("click", () => {
+  const bookingData = {
+    pickupLocation: document.getElementById("pickup-location").value,
+    dropoffLocation: document.getElementById("dropoff-location").value,
+    pickupDate: document.getElementById("pickup-date").textContent,
+    pickupTime: document.getElementById("pickup-time").textContent,
+    returnDate: document.getElementById("return-date").textContent,
+    returnTime: document.getElementById("return-time").textContent
+  };
+
+  if (!bookingData.pickupLocation || !bookingData.dropoffLocation) {
+    alert("Please select pickup and dropoff locations.");
+    return;
+  }
+
+  ABAutozBackend.saveBooking(bookingData);
+  alert("Booking saved successfully!");
+});
+
+
+/* ---------- SAVE VISIT REQUEST ---------- */
+document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const data = {
+    contact: document.querySelector(".form-input").value,
+    message: document.querySelector(".form-textarea").value
+  };
+
+  if (!data.contact) {
+    alert("Please enter your email or phone number.");
+    return;
+  }
+
+  ABAutozBackend.saveVisitRequest(data);
+  alert("Request sent! We’ll contact you shortly.");
+  e.target.reset();
+});
+
+
+
+</script>
+
+</body>
+</html>
