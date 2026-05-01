@@ -23,19 +23,48 @@ html, body {
 .hero-section {
   width: 100%;
   height: 100vh;
-  background-image: url(../image/5f83109f6ed902339368d5fa0349e0d179a368e8.gif);
-  background-position: center;
-  background-size: cover;
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
 }
 
-/* ===========================
-   HEADER
+.hero-video-wrapper {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+}
+
+.hero-bg-video {
+  position: absolute;
+  top: 50%; left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto; height: auto;
+  transform: translate(-50%, -50%);
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1.2s ease-in-out;
+}
+
+.hero-bg-video.active {
+  opacity: 1;
+}
+
+.hero-video-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+  z-index: 1;
+}
+
    =========================== */
 .hero-header {
   width: 90%;
   margin: auto;
   position: relative;
-  z-index: 200;
+  z-index: 10;
   padding-top: 20px;
 }
 
@@ -106,6 +135,8 @@ html, body {
    HERO TEXT
    =========================== */
 .text {
+    position: relative;
+    z-index: 5;
   width: 90%;
   text-align: center;
   margin-top: 8%;

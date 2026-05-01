@@ -59,3 +59,5 @@ window.ABAutozBackend = {
   window.popupPrice = popupPrice;
   window.popupYear = popupYear;
   window.closePopup = closePopup;
+
+
