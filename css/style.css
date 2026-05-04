@@ -2,15 +2,15 @@
    AB AUTOS - ELECTRIC BLUE THEME
    ============================================ */
 :root {
-    --electric-blue: #0EA5E9;
-    --electric-blue-bright: #38BDF8;
-    --electric-blue-deep: #0284C7;
-    --electric-blue-glow: #7DD3FC;
-    --electric-blue-subtle: rgba(14, 165, 233, 0.15);
-    --dark-navy: #0A0F1E;
-    --dark-surface: #0F172A;
-    --dark-surface-light: #1E293B;
-    --dark-border: #1E3A5F;
+    --electric-blue: #D4A843;
+    --electric-blue-bright: #E8C547;
+    --electric-blue-deep: #B8922E;
+    --electric-blue-glow: #EDD478;
+    --electric-blue-subtle: rgba(212, 168, 67, 0.15);
+    --dark-navy: #0A0A0A;
+    --dark-surface: #111111;
+    --dark-surface-light: #1A1A1A;
+    --dark-border: #1A1500;
     --text-primary: #F8FAFC;
     --text-secondary: #94A3B8;
     --text-muted: #64748B;
@@ -43,7 +43,7 @@ html, body {
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background-color: #0A0F1E;
+  background-color: #0A0A0A;
 }
 
 .hero-video-wrapper {
@@ -54,6 +54,7 @@ html, body {
 }
 
 .hero-bg-video {
+    opacity: 1 !important;
   position: absolute;
   top: 50%; left: 50%;
   min-width: 100%;
@@ -61,7 +62,7 @@ html, body {
   width: auto; height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 1.2s ease-in-out;
 }
 
@@ -73,7 +74,7 @@ html, body {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.6) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.45) 100%);
   z-index: 1;
 }
 
@@ -103,8 +104,8 @@ html, body {
 }
 .logo {
   display: block;
-  width: 120px;   /* set your logo width */
-  height: 50px;   /* set your logo height */
+  width: 150px;   /* set your logo width */
+  height: 62px;    /* set your logo height */
   /* background-image: url('./image/logo.png'); */
   background-size: contain;
   background-repeat: no-repeat;
@@ -166,7 +167,7 @@ html, body {
 }
 
 .t-color {
-  color: #0EA5E9;
+  color: #D4A843;
 }
 
 /* ===========================
@@ -216,7 +217,7 @@ h3 {
 }
 
 .input-group:hover {
-  border-color: #0EA5E9;
+  border-color: #D4A843;
 }
 
 /* === COLLAPSIBLE POPUP === */
@@ -286,7 +287,7 @@ h3 {
 }
 
 .days-grid button.selected {
-  background: #0EA5E9;
+  background: #D4A843;
   color: #000;
   font-weight: 600;
 }
@@ -300,7 +301,7 @@ h3 {
 }
 
 .arrow-btn {
-  background: #0EA5E9;
+  background: #D4A843;
   color: #fff;
   padding: 4px 8px;
   border-radius: 6px;
@@ -311,7 +312,7 @@ h3 {
 }
 
 .arrow-btn:hover {
-  background: #0284C7;
+  background: #B8922E;
 }
 
 /* === TIME PICKER === */
@@ -325,7 +326,7 @@ h3 {
 .time-option {
   padding: 10px;
   border-radius: 8px;
-  border: 1px solid #1E3A5F;
+  border: 1px solid #1A1500;
   text-align: center;
   font-size: 13px;
   transition: 0.3s;
@@ -337,7 +338,7 @@ h3 {
 }
 
 .time-option.selected {
-  background: #0EA5E9;
+  background: #D4A843;
   color: #000;
   font-weight: 600;
   border: none;
@@ -345,7 +346,7 @@ h3 {
 
 /* === MAIN BUTTON === */
 .btn-main {
-  background: #0EA5E9;
+  background: #D4A843;
   color: #000;
   font-weight: 600;
   padding: 10px 24px;
@@ -356,7 +357,7 @@ h3 {
 }
 
 .btn-main:hover {
-  background: #0284C7;
+  background: #B8922E;
 }
 
 /* === DATE & TIME FLEX LAYOUT === */
@@ -405,7 +406,7 @@ h3 {
   transition: 0.3s;
 }
 .big-input:focus {
-  border-color: #0EA5E9;
+  border-color: #D4A843;
   outline: none;
 }
 
@@ -421,7 +422,7 @@ h3 {
   left: 0;
   width: 100%;
   background: #fff;
-  border: 1px solid #1E3A5F;
+  border: 1px solid #1A1500;
   border-radius: 8px;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
   margin-top: 4px;
@@ -438,7 +439,7 @@ h3 {
   transition: background 0.2s;
 }
 .dropdown-list li:hover {
-  background: #0EA5E9;
+  background: #D4A843;
   color: #000;
 }
 .dropdown-list.active {
@@ -454,7 +455,7 @@ h3 {
 .show-car button {
   width: 100%;
   height: 45px;
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   color: #000;
   font-family: "Inter", sans-serif;
   font-weight: 600;
@@ -507,7 +508,7 @@ h3 {
     top: 0;
     left: 0;
     width: 100%;
-    background: #0A0F1E;
+    background: #0A0A0A;
 
     flex-direction: column;
     align-items: center;
@@ -611,7 +612,7 @@ h3 {
     width: 100%;
     font-size: 18px;
     text-align: left;
-    color: #0EA5E9;
+    color: #D4A843;
   }
 
   .logo {
@@ -658,7 +659,7 @@ h3 {
 .second-section {
   width: 100%;
   height: 100vh;
-  background-color: #0A0F1E;
+  background-color: #0A0A0A;
 }
 
 .second-section > h1 {
@@ -726,11 +727,11 @@ h3 {
   width: 175px;
   height: 48px;
   background-color: transparent;
-  border: 2px solid #0EA5E9;
+  border: 2px solid #D4A843;
   font-family: inter;
   font-weight: 600;
   font-size: 18px;
-  color: #0EA5E9;
+  color: #D4A843;
   margin-top: 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -739,7 +740,7 @@ h3 {
 .card-1 > button:hover,
 .card-2 > button:hover,
 .card-3 > button:hover {
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   color: #000000;
   transition: 0.3s;
 }
@@ -864,7 +865,7 @@ h3 {
 .collection-section {
   width: 100%;
   height: 100vh;
-  background-color: #0F172A;
+  background-color: #111111;
   padding-top: 50px;
 }
 
@@ -874,7 +875,7 @@ h3 {
   border-radius: 20px;
   width: 23%;
   margin-left: 500px;
-  background-color: #1E293B;
+  background-color: #1A1A1A;
 }
 
 .hold-h1 > h2 {
@@ -932,8 +933,8 @@ h3 {
   color: #ffffff;
   text-shadow: 0 4px 20px rgba(5, 10, 25, 0.45);
   margin-bottom: 20px;
-  position: absolute;
-  top: 30px;
+  position: relative;
+  z-index: 3;
 }
 
 .car-image {
@@ -943,8 +944,8 @@ h3 {
   background-size: contain;
   background-repeat: no-repeat;
   border-radius: 15px;
-  position: absolute;
-  top: 120px;
+  position: relative;
+  z-index: 1;
 }
 
 .text-area {
@@ -956,7 +957,7 @@ h3 {
 }
 
 .flex-box {
-  border: 1px solid #1E3A5F;
+  border: 1px solid #1A1500;
   border-radius: 10px;
   color: #f5f5f5;
   text-align: center;
@@ -967,8 +968,8 @@ h3 {
 }
 
 .flex-box.active {
-  border: 3px solid #0EA5E9;
-  color: #0EA5E9;
+  border: 3px solid #D4A843;
+  color: #D4A843;
 }
 
 /* ============================
@@ -1013,7 +1014,7 @@ h3 {
   }
 
   .car-image {
-    top: 100px;
+    margin-top: 0;
   }
 }
 
@@ -1067,7 +1068,7 @@ h3 {
 
   .car-image {
     height: 40vh;
-    top: 90px;
+    margin-top: 0;
   }
 }
 
@@ -1090,12 +1091,12 @@ h3 {
 
   .car-slide h1 {
     font-size: 50px;
-    top: 10px;
+    margin-top: 0;
   }
 
   .car-image {
     height: 35vh;
-    top: 60px;
+    margin-top: 0;
   }
 
   .text-area {
@@ -1118,7 +1119,7 @@ h3 {
   width: 100%;
   height: fit-content;
   /* border: 1px solid red; */
-  background-color: #0A0F1E;
+  background-color: #0A0A0A;
   padding-top: 90px;
   padding-left: 70px;
   padding-bottom: 50px;
@@ -1157,14 +1158,14 @@ h3 {
   font-family: inter;
   font-weight: 400;
   font-size: 20px;
-  color: #0EA5E9;
+  color: #D4A843;
   text-decoration: none;
 }
 
 .hold-link > .border{
   width: 100%;
   height: 2px;
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   margin-top: 2px;
 }
 
@@ -1183,10 +1184,10 @@ h3 {
 .flex-fleet {
   width: 32%;
   height: 65vh;
-  border: 1px solid #1E293B;
+  border: 1px solid #1A1A1A;
   border-radius: 20px;
   overflow: hidden;
-  background-color: #0F172A;
+  background-color: #111111;
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -1223,7 +1224,7 @@ h3 {
   font-family: inter;
   font-weight: 500;
   font-size: 20px;
-  border-bottom: 2px solid #1E293B;
+  border-bottom: 2px solid #1A1A1A;
   padding-bottom: 5px;
 }
 
@@ -1248,18 +1249,18 @@ h3 {
   color: #FAFAFA;
    padding: 5px 15px;
    border-radius: 10px;
-   background-color: #1E293B;
+   background-color: #1A1A1A;
 }
 
 .btn {
   width: 100%;
   height: 48px;
   background-color: transparent;
-  color: #0EA5E9;
+  color: #D4A843;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  border: 2px solid #0EA5E9;
+  border: 2px solid #D4A843;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 30px;
@@ -1268,7 +1269,7 @@ h3 {
 
 /* Hover effect */
 .btn:hover {
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   color: #000000;
 }
 
@@ -1325,7 +1326,7 @@ h3 {
 
 .close-btn {
   font-size: 28px;
-  color: #0EA5E9;
+  color: #D4A843;
   cursor: pointer;
   align-self: flex-end;
   transition: transform 0.2s ease;
@@ -1340,11 +1341,11 @@ h3 {
   width: 100%;
   height: 48px;
   background-color: transparent;
-  color: #0EA5E9;
+  color: #D4A843;
   font-family: "Inter", sans-serif;
   font-weight: 500;
   font-size: 16px;
-  border: 2px solid #0EA5E9;
+  border: 2px solid #D4A843;
   border-radius: 10px;
   cursor: pointer;
   margin-top: 30px;
@@ -1352,7 +1353,7 @@ h3 {
 }
 
 .btn:hover {
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   color: white;
 }
 
@@ -1513,7 +1514,7 @@ h3 {
 .planning-section{
   width: 100%;
   height: 100vh;
-  background-color: #0A0F1E;
+  background-color: #0A0A0A;
   display: flex;
   justify-content: center;
   padding-top: 50px;
@@ -1572,12 +1573,12 @@ h3 {
 .dash-box {
   width: 55px;
   height: 55px;
-  border: 2px dashed #0EA5E9;
+  border: 2px dashed #D4A843;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #0EA5E9;
+  color: #D4A843;
   font-size: 22px;
   font-weight: 600;
   flex-shrink: 0;
@@ -1599,7 +1600,7 @@ h3 {
 }
 
 .step-btn {
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   color: #000000;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -1765,7 +1766,7 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #0A0F1E;
+  background-color: #0A0A0A;
   font-family: inter;
 }
 
@@ -1819,10 +1820,10 @@ h3 {
 .form-btn {
   flex: 1;
   height: 48px;
-  background-color: #0F172A;
-  border: 1px solid #1E3A5F;
+  background-color: #111111;
+  border: 1px solid #1A1500;
   border-radius: 8px;
-  color: #0EA5E9;
+  color: #D4A843;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
@@ -1839,8 +1840,8 @@ h3 {
 .form-input,
 .form-textarea {
   width: 100%;
-  background-color: #0F172A;
-  border: 1px solid #1E3A5F;
+  background-color: #111111;
+  border: 1px solid #1A1500;
   border-radius: 8px;
   padding: 12px;
   color: #fff;
@@ -1853,7 +1854,7 @@ h3 {
 
 .form-input:focus,
 .form-textarea:focus {
-  border-color: #0284C7;
+  border-color: #B8922E;
 }
 
 /* Textarea */
@@ -1865,7 +1866,7 @@ h3 {
 .form-btn-2 {
   width: 40%;
   height: 55px;
-  background-color: #0EA5E9;
+  background-color: #D4A843;
   color: #000;
   font-family: 'Inter', sans-serif;
   font-weight: 600;
@@ -2064,13 +2065,13 @@ footer {
 
 .footer-logo h1 {
   font-size: 18px;
-  color: #0EA5E9;
+  color: #D4A843;
   font-weight: 500;
 }
 
 /* Back to Top button */
 .back-to-top {
-  background: #0EA5E9;
+  background: #D4A843;
   color: #000;
   border: none;
   border-radius: 10px;
@@ -2083,7 +2084,7 @@ footer {
 
 .back-to-top:hover {
   background: transparent;
-  border: 2px solid #0EA5E9;
+  border: 2px solid #D4A843;
   color: #FFFFFF;
 }
 
@@ -2260,7 +2261,7 @@ header ul li a{
 }
 
 header ul li a:hover{
-    color: #0EA5E9;
+    color: #D4A843;
     transition: 0.3s ease-in-out;
 }
 
@@ -2502,7 +2503,7 @@ body.page-enter {
 .btn-primary,
 .hero-content .btn,
 .cta-btn {
-    box-shadow: 0 0 15px rgba(14, 165, 233, 0.3), 0 0 30px rgba(14, 165, 233, 0.1);
+    box-shadow: 0 0 15px rgba(212, 168, 67, 0.3), 0 0 30px rgba(212, 168, 67, 0.1);
     transition: all 0.3s ease;
 }
 
@@ -2510,15 +2511,15 @@ body.page-enter {
 .btn-primary:hover,
 .hero-content .btn:hover,
 .cta-btn:hover {
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.5), 0 0 40px rgba(14, 165, 233, 0.2);
-    background: #38BDF8 !important;
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.5), 0 0 40px rgba(212, 168, 67, 0.2);
+    background: #E8C547 !important;
     transform: translateY(-1px);
 }
 
 /* Electric accent on the brand name / t-color span */
 .t-color {
-    color: #38BDF8 !important;
-    text-shadow: 0 0 20px rgba(14, 165, 233, 0.4), 0 0 40px rgba(14, 165, 233, 0.15);
+    color: #E8C547 !important;
+    text-shadow: 0 0 20px rgba(212, 168, 67, 0.4), 0 0 40px rgba(212, 168, 67, 0.15);
 }
 
 /* Subtle electric glow on cards/sections hover */
@@ -2526,34 +2527,34 @@ body.page-enter {
 .service-card:hover,
 .feature-card:hover,
 .review-card:hover {
-    border-color: rgba(14, 165, 233, 0.4) !important;
-    box-shadow: 0 0 20px rgba(14, 165, 233, 0.1), 0 4px 20px rgba(5, 10, 25, 0.5);
+    border-color: rgba(212, 168, 67, 0.4) !important;
+    box-shadow: 0 0 20px rgba(212, 168, 67, 0.1), 0 4px 20px rgba(5, 10, 25, 0.5);
 }
 
 /* Hero section overlay with subtle blue tint */
 .hero-section::after,
 .hero-overlay {
-    background: linear-gradient(135deg, rgba(5, 10, 25, 0.85) 0%, rgba(10, 15, 30, 0.75) 50%, rgba(14, 165, 233, 0.05) 100%) !important;
+    background: linear-gradient(135deg, rgba(5, 10, 25, 0.85) 0%, rgba(10, 15, 30, 0.75) 50%, rgba(212, 168, 67, 0.05) 100%) !important;
 }
 
 /* Navigation/header subtle bottom glow */
 header,
 .navbar,
 nav {
-    border-bottom: 1px solid rgba(14, 165, 233, 0.15);
+    border-bottom: 1px solid rgba(212, 168, 67, 0.15);
 }
 
 /* Links with electric blue */
 a:hover {
-    color: #38BDF8;
+    color: #E8C547;
 }
 
 /* Input fields with electric blue focus */
 input:focus,
 textarea:focus,
 select:focus {
-    border-color: #0EA5E9 !important;
-    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+    border-color: #D4A843 !important;
+    box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
     outline: none;
 }
 
@@ -2563,27 +2564,234 @@ select:focus {
 }
 
 ::-webkit-scrollbar-track {
-    background: #0A0F1E;
+    background: #0A0A0A;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #1E293B;
+    background: #1A1A1A;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #0EA5E9;
+    background: #D4A843;
 }
 
 /* Selection highlight */
 ::selection {
-    background: rgba(14, 165, 233, 0.3);
+    background: rgba(212, 168, 67, 0.3);
     color: #F8FAFC;
 }
 
 /* Signature badge update */
 .signature-badge {
-    background: linear-gradient(135deg, #0F172A, #1E293B) !important;
-    border: 1px solid rgba(14, 165, 233, 0.2) !important;
+    background: linear-gradient(135deg, #111111, #1A1A1A) !important;
+    border: 1px solid rgba(212, 168, 67, 0.2) !important;
     color: #94A3B8 !important;
 }
+
+/* === AB AUTOS Professional Dealership Black & Gold Theme === */
+:root {
+  --gold-primary: #D4A843;
+  --gold-light: #E8C547;
+  --gold-dark: #B8922E;
+  --gold-glow: rgba(212, 168, 67, 0.3);
+  --black-bg: #0A0A0A;
+  --black-card: #141414;
+  --black-surface: #1A1A1A;
+  --text-white: #F5F5F5;
+  --text-gray: #AAAAAA;
+}
+a:hover, .nav-link:hover, .nav-link.active { color: var(--gold-primary) !important; }
+.btn-primary, .book-btn, .submit-btn, button[type="submit"] {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold-primary), var(--gold-light)) !important;
+  color: #000 !important; border: none !important; font-weight: 700 !important;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.btn-primary:hover, .book-btn:hover, .submit-btn:hover, button[type="submit"]:hover {
+  background: linear-gradient(135deg, var(--gold-primary), var(--gold-light), #F0D060) !important;
+  box-shadow: 0 0 20px var(--gold-glow), 0 4px 15px rgba(0,0,0,0.3) !important;
+  transform: translateY(-2px);
+}
+.car-card, .service-card, .feature-card, .review-card {
+  background: var(--black-card) !important;
+  border: 1px solid rgba(212, 168, 67, 0.15) !important; border-radius: 12px;
+}
+.car-card:hover, .service-card:hover, .feature-card:hover, .review-card:hover {
+  border-color: var(--gold-primary) !important;
+  box-shadow: 0 0 25px var(--gold-glow), 0 8px 25px rgba(0,0,0,0.4) !important;
+}
+header, .navbar, nav {
+  background: rgba(10, 10, 10, 0.95) !important;
+  border-bottom: 1px solid rgba(212, 168, 67, 0.2) !important;
+  backdrop-filter: blur(10px);
+}
+.hero-section::after, .hero-overlay {
+  background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(212,168,67,0.08) 100%) !important;
+}
+footer { background: #0A0A0A !important; border-top: 1px solid rgba(212, 168, 67, 0.2) !important; }
+input, textarea, select {
+  background: var(--black-surface) !important;
+  border: 1px solid rgba(212, 168, 67, 0.2) !important;
+  color: var(--text-white) !important; border-radius: 8px;
+}
+input:focus, textarea:focus, select:focus {
+  border-color: var(--gold-primary) !important;
+  box-shadow: 0 0 10px var(--gold-glow) !important; outline: none;
+}
+body { color: var(--text-white); background: var(--black-bg); }
+.t-color, .brand-name, .logo-text {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-primary), var(--gold-dark));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+#hero-video { filter: brightness(0.7) contrast(1.1); }
+.section-title::after, h2::after {
+  background: linear-gradient(90deg, transparent, var(--gold-primary), transparent) !important;
+}
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0A0A0A; }
+::-webkit-scrollbar-thumb { background: var(--gold-dark); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-primary); }
+
+/* Car section video replacements - looping slow-motion placeholders */
+video.car-image.car-video {
+  width: 95%;
+  height: 50vh;
+  object-fit: cover;
+  border-radius: 15px;
+  position: relative;
+  z-index: 1;
+  display: block;
+  background: #000;
+}
+
+
+/* === DATE PICKER DARK THEME FIX === */
+.calendar h3, .popup h3 {
+    color: #D4A843 !important;
+}
+
+.days-header span, .days-header div {
+    color: #B8922E !important;
+    font-weight: 600;
+}
+
+.days-grid span, .days-grid div {
+    color: #e0e0e0;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.days-grid span:hover, .days-grid div:hover {
+    background: rgba(212, 168, 67, 0.2);
+    color: #E8C547;
+}
+
+.days-grid span.selected, .days-grid div.selected, .days-grid .selected {
+    background: #D4A843 !important;
+    color: #000 !important;
+    font-weight: 700;
+    border-radius: 6px;
+}
+
+.days-grid span.today, .days-grid div.today, .days-grid .today {
+    border: 2px solid #D4A843;
+    color: #E8C547;
+}
+
+.days-grid span.empty, .days-grid div.empty,
+.days-grid span.disabled, .days-grid div.disabled {
+    color: #555 !important;
+    cursor: default;
+}
+
+.month-controls button, .month-controls span,
+.arrow-btn, .prev-month, .next-month {
+    color: #D4A843 !important;
+    background: transparent !important;
+    border: 1px solid #B8922E !important;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.month-controls button:hover, .arrow-btn:hover,
+.prev-month:hover, .next-month:hover {
+    background: rgba(212, 168, 67, 0.2) !important;
+    color: #E8C547 !important;
+}
+
+.month-controls h3, .month-controls span.month-label,
+.month-year, .calendar-header {
+    color: #D4A843 !important;
+}
+
+.time-grid, .time-options {
+    background: #1a1a1a;
+    color: #E8C547;
+}
+
+.time-grid span, .time-grid div, .time-options span,
+.time-options div, .time-options li, .time-slot {
+    color: #e0e0e0;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+}
+
+.time-grid span:hover, .time-grid div:hover,
+.time-options span:hover, .time-options div:hover,
+.time-options li:hover, .time-slot:hover {
+    background: rgba(212, 168, 67, 0.2);
+    color: #E8C547;
+}
+
+.time-grid span.selected, .time-grid div.selected,
+.time-options .selected, .time-slot.selected {
+    background: #D4A843 !important;
+    color: #000 !important;
+    font-weight: 700;
+}
+
+#pickup-date, #return-date, #pickup-time, #return-time {
+    color: #E8C547;
+    font-weight: 500;
+}
+
+.input-group img, #pickup-picker img, #return-picker img {
+    filter: brightness(0) invert(0.8) sepia(1) saturate(3) hue-rotate(15deg);
+}
+
+.dropdown-list {
+    background: #1a1a1a !important;
+    border: 1px solid #B8922E;
+    color: #e0e0e0;
+}
+
+.dropdown-list li {
+    color: #e0e0e0;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dropdown-list li:hover {
+    background: rgba(212, 168, 67, 0.2);
+    color: #E8C547;
+}
+
+.big-input {
+    background: #1a1a1a !important;
+    color: #E8C547 !important;
+    border: 1px solid #B8922E !important;
+}
+
+.big-input::placeholder {
+    color: #B8922E !important;
+}
+
+.return h3, .return-date h3, .location h3, .picker h3 {
+    color: #D4A843 !important;
+}
+/* === END DATE PICKER DARK THEME FIX === */

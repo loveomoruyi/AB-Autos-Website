@@ -1,0 +1,13 @@
+# Video files (too large for GitHub)
+video/*.mp4
+videos/
+*.mp4
+
+# Backup files
+*.bak
+
+# OS files
+.DS_Store
+
+# Node
+node_modules/
