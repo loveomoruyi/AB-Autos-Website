@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - AB Autos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&family=Raleway:wght@100..800&family=Open+Sans:wght@300..800&family=Roboto:wght@100..900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: #0A0A0A; color: #FAFAFA; font-family: Inter, sans-serif; min-height: 100vh; }
+        a { transition: color 0.3s; }
+
+        /* Search and Filter Bar */
+        .filter-bar {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 1.5rem 2rem;
+            background: #111111;
+            border: 1px solid #1A1500;
+            border-radius: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+        }
+        .filter-bar input[type="text"] {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.8rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #FAFAFA;
+            font-family: Inter, sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .filter-bar input[type="text"]:focus {
+            border-color: #D4A843;
+        }
+        .filter-bar select {
+            padding: 0.8rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #FAFAFA;
+            font-family: Inter, sans-serif;
+            font-size: 1rem;
+            outline: none;
+            cursor: pointer;
+            transition: border-color 0.3s;
+        }
+        .filter-bar select:focus {
+            border-color: #D4A843;
+        }
+        .filter-bar button {
+            padding: 0.8rem 2rem;
+            background: #D4A843;
+            color: #FAFAFA;
+            border: none;
+            border-radius: 8px;
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .filter-bar button:hover {
+            background: #B8922E;
+        }
+
+        /* Vehicle Cards Grid */
+        .inventory-grid {
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .vehicle-card {
+            background: #111111;
+            border: 1px solid #1A1500;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            border-color: #D4A843;
+        }
+        .vehicle-card .card-image {
+            width: 100%;
+            height: 200px;
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .vehicle-card .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .vehicle-card .card-image .placeholder {
+            color: #555;
+            font-size: 3rem;
+        }
+        .vehicle-card .card-body {
+            padding: 1.2rem;
+        }
+        .vehicle-card .card-body h3 {
+            font-family: Montserrat, sans-serif;
+            color: #FAFAFA;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        .vehicle-card .card-body .price {
+            font-family: Montserrat, sans-serif;
+            color: #D4A843;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .vehicle-card .card-body .specs {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.8rem;
+        }
+        .vehicle-card .card-body .specs span {
+            font-size: 0.85rem;
+            color: #888888;
+            background: #1a1a1a;
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+        }
+        .vehicle-card .card-body .card-btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            background: transparent;
+            border: 1px solid #D4A843;
+            color: #D4A843;
+            border-radius: 8px;
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            text-decoration: none;
+        }
+        .vehicle-card .card-body .card-btn:hover {
+            background: #D4A843;
+            color: #FAFAFA;
+        }
+
+        /* Results count */
+        .results-info {
+            max-width: 1200px;
+            margin: 0 auto 1rem;
+            padding: 0 2rem;
+            color: #888888;
+            font-size: 0.95rem;
+        }
+
+        /* No results */
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #888888;
+            font-size: 1.1rem;
+        }
+
+        /* Vehicle Detail Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .modal-content {
+            background: #111111;
+            border: 1px solid #D4A843;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .modal-close:hover { color: #D4A843; }
+        .modal-content h2 {
+            font-family: Montserrat, sans-serif;
+            color: #D4A843;
+            margin-bottom: 1rem;
+        }
+        .modal-content .modal-price {
+            font-family: Montserrat, sans-serif;
+            color: #D4A843;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        .modal-content .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #1a1a1a;
+            color: #888888;
+            font-size: 0.95rem;
+        }
+        .modal-content .detail-row span:last-child {
+            color: #FAFAFA;
+        }
+        .modal-content .modal-btn {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: #D4A843;
+            color: #FAFAFA;
+            border: none;
+            border-radius: 8px;
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            text-decoration: none;
+        }
+        .modal-content .modal-btn:hover {
+            background: #B8922E;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { flex-direction: column; gap: 0.5rem !important; }
+            .inventory-grid { grid-template-columns: 1fr !important; }
+            .hero-title { font-size: 2.5rem !important; }
+            .filter-bar { flex-direction: column; }
+        }
+        @media (max-width: 1024px) {
+            .inventory-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav style="background:#0A0A0A;border-bottom:1px solid #1A1500;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+        <a href="index.html" style="font-family:Montserrat,sans-serif;font-size:1.5rem;font-weight:800;color:#D4A843;text-decoration:none;">AB Autos</a>
+        <div class="nav-links" style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
+            <a href="index.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Home</a>
+            <a href="rental.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Rentals</a>
+            <a href="gallery.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Gallery</a>
+            <a href="inventory.html" style="color:#D4A843;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;font-weight:600;">Inventory</a>
+            <a href="dealership.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Dealership</a>
+            <a href="scheduling.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Schedule</a>
+            <a href="aboutus.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">About</a>
+            <a href="contact.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section style="position:relative;height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#0A0A0A 0%,#111111 50%,#0A0A0A 100%);overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,165,233,0.15) 0%,transparent 70%);"></div>
+        <div style="position:relative;z-index:1;padding:2rem;">
+            <h1 class="hero-title" style="font-family:Montserrat,sans-serif;font-size:3.5rem;font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#D4A843,#E8C547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Vehicle Inventory</h1>
+            <p style="font-family:Inter,sans-serif;font-size:1.2rem;color:#888888;max-width:600px;margin:0 auto;">Browse our premium selection of quality vehicles. Find the perfect car for your lifestyle.</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter Bar -->
+    <div class="filter-bar" id="filterBar">
+        <input type="text" id="searchInput" placeholder="Search by make, model, or keyword..." />
+        <select id="filterCategory">
+            <option value="all">All Categories</option>
+            <option value="sedan">Sedans</option>
+            <option value="suv">SUVs</option>
+            <option value="luxury">Luxury</option>
+            <option value="truck">Trucks</option>
+            <option value="sports">Sports</option>
+        </select>
+        <select id="filterPrice">
+            <option value="all">Any Price</option>
+            <option value="0-20000">Under $20,000</option>
+            <option value="20000-40000">$20,000 - $40,000</option>
+            <option value="40000-60000">$40,000 - $60,000</option>
+            <option value="60000-100000">$60,000 - $100,000</option>
+            <option value="100000-999999">$100,000+</option>
+        </select>
+        <select id="filterYear">
+            <option value="all">Any Year</option>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+        </select>
+        <button onclick="filterVehicles()">Search</button>
+    </div>
+
+    <!-- Results Info -->
+    <div class="results-info" id="resultsInfo"></div>
+
+    <!-- Vehicle Cards Grid -->
+    <div class="inventory-grid" id="inventoryGrid"></div>
+
+    <!-- Vehicle Detail Modal -->
+    <div class="modal-overlay" id="vehicleModal">
+        <div class="modal-content" id="modalContent">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section style="text-align:center;padding:4rem 2rem;background:#111111;border-top:1px solid #1A1500;">
+        <h2 style="font-family:Montserrat,sans-serif;font-size:2rem;color:#FAFAFA;margin-bottom:1rem;">Don't See What You're Looking For?</h2>
+        <p style="font-family:Inter,sans-serif;color:#888888;margin-bottom:2rem;">Contact us and we'll help you find the perfect vehicle from our extended network.</p>
+        <a href="contact.html" style="display:inline-block;background:#D4A843;color:#FAFAFA;font-family:Montserrat,sans-serif;font-weight:600;padding:0.8rem 2.5rem;border-radius:8px;text-decoration:none;font-size:1rem;transition:background 0.3s;" onmouseover="this.style.background='#B8922E'" onmouseout="this.style.background='#D4A843'">Contact Us</a>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background:#0A0A0A;border-top:1px solid #1A1500;padding:2rem;text-align:center;">
+        <p style="font-family:Inter,sans-serif;color:#555555;font-size:0.9rem;">&copy; 2026 AB Autos. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Vehicle inventory data
+        const vehicles = [
+            {
+                id: 1, make: "BMW", model: "M5 Competition", year: 2025, price: 112900,
+                category: "luxury", mileage: 1200, transmission: "Automatic", fuel: "Gasoline",
+                color: "Alpine White", engine: "4.4L Twin-Turbo V8", hp: 617,
+                image: "", description: "Ultimate driving machine with M-specific tuning and luxury appointments."
+            },
+            {
+                id: 2, make: "Mercedes-Benz", model: "E-Class 450", year: 2025, price: 68900,
+                category: "sedan", mileage: 3400, transmission: "Automatic", fuel: "Gasoline",
+                color: "Obsidian Black", engine: "3.0L Turbo I6", hp: 375,
+                image: "", description: "Elegant luxury sedan with cutting-edge technology and refined comfort."
+            },
+            {
+                id: 3, make: "Audi", model: "Q8 e-tron", year: 2025, price: 74200,
+                category: "suv", mileage: 800, transmission: "Automatic", fuel: "Electric",
+                color: "Mythos Black", engine: "Dual Electric Motors", hp: 402,
+                image: "", description: "Premium all-electric SUV with exceptional range and quattro all-wheel drive."
+            },
+            {
+                id: 4, make: "Ford", model: "F-150 Raptor", year: 2024, price: 78500,
+                category: "truck", mileage: 5200, transmission: "Automatic", fuel: "Gasoline",
+                color: "Code Orange", engine: "3.5L EcoBoost V6", hp: 450,
+                image: "", description: "High-performance off-road truck built to conquer any terrain."
+            },
+            {
+                id: 5, make: "Porsche", model: "911 Carrera S", year: 2025, price: 134800,
+                category: "sports", mileage: 650, transmission: "PDK", fuel: "Gasoline",
+                color: "Guards Red", engine: "3.0L Twin-Turbo Flat-6", hp: 443,
+                image: "", description: "Iconic sports car delivering exhilarating performance and timeless design."
+            },
+            {
+                id: 6, make: "Toyota", model: "Camry XSE", year: 2025, price: 32800,
+                category: "sedan", mileage: 4500, transmission: "Automatic", fuel: "Hybrid",
+                color: "Celestial Silver", engine: "2.5L Hybrid", hp: 225,
+                image: "", description: "Best-selling sedan with sporty styling and exceptional fuel efficiency."
+            },
+            {
+                id: 7, make: "Range Rover", model: "Sport HSE", year: 2024, price: 89900,
+                category: "suv", mileage: 7800, transmission: "Automatic", fuel: "Gasoline",
+                color: "Santorini Black", engine: "3.0L Turbo I6", hp: 395,
+                image: "", description: "Luxury SUV combining British elegance with remarkable off-road capability."
+            },
+            {
+                id: 8, make: "Honda", model: "Accord Sport", year: 2025, price: 29500,
+                category: "sedan", mileage: 2100, transmission: "CVT", fuel: "Gasoline",
+                color: "Platinum White", engine: "1.5L Turbo I4", hp: 192,
+                image: "", description: "Reliable and stylish midsize sedan with advanced safety features."
+            },
+            {
+                id: 9, make: "Chevrolet", model: "Corvette Stingray", year: 2025, price: 69900,
+                category: "sports", mileage: 900, transmission: "Automatic", fuel: "Gasoline",
+                color: "Torch Red", engine: "6.2L V8", hp: 490,
+                image: "", description: "Mid-engine American sports car with breathtaking performance."
+            },
+            {
+                id: 10, make: "Tesla", model: "Model Y Long Range", year: 2025, price: 47990,
+                category: "suv", mileage: 150, transmission: "Single-Speed", fuel: "Electric",
+                color: "Pearl White", engine: "Dual Motor AWD", hp: 384,
+                image: "", description: "All-electric crossover with autopilot and industry-leading range."
+            },
+            {
+                id: 11, make: "Lexus", model: "IS 500 F Sport", year: 2024, price: 58900,
+                category: "luxury", mileage: 6200, transmission: "Automatic", fuel: "Gasoline",
+                color: "Ultrasonic Blue", engine: "5.0L V8", hp: 472,
+                image: "", description: "Performance luxury sedan with naturally aspirated V8 power."
+            },
+            {
+                id: 12, make: "RAM", model: "1500 TRX", year: 2024, price: 85900,
+                category: "truck", mileage: 3800, transmission: "Automatic", fuel: "Gasoline",
+                color: "Hydro Blue", engine: "6.2L Supercharged V8", hp: 702,
+                image: "", description: "The most powerful mass-produced truck, built for ultimate performance."
+            }
+        ];
+
+        function formatPrice(price) {
+            return '$' + price.toLocaleString();
+        }
+
+        function createVehicleCard(vehicle) {
+            const card = document.createElement('div');
+            card.className = 'vehicle-card';
+            card.onclick = function() { openModal(vehicle.id); };
+
+            const imageHtml = vehicle.image
+                ? '<img src="' + vehicle.image + '" alt="' + vehicle.make + ' ' + vehicle.model + '">'
+                : '<div class="placeholder">&#128663;</div>';
+
+            card.innerHTML =
+                '<div class="card-image">' + imageHtml + '</div>' +
+                '<div class="card-body">' +
+                    '<h3>' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model + '</h3>' +
+                    '<div class="price">' + formatPrice(vehicle.price) + '</div>' +
+                    '<div class="specs">' +
+                        '<span>' + vehicle.mileage.toLocaleString() + ' mi</span>' +
+                        '<span>' + vehicle.transmission + '</span>' +
+                        '<span>' + vehicle.fuel + '</span>' +
+                    '</div>' +
+                    '<button class="card-btn">View Details</button>' +
+                '</div>';
+
+            return card;
+        }
+
+        function filterVehicles() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const category = document.getElementById('filterCategory').value;
+            const priceRange = document.getElementById('filterPrice').value;
+            const yearFilter = document.getElementById('filterYear').value;
+
+            let filtered = vehicles.filter(function(v) {
+                // Search term filter
+                const searchMatch = !searchTerm ||
+                    v.make.toLowerCase().includes(searchTerm) ||
+                    v.model.toLowerCase().includes(searchTerm) ||
+                    v.description.toLowerCase().includes(searchTerm) ||
+                    v.color.toLowerCase().includes(searchTerm);
+
+                // Category filter
+                const categoryMatch = category === 'all' || v.category === category;
+
+                // Price filter
+                let priceMatch = true;
+                if (priceRange !== 'all') {
+                    const parts = priceRange.split('-');
+                    const min = parseInt(parts[0]);
+                    const max = parseInt(parts[1]);
+                    priceMatch = v.price >= min && v.price <= max;
+                }
+
+                // Year filter
+                const yearMatch = yearFilter === 'all' || v.year === parseInt(yearFilter);
+
+                return searchMatch && categoryMatch && priceMatch && yearMatch;
+            });
+
+            renderVehicles(filtered);
+        }
+
+        function renderVehicles(vehicleList) {
+            const grid = document.getElementById('inventoryGrid');
+            const info = document.getElementById('resultsInfo');
+            grid.innerHTML = '';
+
+            if (vehicleList.length === 0) {
+                grid.innerHTML = '<div class="no-results" style="grid-column:1/-1;">No vehicles match your search criteria. Try adjusting your filters.</div>';
+                info.textContent = '0 vehicles found';
+                return;
+            }
+
+            info.textContent = vehicleList.length + ' vehicle' + (vehicleList.length !== 1 ? 's' : '') + ' found';
+            vehicleList.forEach(function(vehicle) {
+                grid.appendChild(createVehicleCard(vehicle));
+            });
+        }
+
+        function openModal(vehicleId) {
+            const vehicle = vehicles.find(function(v) { return v.id === vehicleId; });
+            if (!vehicle) return;
+
+            const body = document.getElementById('modalBody');
+            body.innerHTML =
+                '<h2>' + vehicle.year + ' ' + vehicle.make + ' ' + vehicle.model + '</h2>' +
+                '<div class="modal-price">' + formatPrice(vehicle.price) + '</div>' +
+                '<p style="color:#888888;margin-bottom:1.5rem;">' + vehicle.description + '</p>' +
+                '<div class="detail-row"><span>Make</span><span>' + vehicle.make + '</span></div>' +
+                '<div class="detail-row"><span>Model</span><span>' + vehicle.model + '</span></div>' +
+                '<div class="detail-row"><span>Year</span><span>' + vehicle.year + '</span></div>' +
+                '<div class="detail-row"><span>Mileage</span><span>' + vehicle.mileage.toLocaleString() + ' miles</span></div>' +
+                '<div class="detail-row"><span>Engine</span><span>' + vehicle.engine + '</span></div>' +
+                '<div class="detail-row"><span>Horsepower</span><span>' + vehicle.hp + ' hp</span></div>' +
+                '<div class="detail-row"><span>Transmission</span><span>' + vehicle.transmission + '</span></div>' +
+                '<div class="detail-row"><span>Fuel Type</span><span>' + vehicle.fuel + '</span></div>' +
+                '<div class="detail-row"><span>Exterior Color</span><span>' + vehicle.color + '</span></div>' +
+                '<a href="scheduling.html" class="modal-btn">Schedule Test Drive</a>' +
+                ' <a href="contact.html" class="modal-btn" style="background:transparent;border:1px solid #D4A843;color:#D4A843;" onmouseover="this.style.background=\'#D4A843\';this.style.color=\'#FAFAFA\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'#D4A843\'">Contact Us</a>';
+
+            document.getElementById('vehicleModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('vehicleModal').classList.remove('active');
+        }
+
+        // Close modal on overlay click
+        document.getElementById('vehicleModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Live search on input
+        document.getElementById('searchInput').addEventListener('input', filterVehicles);
+        document.getElementById('filterCategory').addEventListener('change', filterVehicles);
+        document.getElementById('filterPrice').addEventListener('change', filterVehicles);
+        document.getElementById('filterYear').addEventListener('change', filterVehicles);
+
+        // Initial render
+        renderVehicles(vehicles);
+    </script>
+</body>
+</html>

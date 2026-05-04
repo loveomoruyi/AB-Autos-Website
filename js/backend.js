@@ -54,10 +54,10 @@ window.ABAutozBackend = {
 
 
   /* ================= EXPOSE TO BACKEND ================= */
-  window.bookNowBtn = bookNowBtn;
-  window.popupName = popupName;
-  window.popupPrice = popupPrice;
-  window.popupYear = popupYear;
-  window.closePopup = closePopup;
+//  window.bookNowBtn = bookNowBtn;
+//  window.popupName = popupName;
+//  window.popupPrice = popupPrice;
+//  window.popupYear = popupYear;
+//  window.closePopup = closePopup;
 
 

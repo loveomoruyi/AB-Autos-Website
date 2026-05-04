@@ -53,7 +53,7 @@
   </div>
 
      <!-- ================= BOOKING SECTION ================= -->
-  <section class="booking-section">
+  <section class="booking-section" style="display:flex;flex-direction:column;align-items:center;">
     <div class="button-container">
 
       <!-- Search Location -->
@@ -74,7 +74,8 @@
           <div class="popup" id="pickup-calendar"></div>
         </div>
 
-        <div class="input-group" id="pickup-time-picker">
+        <h3 style="font-family:Inter,sans-serif;color:#888888;font-size:0.95rem;margin-top:0.5rem;">Pick-up Time</h3>
+            <div class="input-group" id="pickup-time-picker">
           <span id="pickup-time">12:00 PM</span>
           <div class="popup" id="pickup-time-popup"></div>
         </div>
@@ -89,7 +90,8 @@
           <div class="popup" id="return-calendar"></div>
         </div>
 
-        <div class="input-group" id="return-time-picker">
+        <h3 style="font-family:Inter,sans-serif;color:#888888;font-size:0.95rem;margin-top:0.5rem;">Return Time</h3>
+            <div class="input-group" id="return-time-picker">
           <span id="return-time">12:00 PM</span>
           <div class="popup" id="return-time-popup"></div>
         </div>
@@ -97,7 +99,7 @@
 
       <!-- Button -->
       <div class="show-car">
-        <button type="button">Show Car</button>
+        <button type="button">Show Cars</button>
       </div>
 
     </div>
@@ -196,7 +198,7 @@ your vehicle?</h1>
     <div class="dash-box"><span>1</span></div>
     <div class="step-text">
       <h3>Tell us about your car</h3>
-      <p>Tell us your carâ€™s specific features and condition.</p>
+      <p>Tell us your car's specific features and condition.</p>
     </div>
   </div>
 
@@ -225,7 +227,7 @@ your vehicle?</h1>
  <!-- ================= NEED CAR SECTION ================= -->
 <section class="need-car-section">
   <div class="need-text">
-    <h1>Need a Car or a Quick Fix? Letâ€™s Talk.</h1>
+    <h1>Need a Car or a Quick Fix? Let's Talk.</h1>
     <p>
       Have questions about rentals, buying a car, or scheduling service?<br>
       Our team is ready to help you find the right option fast.
@@ -270,7 +272,7 @@ your vehicle?</h1>
   </div>
 
   <div class="footer-text">
-    <h1>Â© 2025 AB Autoz. All rights reserved.</h1>
+    <h1>&copy; 2025 AB Autoz. All rights reserved.</h1>
   </div>
 </footer>
 
@@ -358,8 +360,8 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="days-header">${dayNames.map(d=>`<div>${d}</div>`).join("")}</div>
         <div class="days-grid">${days.join("")}</div>
         <div class="month-controls">
-          <button class="arrow-btn" data-dir="prev">â—€</button>
-          <button class="arrow-btn" data-dir="next">â–¶</button>
+          <button class="arrow-btn" data-dir="prev">&larr;</button>
+          <button class="arrow-btn" data-dir="next">&rarr;</button>
         </div>
       </div>
     `;
@@ -430,9 +432,9 @@ document.addEventListener("DOMContentLoaded", () => {
   [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].forEach(picker=>{
     picker.addEventListener("click", e=>{
       e.stopPropagation();
-            const isActive = popup.classList.contains("active");
+            const isActive = picker.classList.contains("active");
       closeAllPopups();
-      if(!isActive) popup.classList.add("active");
+      if(!isActive) picker.classList.add("active");
     });
   });
 
@@ -509,8 +511,10 @@ document.querySelector(".show-car button")?.addEventListener("click", () => {
     return;
   }
 
-  ABAutozBackend.saveBooking(bookingData);
-  alert("Booking saved successfully!");
+  // Save booking data to localStorage
+  localStorage.setItem("ab_booking", JSON.stringify(bookingData));
+  // Redirect to inventory page
+  window.location.href = "inventory.html";
 });
 
 /* ---------- SAVE VISIT REQUEST ---------- */
@@ -528,7 +532,7 @@ document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
   }
 
   ABAutozBackend.saveVisitRequest(data);
-  alert("Request sent! Weâ€™ll contact you shortly.");
+  alert("Request sent! We'll contact you shortly.");
   e.target.reset();
 });
 

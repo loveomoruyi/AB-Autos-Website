@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Appointment - AB Autos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&family=Raleway:wght@100..800&family=Open+Sans:wght@300..800&family=Roboto:wght@100..900&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: #0A0A0A; color: #FAFAFA; font-family: Inter, sans-serif; min-height: 100vh; }
+        a { transition: color 0.3s; }
+
+        /* Appointment Form Styles */
+        .schedule-container {
+            max-width: 800px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+        .schedule-form {
+            background: #111111;
+            border: 1px solid #1A1500;
+            border-radius: 12px;
+            padding: 2.5rem;
+        }
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        .form-section h3 {
+            font-family: Montserrat, sans-serif;
+            color: #D4A843;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #1A1500;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+        .form-group label {
+            font-family: Inter, sans-serif;
+            color: #888888;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #FAFAFA;
+            font-family: Inter, sans-serif;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #D4A843;
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .form-group select {
+            cursor: pointer;
+        }
+        /* Style date and time inputs */
+        .form-group input[type="date"],
+        .form-group input[type="time"] {
+            color-scheme: dark;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: #D4A843;
+            color: #FAFAFA;
+            border: none;
+            border-radius: 8px;
+            font-family: Montserrat, sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+        .submit-btn:hover {
+            background: #B8922E;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #111111;
+            border: 1px solid #D4A843;
+            border-radius: 12px;
+        }
+        .success-message.active {
+            display: block;
+        }
+        .success-message .check-icon {
+            font-size: 4rem;
+            color: #D4A843;
+            margin-bottom: 1rem;
+        }
+        .success-message h2 {
+            font-family: Montserrat, sans-serif;
+            color: #D4A843;
+            margin-bottom: 0.5rem;
+        }
+        .success-message p {
+            color: #888888;
+            margin-bottom: 1.5rem;
+        }
+        .success-message a {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: #D4A843;
+            color: #FAFAFA;
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: Montserrat, sans-serif;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+        .success-message a:hover {
+            background: #B8922E;
+        }
+
+        /* Service type cards */
+        .service-types {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .service-type-card {
+            background: #111111;
+            border: 1px solid #1A1500;
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .service-type-card:hover,
+        .service-type-card.selected {
+            border-color: #D4A843;
+            transform: translateY(-3px);
+        }
+        .service-type-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .service-type-card h4 {
+            font-family: Montserrat, sans-serif;
+            color: #D4A843;
+            font-size: 0.95rem;
+            margin-bottom: 0.3rem;
+        }
+        .service-type-card p {
+            color: #888888;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { flex-direction: column; gap: 0.5rem !important; }
+            .hero-title { font-size: 2.5rem !important; }
+            .form-row { grid-template-columns: 1fr; }
+            .service-types { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Nav -->
+    <nav style="background:#0A0A0A;border-bottom:1px solid #1A1500;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;">
+        <a href="index.html" style="font-family:Montserrat,sans-serif;font-size:1.5rem;font-weight:800;color:#D4A843;text-decoration:none;">AB Autos</a>
+        <div class="nav-links" style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
+            <a href="index.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Home</a>
+            <a href="rental.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Rentals</a>
+            <a href="gallery.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Gallery</a>
+            <a href="inventory.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Inventory</a>
+            <a href="dealership.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Dealership</a>
+            <a href="scheduling.html" style="color:#D4A843;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;font-weight:600;">Schedule</a>
+            <a href="aboutus.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">About</a>
+            <a href="contact.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Banner -->
+    <section style="position:relative;height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#0A0A0A 0%,#111111 50%,#0A0A0A 100%);overflow:hidden;">
+        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,165,233,0.15) 0%,transparent 70%);"></div>
+        <div style="position:relative;z-index:1;padding:2rem;">
+            <h1 class="hero-title" style="font-family:Montserrat,sans-serif;font-size:3.5rem;font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#D4A843,#E8C547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Schedule an Appointment</h1>
+            <p style="font-family:Inter,sans-serif;font-size:1.2rem;color:#888888;max-width:600px;margin:0 auto;">Book a test drive, service appointment, or consultation with our team.</p>
+        </div>
+    </section>
+
+    <!-- Service Type Selection -->
+    <div style="max-width:800px;margin:2rem auto 0;padding:0 2rem;">
+        <h3 style="font-family:Montserrat,sans-serif;color:#FAFAFA;font-size:1.1rem;margin-bottom:1rem;text-align:center;">What would you like to schedule?</h3>
+    </div>
+    <div class="service-types" id="serviceTypes">
+        <div class="service-type-card selected" onclick="selectServiceType(this, 'test-drive')">
+            <div class="icon">&#128663;</div>
+            <h4>Test Drive</h4>
+            <p>Take your dream car for a spin</p>
+        </div>
+        <div class="service-type-card" onclick="selectServiceType(this, 'service')">
+            <div class="icon">&#128295;</div>
+            <h4>Service</h4>
+            <p>Maintenance or repair appointment</p>
+        </div>
+        <div class="service-type-card" onclick="selectServiceType(this, 'consultation')">
+            <div class="icon">&#128172;</div>
+            <h4>Consultation</h4>
+            <p>Discuss purchase or trade-in</p>
+        </div>
+    </div>
+
+    <!-- Appointment Form -->
+    <div class="schedule-container">
+        <form class="schedule-form" id="scheduleForm" onsubmit="return handleSubmit(event)">
+            <!-- Personal Info -->
+            <div class="form-section">
+                <h3>Personal Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required placeholder="John">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required placeholder="Doe">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required placeholder="(555) 123-4567">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Appointment Details -->
+            <div class="form-section">
+                <h3>Appointment Details</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="appointmentDate">Preferred Date *</label>
+                        <input type="date" id="appointmentDate" name="appointmentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="appointmentTime">Preferred Time *</label>
+                        <select id="appointmentTime" name="appointmentTime" required>
+                            <option value="">Select a time</option>
+                            <option value="09:00">9:00 AM</option>
+                            <option value="09:30">9:30 AM</option>
+                            <option value="10:00">10:00 AM</option>
+                            <option value="10:30">10:30 AM</option>
+                            <option value="11:00">11:00 AM</option>
+                            <option value="11:30">11:30 AM</option>
+                            <option value="12:00">12:00 PM</option>
+                            <option value="12:30">12:30 PM</option>
+                            <option value="13:00">1:00 PM</option>
+                            <option value="13:30">1:30 PM</option>
+                            <option value="14:00">2:00 PM</option>
+                            <option value="14:30">2:30 PM</option>
+                            <option value="15:00">3:00 PM</option>
+                            <option value="15:30">3:30 PM</option>
+                            <option value="16:00">4:00 PM</option>
+                            <option value="16:30">4:30 PM</option>
+                            <option value="17:00">5:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="serviceType">Service Type</label>
+                        <input type="text" id="serviceType" name="serviceType" readonly value="Test Drive" style="cursor:default;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle Interest (for test drives) -->
+            <div class="form-section" id="vehicleSection">
+                <h3>Vehicle of Interest</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="vehicleMake">Make</label>
+                        <select id="vehicleMake" name="vehicleMake">
+                            <option value="">Select Make</option>
+                            <option value="Audi">Audi</option>
+                            <option value="BMW">BMW</option>
+                            <option value="Chevrolet">Chevrolet</option>
+                            <option value="Ford">Ford</option>
+                            <option value="Honda">Honda</option>
+                            <option value="Lexus">Lexus</option>
+                            <option value="Mercedes-Benz">Mercedes-Benz</option>
+                            <option value="Porsche">Porsche</option>
+                            <option value="RAM">RAM</option>
+                            <option value="Range Rover">Range Rover</option>
+                            <option value="Tesla">Tesla</option>
+                            <option value="Toyota">Toyota</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="vehicleModel">Model (optional)</label>
+                        <input type="text" id="vehicleModel" name="vehicleModel" placeholder="e.g. M5 Competition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Notes -->
+            <div class="form-section">
+                <h3>Additional Notes</h3>
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="notes">Anything else we should know?</label>
+                        <textarea id="notes" name="notes" placeholder="Tell us about any specific requirements or questions..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Book Appointment</button>
+        </form>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage">
+            <div class="check-icon">&#10003;</div>
+            <h2>Appointment Booked!</h2>
+            <p>Thank you for scheduling with AB Autos. We will confirm your appointment via email shortly.</p>
+            <p id="appointmentSummary" style="color:#FAFAFA;font-size:0.95rem;margin-bottom:1.5rem;"></p>
+            <a href="index.html">Return to Home</a>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section style="text-align:center;padding:4rem 2rem;background:#111111;border-top:1px solid #1A1500;">
+        <h2 style="font-family:Montserrat,sans-serif;font-size:2rem;color:#FAFAFA;margin-bottom:1rem;">Need Immediate Assistance?</h2>
+        <p style="font-family:Inter,sans-serif;color:#888888;margin-bottom:2rem;">Call us at (555) 123-4567 or visit our dealership at 123 Automotive Drive, Motor City.</p>
+        <a href="contact.html" style="display:inline-block;background:#D4A843;color:#FAFAFA;font-family:Montserrat,sans-serif;font-weight:600;padding:0.8rem 2.5rem;border-radius:8px;text-decoration:none;font-size:1rem;transition:background 0.3s;" onmouseover="this.style.background='#B8922E'" onmouseout="this.style.background='#D4A843'">Contact Us</a>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background:#0A0A0A;border-top:1px solid #1A1500;padding:2rem;text-align:center;">
+        <p style="font-family:Inter,sans-serif;color:#555555;font-size:0.9rem;">&copy; 2026 AB Autos. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0');
+        var yyyy = today.getFullYear();
+        document.getElementById('appointmentDate').min = yyyy + '-' + mm + '-' + dd;
+
+        var selectedServiceType = 'test-drive';
+
+        function selectServiceType(card, type) {
+            // Remove selected from all cards
+            var cards = document.querySelectorAll('.service-type-card');
+            cards.forEach(function(c) { c.classList.remove('selected'); });
+
+            // Add selected to clicked card
+            card.classList.add('selected');
+            selectedServiceType = type;
+
+            // Update the service type field
+            var labels = {
+                'test-drive': 'Test Drive',
+                'service': 'Service Appointment',
+                'consultation': 'Consultation'
+            };
+            document.getElementById('serviceType').value = labels[type];
+
+            // Show/hide vehicle section based on type
+            var vehicleSection = document.getElementById('vehicleSection');
+            if (type === 'test-drive') {
+                vehicleSection.style.display = 'block';
+            } else {
+                vehicleSection.style.display = 'none';
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            var formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                date: document.getElementById('appointmentDate').value,
+                time: document.getElementById('appointmentTime').value,
+                serviceType: selectedServiceType,
+                vehicleMake: document.getElementById('vehicleMake').value,
+                vehicleModel: document.getElementById('vehicleModel').value,
+                notes: document.getElementById('notes').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            var appointments = JSON.parse(localStorage.getItem('ab_appointments') || '[]');
+            appointments.push(formData);
+            localStorage.setItem('ab_appointments', JSON.stringify(appointments));
+
+            // Show success message
+            var dateObj = new Date(formData.date + 'T00:00:00');
+            var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            var formattedDate = dateObj.toLocaleDateString('en-US', options);
+
+            // Convert 24h time to 12h
+            var timeParts = formData.time.split(':');
+            var hours = parseInt(timeParts[0]);
+            var minutes = timeParts[1];
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12 || 12;
+            var formattedTime = hours + ':' + minutes + ' ' + ampm;
+
+            document.getElementById('appointmentSummary').innerHTML =
+                '<strong>' + formData.firstName + '</strong>, your ' +
+                document.getElementById('serviceType').value.toLowerCase() +
+                ' is scheduled for:<br>' +
+                formattedDate + ' at ' + formattedTime;
+
+            document.getElementById('scheduleForm').style.display = 'none';
+            document.getElementById('successMessage').classList.add('active');
+
+            // Scroll to success message
+            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+
+            return false;
+        }
+    </script>
+</body>
+</html>
