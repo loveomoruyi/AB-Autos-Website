@@ -13,7 +13,7 @@
     <!-- Background Video -->
     <div class="hero-video-wrapper">
       <video id="hero-video" class="hero-bg-video" autoplay muted loop playsinline>
-        <source src="video/car1.mp4" type="video/mp4">
+        <source src="video/car4.mp4" type="video/mp4">
       </video>
       <div class="hero-video-overlay"></div>
     </div>
@@ -26,25 +26,25 @@
     </div>
 
     <ul class="nav-links">
-      <li><a id="rentals-link" href="#">Rentals</a></li>
-      <li><a id="garage-link" href="#">Garage</a></li>
-      <li><a id="gallery-link" href="#">Gallery</a></li>
+      <li><a id="rentals-link" href="pages/rental.html">Rentals</a></li>
+      <li><a id="garage-link" href="pages/garage.html">Garage</a></li>
+      <li><a id="gallery-link" href="pages/gallery.html">Gallery</a></li>
 
       <li>
         <a id="logo-link" href="#" class="logo"></a>
       </li>
 
       <li class="dropdown">
-        <a id="services-link" href="#">Service â–¾</a>
+        <a id="services-link" href="pages/service.html">Service</a>
         <ul class="dropdown-menu">
-          <li><a id="tire-link" href="#">Tire Service</a></li>
-          <li><a id="autobody-link" href="#">Autobody Service</a></li>
-          <li><a id="dealership-link" href="#">Dealership Service</a></li>
+          <li><a id="tire-link" href="pages/tire-service.html">Tire Service</a></li>
+          <li><a id="autobody-link" href="pages/autobody.html">Autobody Service</a></li>
+          <li><a id="dealership-link" href="pages/dealership.html">Dealership Service</a></li>
         </ul>
       </li>
 
-      <li><a id="about-link" href="#">About us</a></li>
-      <li><a id="contact-link" href="#">Contact</a></li>
+      <li><a id="about-link" href="pages/aboutus.html">About us</a></li>
+      <li><a id="contact-link" href="pages/contact.html">Contact</a></li>
     </ul>
   </header>
 
@@ -56,21 +56,12 @@
   <section class="booking-section">
     <div class="button-container">
 
-      <!-- Pick Up -->
+      <!-- Search Location -->
       <div class="location">
-        <h3>Pick Up</h3>
+        <h3>Search Location</h3>
         <div class="dropdown">
           <input type="search" placeholder="Search Location" class="big-input" id="pickup-location" />
           <ul class="dropdown-list" id="pickup-list"></ul>
-        </div>
-      </div>
-
-      <!-- Drop Off -->
-      <div class="location">
-        <h3>Drop Off</h3>
-        <div class="dropdown">
-          <input type="search" placeholder="Search Location" class="big-input" id="dropoff-location" />
-          <ul class="dropdown-list" id="dropoff-list"></ul>
         </div>
       </div>
 
@@ -147,168 +138,48 @@ well-maintained vehicles.</p>
     <!-- Image Area -->
     <div class="image-area">
       <!-- One box only -->
-      <div class="car-slide active">
-        <h1>ECONOMY</h1>
-        <div
-          class="car-image"
-          style="background-image: url('./image/image 7.png');"
-        ></div>
-      </div>
 
-      <div class="car-slide">
+      <div class="car-slide active">
         <h1>SEDANS</h1>
-        <div
-          class="car-image"
-          style="background-image: url('./image/6e5e10da-0515-4e94-a390-9f544e2d5efc 1.png');"
-        ></div>
+        <video
+            class="car-image car-video"
+            src="./videos/sedans-bg.mp4"
+            autoplay muted loop playsinline
+          ></video>
       </div>
 
       <div class="car-slide">
         <h1>SUVS</h1>
-        <div
-          class="car-image"
-          style="background-image: url('./image/image 8.png');"
-        ></div>
+        <video
+            class="car-image car-video"
+            src="./videos/suvs-bg.mp4"
+            autoplay muted loop playsinline
+          ></video>
       </div>
 
       <div class="car-slide">
         <h1>LUXURY</h1>
-        <div
-          class="car-image"
-          style="background-image: url('./image/image 9.png');"
-        ></div>
-      </div>
-
-      <div class="car-slide">
-        <h1>SPORTS</h1>
-        <div
-          class="car-image"
-          style="background-image: url('./image/image 10.png');"
-        ></div>
+        <video
+            class="car-image car-video"
+            src="./videos/luxury-bg.mp4"
+            autoplay muted loop playsinline
+          ></video>
       </div>
     </div>
 
     <!-- Buttons -->
     <div class="text-area">
-      <div class="flex-box category-btn" data-index="0">Economy</div>
-      <div class="flex-box category-btn" data-index="1">Sedans</div>
-      <div class="flex-box category-btn" data-index="2">SUVs</div>
-      <div class="flex-box category-btn" data-index="3">Luxury</div>
-      <div class="flex-box category-btn" data-index="4">Sport Cars</div>
+      <div class="flex-box category-btn" data-index="0">Sedans</div>
+      <div class="flex-box category-btn" data-index="1">SUVs</div>
+      <div class="flex-box category-btn" data-index="2">Luxury</div>
     </div>
   </div>
 </section>
-
 
 <!-- OUR FLEET SECTION -->
-<section class="our-fleet" id="our-fleet">
-  <div class="fleet-text">
-    <div class="hold-fleet">
-      <h2>Our Fleet</h2>
-    </div>
-    <div class="hold-link">
-      <a href="#">See all <span><img src="./image/Vector (3).png" alt=""></span></a>
-      <div class="border"></div>
-    </div>
-  </div>
-
-  <div class="fleet-image">
-
-    <!-- Fleet Item 1 -->
-    <div class="flex-fleet">
-      <div class="flex-fleet-image">
-        <img src="./image/Rectangle 3.png" alt="2025 Lamborghini Aventador SVJ Roadster">
-      </div>
-      <div class="flex-fleet-text">
-        <h2>2025 Lamborghini Aventador SVJ Roadster</h2>
-        <div class="fleet-info">
-          <div class="cash">$1,527,999</div>
-          <div class="date"><span><img src="./image/Vector (2).png" alt=""></span> 2025</div>
-        </div>
-        <button class="btn view-details" 
-          data-name="2025 Lamborghini Aventador SVJ Roadster"
-          data-image="./image/Rectangle 3.png"
-          data-price="$1,527,999"
-          data-year="2025"
-          data-engine="6.5L V12"
-          data-hp="770 HP"
-          data-speed="217 mph"
-          data-desc="Experience the ultimate blend of performance and design with the Lamborghini Aventador SVJ Roadster. This masterpiece features a V12 engine, superior aerodynamics, and an iconic open-top experience.">
-          View Details
-        </button>
-      </div>
-    </div>
-
-    <!-- Fleet Item 2 -->
-    <div class="flex-fleet">
-      <div class="flex-fleet-image">
-        <img src="./image/Rectangle 3 (1).png" alt="2023 Lamborghini Aventador SVJ Roadster">
-      </div>
-      <div class="flex-fleet-text">
-        <h2>2023 Lamborghini Aventador SVJ Roadster</h2>
-        <div class="fleet-info">
-          <div class="cash">$997,999</div>
-          <div class="date"><span><img src="./image/Vector (2).png" alt=""></span> 2023</div>
-        </div>
-        <button class="btn view-details" 
-          data-name="2023 Lamborghini Aventador SVJ Roadster"
-          data-image="./image/Rectangle 3 (1).png"
-          data-price="$997,999"
-          data-year="2023"
-          data-engine="6.5L V12"
-          data-hp="760 HP"
-          data-speed="215 mph"
-          data-desc="A refined evolution of Lamborghini excellence, the 2023 Aventador SVJ offers precision handling and striking aerodynamics for those who crave performance and prestige.">
-          View Details
-        </button>
-      </div>
-    </div>
-
-    <!-- Fleet Item 3 -->
-    <div class="flex-fleet">
-      <div class="flex-fleet-image">
-        <img src="./image/Rectangle 3 (2).png" alt="2021 Lamborghini Aventador SVJ Roadster">
-      </div>
-      <div class="flex-fleet-text">
-        <h2>2021 Lamborghini Aventador SVJ Roadster</h2>
-        <div class="fleet-info">
-          <div class="cash">$827,999</div>
-          <div class="date"><span><img src="./image/Vector (2).png" alt=""></span> 2021</div>
-        </div>
-        <button class="btn view-details" 
-          data-name="2021 Lamborghini Aventador SVJ Roadster"
-          data-image="./image/Rectangle 3 (2).png"
-          data-price="$827,999"
-          data-year="2021"
-          data-engine="6.5L V12"
-          data-hp="750 HP"
-          data-speed="213 mph"
-          data-desc="The 2021 SVJ Roadster embodies Lamborghini's racing DNA, combining pure power, exclusivity, and aggressive styling for an unmatched driving experience.">
-          View Details
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- POPUP PANEL (keep it outside the section for correct layering) -->
 <!-- OUR FLEET POPUP -->
-<div class="fleet-popup-overlay">
-  <div class="fleet-popup">
-    <span class="fleet-close-btn">&times;</span>
-    <img src="" alt="Car image" class="fleet-popup-img">
-    <h2 class="fleet-popup-name"></h2>
-    <p class="fleet-popup-price"></p>
-    <p class="fleet-popup-year"></p>
-    <p class="fleet-popup-engine"></p>
-    <p class="fleet-popup-hp"></p>
-    <p class="fleet-popup-speed"></p>
-    <p class="fleet-popup-desc"></p>
-    <button class="fleet-book-now">Book Now</button>
-  </div>
-</div>
-
-
 
  <!-- planning section -->
   <section class="planning-section">
@@ -402,7 +273,6 @@ your vehicle?</h1>
     <h1>Â© 2025 AB Autoz. All rights reserved.</h1>
   </div>
 </footer>
-
 
 <script src="./js/backend.js"></script>
 
@@ -560,8 +430,7 @@ document.addEventListener("DOMContentLoaded", () => {
   [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].forEach(picker=>{
     picker.addEventListener("click", e=>{
       e.stopPropagation();
-      const popup = picker.querySelector(".popup");
-      const isActive = popup.classList.contains("active");
+            const isActive = popup.classList.contains("active");
       closeAllPopups();
       if(!isActive) popup.classList.add("active");
     });
@@ -571,10 +440,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ------------------ Location Dropdowns ------------------
   const pickupInput = document.getElementById("pickup-location");
-  const dropoffInput = document.getElementById("dropoff-location");
   const pickupList = document.getElementById("pickup-list");
-  const dropoffList = document.getElementById("dropoff-list");
-  const locations = ["Lagos Airport","Abuja Central","Port Harcourt Terminal","Enugu Station","Kano Garage","Ibadan Junction","Benin City Center","Owerri Downtown"];
+  const locations = ["Houston Galleria","Houston Downtown","Houston IAH Airport","Houston Hobby Airport","Katy, TX","Sugar Land, TX","The Woodlands, TX","Pearland, TX","Cypress, TX","Spring, TX"];
 
   function showDropdown(input,list){
     const query = input.value.toLowerCase();
@@ -589,11 +456,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  [pickupInput, dropoffInput].forEach(input=>{
-    const list = input===pickupInput?pickupList:dropoffList;
-    input.addEventListener("input", ()=>showDropdown(input,list));
-    input.addEventListener("focus", ()=>showDropdown(input,list));
-  });
+  pickupInput.addEventListener("input", ()=>showDropdown(pickupInput,pickupList));
+    pickupInput.addEventListener("focus", ()=>showDropdown(pickupInput,pickupList));
 
   document.body.addEventListener("click", e=>{
     if(!e.target.closest(".dropdown")){
@@ -627,96 +491,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showCarSlide(0);
   startSlideShow();
-
-  // ------------------ Fleet Popup (slide-in from left inside our-fleet) ------------------
-  const fleetButtons = document.querySelectorAll(".view-details");
-  const popupOverlay = document.querySelector(".fleet-popup-overlay");
-  const popup = document.querySelector(".fleet-popup");
-  const closeBtn = document.querySelector(".fleet-close-btn");
-  const bookNowBtn = document.querySelector(".fleet-book-now");
-
-  const popupImg = document.querySelector(".fleet-popup-img");
-  const popupName = document.querySelector(".fleet-popup-name");
-  const popupPrice = document.querySelector(".fleet-popup-price");
-  const popupYear = document.querySelector(".fleet-popup-year");
-  const popupEngine = document.querySelector(".fleet-popup-engine");
-  const popupHp = document.querySelector(".fleet-popup-hp");
-  const popupSpeed = document.querySelector(".fleet-popup-speed");
-  const popupDesc = document.querySelector(".fleet-popup-desc");
-
-  fleetButtons.forEach(button=>{
-    button.addEventListener("click", ()=>{
-      popupName.textContent = button.dataset.name;
-      popupImg.src = button.dataset.image;
-      popupPrice.textContent = `Price: ${button.dataset.price}`;
-      popupYear.textContent = `Year: ${button.dataset.year}`;
-      popupEngine.textContent = `Engine: ${button.dataset.engine}`;
-      popupHp.textContent = `Power: ${button.dataset.hp}`;
-      popupSpeed.textContent = `Top Speed: ${button.dataset.speed}`;
-      popupDesc.textContent = button.dataset.desc;
-
-      const fleetSection = document.getElementById("our-fleet");
-      if(fleetSection){
-        fleetSection.style.position = "relative"; // ensure relative container
-        fleetSection.appendChild(popupOverlay);
-        popupOverlay.style.display="flex";
-        requestAnimationFrame(()=>popup.classList.add("show"));
-        fleetSection.scrollIntoView({behavior:"smooth", block:"center"});
-      }
-    });
   });
-
-  const closePopup = ()=>{
-    popup.classList.remove("show");
-    setTimeout(()=>popupOverlay.style.display="none", 400);
-  };
-
-  closeBtn.addEventListener("click", closePopup);
-  popupOverlay.addEventListener("click", e=>{
-    if(e.target === popupOverlay) closePopup();
-  });
-
-  bookNowBtn.addEventListener("click", ()=>{
-    closePopup();
-    const bookingSection = document.querySelector(".need-car-section");
-    if(bookingSection) bookingSection.scrollIntoView({behavior:"smooth", block:"start"});
-  });
-
-});
-
-bookNowBtn.addEventListener("click", () => {
-  const booking = {
-    name: popupName.textContent,
-    price: popupPrice.textContent,
-    year: popupYear.textContent
-  };
-
-  ABAutozBackend.saveFleetBooking(booking);
-  alert("Car reserved successfully!");
-  closePopup();
-});
 
 
 /* ---------- SAVE MAIN BOOKING ---------- */
 document.querySelector(".show-car button")?.addEventListener("click", () => {
   const bookingData = {
     pickupLocation: document.getElementById("pickup-location").value,
-    dropoffLocation: document.getElementById("dropoff-location").value,
     pickupDate: document.getElementById("pickup-date").textContent,
     pickupTime: document.getElementById("pickup-time").textContent,
     returnDate: document.getElementById("return-date").textContent,
     returnTime: document.getElementById("return-time").textContent
   };
 
-  if (!bookingData.pickupLocation || !bookingData.dropoffLocation) {
-    alert("Please select pickup and dropoff locations.");
+  if (!bookingData.pickupLocation) {
+    alert("Please select a pickup location.");
     return;
   }
 
   ABAutozBackend.saveBooking(bookingData);
   alert("Booking saved successfully!");
 });
-
 
 /* ---------- SAVE VISIT REQUEST ---------- */
 document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
@@ -737,11 +532,28 @@ document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
   e.target.reset();
 });
 
-
-
 </script>
 
 <div class="signature-badge signature-bottom-left">Built by Love Omoruyi with Vision</div>
-<script src="js/hero-video.js"></script>
-</body>
+<script src="js/hero-video.js?v=2"></script>
+
+    <!-- Car section videos - slow motion playback -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const SECTION_PLAYBACK_RATE = 0.55;
+        const carVideos = document.querySelectorAll('video.car-video');
+        carVideos.forEach(function(video) {
+          video.playbackRate = SECTION_PLAYBACK_RATE;
+          video.addEventListener('play', function() {
+            this.playbackRate = SECTION_PLAYBACK_RATE;
+          });
+          // Ensure video plays
+          video.play().catch(function(e) {
+            console.log('Auto-play prevented for', video.src);
+          });
+        });
+      });
+    </script>
+
+  </body>
 </html>
