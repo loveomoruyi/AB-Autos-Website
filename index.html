@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AB Autoz</title>
   <link rel="stylesheet" href="./css/style.css" />
+<style>
+.return { display: flex; flex-wrap: wrap; gap: 20px; align-items: flex-start; width: 100%; }
+.return > div, .return > h3 { flex: 1; min-width: 200px; }
+.booking-section .button-container { width: 100%; max-width: 900px; }
+.booking-section { padding: 30px; }
+.input-group { position: relative; }
+.popup { min-width: 280px; }
+.second-container button { padding: 18px 40px !important; font-size: 1.2rem !important; font-weight: 700 !important; }
+</style>
 </head>
 <body>
   <div class="signature-badge signature-top-left">Built by Love Omoruyi with Vision</div>
@@ -26,25 +35,25 @@
     </div>
 
     <ul class="nav-links">
-      <li><a id="rentals-link" href="pages/rental.html">Rentals</a></li>
-      <li><a id="garage-link" href="pages/garage.html">Garage</a></li>
-      <li><a id="gallery-link" href="pages/gallery.html">Gallery</a></li>
+      <li><a id="rentals-link" href="rental.html">Rentals</a></li>
+      <li><a id="garage-link" href="garage.html">Garage</a></li>
+      <li><a id="gallery-link" href="gallery.html">Gallery</a></li>
 
       <li>
         <a id="logo-link" href="#" class="logo"></a>
       </li>
 
       <li class="dropdown">
-        <a id="services-link" href="pages/service.html">Service</a>
+        <a id="services-link" href="service.html">Service</a>
         <ul class="dropdown-menu">
-          <li><a id="tire-link" href="pages/tire-service.html">Tire Service</a></li>
-          <li><a id="autobody-link" href="pages/autobody.html">Autobody Service</a></li>
-          <li><a id="dealership-link" href="pages/dealership.html">Dealership Service</a></li>
+          <li><a id="tire-link" href="tire-service.html">Tire Service</a></li>
+          <li><a id="autobody-link" href="autobody.html">Autobody Service</a></li>
+          <li><a id="dealership-link" href="dealership.html">Dealership Service</a></li>
         </ul>
       </li>
 
-      <li><a id="about-link" href="pages/aboutus.html">About us</a></li>
-      <li><a id="contact-link" href="pages/contact.html">Contact</a></li>
+      <li><a id="about-link" href="aboutus.html">About us</a></li>
+      <li><a id="contact-link" href="contact.html">Contact</a></li>
     </ul>
   </header>
 
@@ -53,7 +62,7 @@
   </div>
 
      <!-- ================= BOOKING SECTION ================= -->
-  <section class="booking-section" style="display:flex;flex-direction:column;align-items:center;">
+  <section class="booking-section" style="display:flex;flex-direction:column;align-items:flex-end;width:100%;">
     <div class="button-container">
 
       <!-- Search Location -->
@@ -80,26 +89,11 @@
           <div class="popup" id="pickup-time-popup"></div>
         </div>
       </div>
-
-      <!-- Return Date -->
-      <div class="return-date">
-        <h3>Return Date</h3>
-        <div class="input-group" id="return-picker">
-          <span><img src="./image/Vector (4).png" alt=""></span>
-          <span id="return-date">Oct 18th</span>
-          <div class="popup" id="return-calendar"></div>
-        </div>
-
-        <h3 style="font-family:Inter,sans-serif;color:#888888;font-size:0.95rem;margin-top:0.5rem;">Return Time</h3>
-            <div class="input-group" id="return-time-picker">
-          <span id="return-time">12:00 PM</span>
-          <div class="popup" id="return-time-popup"></div>
-        </div>
       </div>
 
       <!-- Button -->
       <div class="show-car">
-        <button type="button">Show Cars</button>
+        <button type="button" onclick="window.location.href=\'inventory.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Show Cars</button>
       </div>
 
     </div>
@@ -115,17 +109,17 @@
         <p>From daily trips to long-term rentals,
 choose from our diverse fleet of <br>
 well-maintained vehicles.</p>
-<button>Book Now</button>
+<button onclick="window.location.href=\'rental.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
       </div>
       <div class="card-2">
         <h2>Quality Vehicles for Sale</h2>
         <p>Transparent pricing, flexible payment options, and full documentation support.</p>
-<button>Buy Now</button>
+<button onclick="window.location.href=\'inventory.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Buy Now</button>
       </div>
       <div class="card-3">
         <h2>Expert Auto Repairs</h2>
         <p>Certified technicians, modern equipment, and parts ensure your vehicle gets the care it deserves.</p>
-<button>Book Now</button>
+<button onclick="window.location.href=\'scheduling.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
       </div>
     </div>
   </section>
@@ -371,14 +365,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     container.querySelectorAll(".arrow-btn").forEach(btn=>{
-      btn.addEventListener("click", ()=>{
+      btn.addEventListener("click", (e)=>{ e.stopPropagation();
         const dir = btn.dataset.dir;
         if(container.id==="pickup-calendar"){
           pickupMonth = new Date(pickupMonth.getFullYear(), pickupMonth.getMonth()+(dir==="next"?1:-1));
           renderPickupCalendar();
         } else {
           returnMonth = new Date(returnMonth.getFullYear(), returnMonth.getMonth()+(dir==="next"?1:-1));
-          renderReturnCalendar();
+          
         }
       });
     });
@@ -396,7 +390,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }); }
 
   renderPickupCalendar();
-  renderReturnCalendar();
+  
 
   // ------------------ Time Picker ------------------
   const pickupTimePopup = document.getElementById("pickup-time-popup");
@@ -426,19 +420,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   renderTimeGrid(pickupTimePopup, pickupTimeSpan);
-  renderTimeGrid(returnTimePopup, returnTimeSpan);
+  
 
   function closeAllPopups(){ document.querySelectorAll(".popup").forEach(p=>p.classList.remove("active")); }
   [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].forEach(picker=>{
     picker.addEventListener("click", e=>{
       e.stopPropagation();
-            const isActive = picker.classList.contains("active");
+            const popupEl = picker.querySelector(".popup");
+        const isActive = popupEl.classList.contains("active");
       closeAllPopups();
-      if(!isActive) picker.classList.add("active");
+      if(!isActive) popupEl.classList.add("active");
     });
   });
 
-  document.body.addEventListener("click", closeAllPopups);
+  document.body.addEventListener("click", (e)=>{ if(!e.target.closest(".popup")&&!e.target.closest(".input-group")) closeAllPopups(); });
 
   // ------------------ Location Dropdowns ------------------
   const pickupInput = document.getElementById("pickup-location");
@@ -484,7 +479,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function startSlideShow(){ slideInterval=setInterval(nextCarSlide,5000); }
 
   carButtons.forEach((btn,index)=>{
-    btn.addEventListener("click", ()=>{
+    btn.addEventListener("click", (e)=>{ e.stopPropagation();
       clearInterval(slideInterval);
       showCarSlide(index);
       startSlideShow();
@@ -502,9 +497,7 @@ document.querySelector(".show-car button")?.addEventListener("click", () => {
     pickupLocation: document.getElementById("pickup-location").value,
     pickupDate: document.getElementById("pickup-date").textContent,
     pickupTime: document.getElementById("pickup-time").textContent,
-    returnDate: document.getElementById("return-date").textContent,
-    returnTime: document.getElementById("return-time").textContent
-  };
+          };
 
   if (!bookingData.pickupLocation) {
     alert("Please select a pickup location.");
