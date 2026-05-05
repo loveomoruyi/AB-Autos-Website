@@ -93,7 +93,7 @@
 
       <!-- Button -->
       <div class="show-car">
-        <button type="button" onclick="window.location.href=\'inventory.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Show Cars</button>
+        <button type="button" onclick="window.location.href='inventory.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Show Cars</button>
       </div>
 
     </div>
@@ -109,17 +109,17 @@
         <p>From daily trips to long-term rentals,
 choose from our diverse fleet of <br>
 well-maintained vehicles.</p>
-<button onclick="window.location.href=\'scheduling.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
+<button onclick="window.location.href='rental.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
       </div>
       <div class="card-2">
         <h2>Quality Vehicles for Sale</h2>
         <p>Transparent pricing, flexible payment options, and full documentation support.</p>
-<button onclick="window.location.href=\'inventory.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Buy Now</button>
+<button onclick="window.location.href='scheduling.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Buy Now</button>
       </div>
       <div class="card-3">
         <h2>Expert Auto Repairs</h2>
         <p>Certified technicians, modern equipment, and parts ensure your vehicle gets the care it deserves.</p>
-<button onclick="window.location.href=\'scheduling.html\'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
+<button onclick="window.location.href='scheduling.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
       </div>
     </div>
   </section>
@@ -459,7 +459,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.addEventListener("click", e=>{
     if(!e.target.closest(".dropdown")){
       pickupList.classList.remove("active");
-      dropoffList.classList.remove("active");
+      
     }
   });
 
