@@ -1,127 +1,133 @@
 (function () {
-  // Bentley interior first (smoothest slow-mo), car1 removed (stuttering)
-  var videoSources = [
+var videoSources = [
     "video/car4.mp4",
     "video/car2.mp4",
     "video/car3.mp4",
     "video/car5.mp4",
     "video/car7.mp4",
     "video/car8.mp4"
-  ];
+];
 
-  var PLAYBACK_RATE = 0.55;
-  var MAX_CLIP_DURATION = 12;
-  var FADE_DURATION = 1200;
-  var MIN_VIDEOS_BEFORE_REPEAT = 5;
-  var currentVideoIndex = 0;
-  var playedIndices = [];
-  var heroVideo = document.getElementById("hero-video");
-  var clipTimer = null;
+var PLAYBACK_RATE = 0.55;
+var MAX_CLIP_DURATION = 12;
+var FADE_DURATION = 1500;
+var MIN_VIDEOS_BEFORE_REPEAT = 5;
+var currentVideoIndex = 0;
+var playedIndices = [];
+var clipTimer = null;
 
-  if (!heroVideo) return;
+var videoA = document.getElementById("hero-video-a");
+var videoB = document.getElementById("hero-video-b");
 
-  heroVideo.removeAttribute("loop");
-  heroVideo.loop = false;
-  heroVideo.playbackRate = PLAYBACK_RATE;
-  heroVideo.muted = true;
-  heroVideo.playsInline = true;
-  heroVideo.style.opacity = "1";
+if (!videoA || !videoB) return;
 
-  function getNextVideoIndex() {
-    if (playedIndices.length >= MIN_VIDEOS_BEFORE_REPEAT) {
-      playedIndices = [];
+var activeVideo = videoA;
+var nextVideo = videoB;
+
+[videoA, videoB].forEach(function(v) {
+    v.removeAttribute("loop");
+    v.playbackRate = PLAYBACK_RATE;
+    v.muted = true;
+    v.playsInline = true;
+});
+
+function getNextVideoIndex() {
+    if (playedIndices.length >= videoSources.length) {
+        playedIndices = [];
     }
     var nextIndex = (currentVideoIndex + 1) % videoSources.length;
     var attempts = 0;
     while (playedIndices.indexOf(nextIndex) !== -1 && attempts < videoSources.length) {
-      nextIndex = (nextIndex + 1) % videoSources.length;
-      attempts++;
+        nextIndex = (nextIndex + 1) % videoSources.length;
+        attempts++;
     }
     return nextIndex;
-  }
+}
 
-  function fadeOut(callback) {
-    heroVideo.style.transition = "opacity " + FADE_DURATION + "ms ease";
-    heroVideo.style.opacity = "0";
-    setTimeout(callback, FADE_DURATION);
-  }
+function startClipTimer() {
+    clearTimeout(clipTimer);
+    var clipDuration = MAX_CLIP_DURATION;
+    if (videoSources[currentVideoIndex].indexOf("car7") !== -1) {
+        clipDuration = 8;
+    }
+    var realDuration = clipDuration / PLAYBACK_RATE;
+    clipTimer = setTimeout(function () {
+        if (!activeVideo.paused && !activeVideo.ended) {
+            crossfadeToNext();
+        }
+    }, realDuration * 1000);
+}
 
-  function fadeIn() {
-    heroVideo.style.transition = "opacity " + FADE_DURATION + "ms ease";
-    heroVideo.style.opacity = "1";
-  }
-
-  function playNextVideo() {
+function crossfadeToNext() {
     clearTimeout(clipTimer);
     var nextIndex = getNextVideoIndex();
     currentVideoIndex = nextIndex;
     playedIndices.push(currentVideoIndex);
-    console.log("Switching to video " + (currentVideoIndex + 1) + ": " + videoSources[currentVideoIndex]);
+    console.log("Crossfading to video " + (currentVideoIndex + 1) + ": " + videoSources[currentVideoIndex]);
 
-    fadeOut(function () {
-      heroVideo.src = videoSources[currentVideoIndex];
-      heroVideo.load();
-      heroVideo.playbackRate = PLAYBACK_RATE;
-      heroVideo.oncanplay = function () {
-        heroVideo.oncanplay = null;
-        heroVideo.play().then(function () {
-          fadeIn();
+    nextVideo.src = videoSources[currentVideoIndex];
+    nextVideo.load();
+    nextVideo.playbackRate = PLAYBACK_RATE;
+
+    nextVideo.oncanplay = function () {
+        nextVideo.oncanplay = null;
+        nextVideo.play().then(function () {
+            nextVideo.classList.add("active");
+            activeVideo.classList.remove("active");
+
+            setTimeout(function () {
+                var temp = activeVideo;
+                activeVideo = nextVideo;
+                nextVideo = temp;
+
+                nextVideo.pause();
+                nextVideo.removeAttribute("src");
+                nextVideo.load();
+
+                startClipTimer();
+            }, FADE_DURATION + 100);
         }).catch(function (err) {
-          console.warn("Video play failed:", err);
-          fadeIn();
+            console.warn("Video play failed:", err);
         });
-      };
+    };
+}
+
+videoA.addEventListener("ended", function () {
+    if (activeVideo === videoA) {
+        crossfadeToNext();
+    }
+});
+
+videoB.addEventListener("ended", function () {
+    if (activeVideo === videoB) {
+        crossfadeToNext();
+    }
+});
+
+[videoA, videoB].forEach(function(v) {
+    v.addEventListener("loadedmetadata", function () {
+        v.playbackRate = PLAYBACK_RATE;
     });
-  }
+    v.addEventListener("ratechange", function () {
+        if (v.playbackRate !== PLAYBACK_RATE) {
+            v.playbackRate = PLAYBACK_RATE;
+        }
+    });
+});
 
-  function startClipTimer() {
-    clearTimeout(clipTimer);
-    // Shorten G-Wagon clip (car7.mp4) to 8s, others use default 12s
-    var clipDuration = MAX_CLIP_DURATION;
-    if (videoSources[currentVideoIndex].indexOf("car7") !== -1) {
-      clipDuration = 8;
-    }
-    var realDuration = clipDuration / PLAYBACK_RATE;
-    clipTimer = setTimeout(function () {
-      if (!heroVideo.paused && !heroVideo.ended) {
-        playNextVideo();
-      }
-    }, realDuration * 1000);
-  }
-
-  heroVideo.addEventListener("ended", function () {
-    clearTimeout(clipTimer);
-    playNextVideo();
-  });
-
-  heroVideo.addEventListener("playing", function () {
-    heroVideo.playbackRate = PLAYBACK_RATE;
+videoA.src = videoSources[0];
+playedIndices.push(0);
+videoA.load();
+videoA.playbackRate = PLAYBACK_RATE;
+videoA.play().then(function () {
     startClipTimer();
-  });
-
-  heroVideo.addEventListener("loadedmetadata", function () {
-    heroVideo.playbackRate = PLAYBACK_RATE;
-  });
-
-  heroVideo.addEventListener("ratechange", function () {
-    if (heroVideo.playbackRate !== PLAYBACK_RATE) {
-      heroVideo.playbackRate = PLAYBACK_RATE;
-    }
-  });
-
-  heroVideo.src = videoSources[0];
-  playedIndices.push(0);
-  heroVideo.load();
-  heroVideo.playbackRate = PLAYBACK_RATE;
-  heroVideo.play().then(function () {
-    fadeIn();
-  }).catch(function (err) {
+}).catch(function (err) {
     console.warn("Initial video play failed:", err);
     document.addEventListener("click", function handler() {
-      heroVideo.play();
-      document.removeEventListener("click", handler);
+        videoA.play();
+        document.removeEventListener("click", handler);
     }, { once: true });
-  });
+});
 
-  console.log("AB Autoz Hero Video: Initialized with " + videoSources.length + " videos (Bentley first), playbackRate=" + PLAYBACK_RATE);
+console.log("AB Autoz Hero Video: Initialized crossfade with " + videoSources.length + " videos, playbackRate=" + PLAYBACK_RATE);
 })();
