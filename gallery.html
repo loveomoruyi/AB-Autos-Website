@@ -3,84 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gallery - AB Autos</title>
+    <title>AB Autos - Gallery</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&family=Open+Sans:wght@300..800&family=Raleway:wght@100..900&family=Roboto:wght@100..900&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: #0A0A0A; color: #FAFAFA; font-family: Inter, sans-serif; min-height: 100vh; }
-        a { transition: color 0.3s; }
-        @media (max-width: 768px) {
-            .nav-links { flex-direction: column; gap: 0.5rem !important; }
-            .cards-grid { grid-template-columns: 1fr !important; }
-            .hero-title { font-size: 2.5rem !important; }
-        }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { background:#0A0A0A; color:#FAFAFA; font-family:Inter,sans-serif; }
+        nav { display:flex; justify-content:center; align-items:center; padding:1.2rem 2rem; background:#111111; border-bottom:1px solid #1A1500; flex-wrap:wrap; gap:1.5rem; }
+        nav a { color:#888888; text-decoration:none; font-size:0.9rem; transition:color 0.3s; }
+        nav a:hover { color:#D4A843; }
+        .hero-banner { position:relative; height:50vh; display:flex; align-items:center; justify-content:center; text-align:center; background:linear-gradient(135deg,#0A0A0A 0%,#111111 50%,#0A0A0A 100%); overflow:hidden; }
+        .hero-banner::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at center,rgba(14,165,233,0.08) 0%,transparent 70%); }
+        .hero-banner .content { position:relative; z-index:1; padding:2rem; }
+        .hero-banner h1 { font-family:Montserrat,sans-serif; font-size:3.5rem; font-weight:800; margin-bottom:1rem; background:linear-gradient(135deg,#D4A843,#E8C547); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+        .hero-banner p { font-size:1.2rem; color:#888888; max-width:600px; margin:0 auto; }
+        .filter-bar { display:flex; justify-content:center; gap:1rem; padding:2rem; flex-wrap:wrap; }
+        .filter-btn { padding:0.6rem 1.5rem; border:1px solid #333; background:transparent; color:#888; border-radius:25px; cursor:pointer; font-size:0.9rem; transition:all 0.3s; }
+        .filter-btn:hover, .filter-btn.active { background:#D4A843; color:#0A0A0A; border-color:#D4A843; font-weight:600; }
+        .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:1.5rem; max-width:1200px; margin:0 auto 3rem; padding:0 2rem; }
+        .gallery-item { position:relative; border-radius:12px; overflow:hidden; border:1px solid #1A1500; background:#111111; transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s; cursor:pointer; }
+        .gallery-item:hover { transform:translateY(-5px); border-color:#D4A843; box-shadow:0 10px 30px rgba(212,168,67,0.1); }
+        .gallery-item video { width:100%; height:220px; object-fit:cover; display:block; }
+        .gallery-item .overlay { position:absolute; top:0; left:0; right:0; bottom:0; background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 60%); opacity:0; transition:opacity 0.3s; display:flex; align-items:flex-end; padding:1.5rem; }
+        .gallery-item:hover .overlay { opacity:1; }
+        .gallery-item .overlay h3 { font-family:Montserrat,sans-serif; color:#D4A843; font-size:1.1rem; margin-bottom:0.3rem; }
+        .gallery-item .overlay p { color:#ccc; font-size:0.85rem; }
+        .gallery-item .badge { position:absolute; top:12px; right:12px; background:#D4A843; color:#0A0A0A; padding:0.3rem 0.8rem; border-radius:15px; font-size:0.75rem; font-weight:600; }
+        .showcase-section { max-width:1200px; margin:0 auto 3rem; padding:0 2rem; }
+        .showcase-section h2 { font-family:Montserrat,sans-serif; font-size:2rem; color:#D4A843; margin-bottom:1.5rem; text-align:center; }
+        .showcase-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+        .showcase-card { background:#111111; border:1px solid #1A1500; border-radius:12px; padding:2rem; transition:transform 0.3s,border-color 0.3s; }
+        .showcase-card:hover { transform:translateY(-5px); border-color:#D4A843; }
+        .showcase-card h3 { font-family:Montserrat,sans-serif; color:#D4A843; font-size:1.3rem; margin-bottom:0.8rem; }
+        .showcase-card p { color:#888888; font-size:1rem; line-height:1.6; }
+        .cta-section { text-align:center; padding:4rem 2rem; background:#111111; border-top:1px solid #1A1500; }
+        .cta-section h2 { font-family:Montserrat,sans-serif; font-size:2rem; color:#FAFAFA; margin-bottom:1rem; }
+        .cta-section p { color:#888888; margin-bottom:2rem; }
+        .cta-btn { display:inline-block; background:#D4A843; color:#FAFAFA; font-family:Montserrat,sans-serif; font-weight:600; padding:0.8rem 2.5rem; border-radius:8px; text-decoration:none; font-size:1rem; transition:background 0.3s; }
+        .cta-btn:hover { background:#B8922E; }
+        footer { background:#0A0A0A; border-top:1px solid #1A1500; padding:2rem; text-align:center; }
+        footer p { font-family:Inter,sans-serif; color:#555555; font-size:0.9rem; }
+        .stats-bar { display:flex; justify-content:center; gap:3rem; padding:2rem; background:#111111; border-bottom:1px solid #1A1500; flex-wrap:wrap; }
+        .stat-item { text-align:center; }
+        .stat-item .number { font-family:Montserrat,sans-serif; font-size:2rem; font-weight:700; color:#D4A843; }
+        .stat-item .label { color:#888; font-size:0.85rem; margin-top:0.3rem; }
+        @media(max-width:768px) { .gallery-grid { grid-template-columns:1fr; } .showcase-grid { grid-template-columns:1fr; } .hero-banner h1 { font-size:2.5rem; } .stats-bar { gap:1.5rem; } }
     </style>
 </head>
 <body>
-    <nav style="background:#0A0A0A;border-bottom:1px solid #1A1500;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:70px;position:sticky;top:0;z-index:1000;">
-        <a href="index.html" style="color:#D4A843;font-family:Montserrat,sans-serif;font-size:1.5rem;font-weight:800;text-decoration:none;">AB <span style="color:#FAFAFA;">Autos</span></a>
-        <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
-            <a href="index.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Home</a>
-            <a href="rental.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Rentals</a>
-            <a href="garage.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Garage</a>
-            <a href="gallery.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Gallery</a>
-            <a href="service.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Services</a>
-            <a href="tire-service.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Tires</a>
-            <a href="autobody.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Autobody</a>
-            <a href="dealership.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Dealership</a>
-            <a href="aboutus.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">About</a>
-            <a href="contact.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Contact</a>
-        </div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="rental.html">Rentals</a>
+        <a href="garage.html">Garage</a>
+        <a href="gallery.html" style="color:#D4A843;">Gallery</a>
+        <a href="service.html">Services</a>
+        <a href="tire-service.html">Tires</a>
+        <a href="autobody.html">Autobody</a>
+        <a href="dealership.html">Dealership</a>
+        <a href="aboutus.html">About</a>
+        <a href="contact.html">Contact</a>
     </nav>
 
     <!-- Hero Banner -->
-    <section style="position:relative;height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#0A0A0A 0%,#111111 50%,#0A0A0A 100%);overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,165,233,0.15) 0%,transparent 70%);"></div>
-        <div style="position:relative;z-index:1;padding:2rem;">
-            <h1 class="hero-title" style="font-family:Montserrat,sans-serif;font-size:3.5rem;font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#D4A843,#E8C547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Gallery</h1>
-            <p style="font-family:Inter,sans-serif;font-size:1.2rem;color:#888888;max-width:600px;margin:0 auto;">Our Showcase</p>
+    <section class="hero-banner">
+        <div class="content">
+            <h1>Gallery</h1>
+            <p>Explore our collection of premium vehicles, custom builds, and client transformations</p>
         </div>
     </section>
 
-    <!-- Description -->
-    <section style="max-width:900px;margin:3rem auto;padding:0 2rem;text-align:center;">
-        <p style="font-family:Inter,sans-serif;font-size:1.1rem;color:#888888;line-height:1.8;">Browse our stunning collection of premium and luxury vehicles. Each car tells a story of engineering excellence and automotive passion.</p>
-    </section>
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+        <div class="stat-item"><div class="number">500+</div><div class="label">Vehicles Serviced</div></div>
+        <div class="stat-item"><div class="number">150+</div><div class="label">Custom Builds</div></div>
+        <div class="stat-item"><div class="number">98%</div><div class="label">Client Satisfaction</div></div>
+        <div class="stat-item"><div class="number">15+</div><div class="label">Years Experience</div></div>
+    </div>
 
-    <!-- Cards Grid -->
-    <section style="max-width:1100px;margin:2rem auto 4rem;padding:0 2rem;">
-        <div class="cards-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;">
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterGallery('all')">All</button>
+        <button class="filter-btn" onclick="filterGallery('premium')">Premium</button>
+        <button class="filter-btn" onclick="filterGallery('classic')">Classic</button>
+        <button class="filter-btn" onclick="filterGallery('custom')">Custom Builds</button>
+        <button class="filter-btn" onclick="filterGallery('repairs')">Repairs</button>
+        <button class="filter-btn" onclick="filterGallery('restorations')">Restorations</button>
+    </div>
 
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Premium Collection</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Marvel at our curated selection of the worlds most exclusive vehicles.</p>
+    <!-- Gallery Grid -->
+    <div class="gallery-grid">
+        <div class="gallery-item" data-category="premium">
+            <video src="video/car1.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Premium</span>
+            <div class="overlay"><div><h3>2025 BMW M5 Competition</h3><p>Twin-turbo V8 power meets luxury</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="premium">
+            <video src="video/car2.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Premium</span>
+            <div class="overlay"><div><h3>2025 Mercedes-AMG GT</h3><p>Handcrafted performance excellence</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="classic">
+            <video src="video/car3.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Classic</span>
+            <div class="overlay"><div><h3>1967 Ford Mustang GT</h3><p>Iconic American muscle restored</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="custom">
+            <video src="video/car4.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Custom</span>
+            <div class="overlay"><div><h3>Custom Widebody Kit</h3><p>Full aerodynamic transformation</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="repairs">
+            <video src="video/car5.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Repair</span>
+            <div class="overlay"><div><h3>Full Engine Rebuild</h3><p>Complete powertrain restoration</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="restorations">
+            <video src="video/car6.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Restoration</span>
+            <div class="overlay"><div><h3>Classic Porsche 911</h3><p>Frame-off complete restoration</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="premium">
+            <video src="video/car7.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Premium</span>
+            <div class="overlay"><div><h3>2025 Audi RS e-tron GT</h3><p>Electric performance redefined</p></div></div>
+        </div>
+        <div class="gallery-item" data-category="custom">
+            <video src="video/car8.mp4" muted loop playsinline onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0;"></video>
+            <span class="badge">Custom</span>
+            <div class="overlay"><div><h3>Liberty Walk GTR</h3><p>Wide-body street monster</p></div></div>
+        </div>
+    </div>
+
+    <!-- Showcase Section -->
+    <section class="showcase-section">
+        <h2>Our Specialties</h2>
+        <div class="showcase-grid">
+            <div class="showcase-card">
+                <h3>Premium Collection</h3>
+                <p>Marvel at our curated selection of the worlds most exclusive vehicles. From supercars to luxury sedans, each vehicle represents the pinnacle of automotive engineering.</p>
             </div>
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Classic Beauties</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Timeless classics that represent the golden era of automotive design.</p>
+            <div class="showcase-card">
+                <h3>Classic Beauties</h3>
+                <p>Timeless classics that represent the golden era of automotive design. Meticulously restored to their original glory with modern reliability upgrades.</p>
             </div>
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Custom Builds</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">One-of-a-kind custom vehicles built to the highest specifications.</p>
+            <div class="showcase-card">
+                <h3>Custom Builds</h3>
+                <p>One-of-a-kind custom vehicles built to the highest specifications. From performance upgrades to full aesthetic transformations.</p>
             </div>
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Client Showcases</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Vehicles we have serviced and transformed for our valued clients.</p>
+            <div class="showcase-card">
+                <h3>Client Showcases</h3>
+                <p>Vehicles we have serviced and transformed for our valued clients. Every project tells a unique story of passion and craftsmanship.</p>
             </div>
         </div>
     </section>
 
     <!-- CTA Section -->
-    <section style="text-align:center;padding:4rem 2rem;background:#111111;border-top:1px solid #1A1500;">
-        <h2 style="font-family:Montserrat,sans-serif;font-size:2rem;color:#FAFAFA;margin-bottom:1rem;">Ready to Get Started?</h2>
-        <p style="font-family:Inter,sans-serif;color:#888888;margin-bottom:2rem;">Contact us today to learn more about our gallery services.</p>
-        <a href="contact.html" style="display:inline-block;background:#D4A843;color:#FAFAFA;font-family:Montserrat,sans-serif;font-weight:600;padding:0.8rem 2.5rem;border-radius:8px;text-decoration:none;font-size:1rem;transition:background 0.3s;" onmouseover="this.style.background='#B8922E'" onmouseout="this.style.background='#D4A843'">Contact Us</a>
+    <section class="cta-section">
+        <h2>Ready to Get Started?</h2>
+        <p>Book a consultation or schedule your vehicle for service today.</p>
+        <a href="scheduling.html" class="cta-btn">Book Now</a>
+        <a href="contact.html" class="cta-btn" style="margin-left:1rem;background:transparent;border:1px solid #D4A843;color:#D4A843;">Contact Us</a>
     </section>
 
     <!-- Footer -->
-    <footer style="background:#0A0A0A;border-top:1px solid #1A1500;padding:2rem;text-align:center;">
-        <p style="font-family:Inter,sans-serif;color:#555555;font-size:0.9rem;">&copy; 2026 AB Autos. All Rights Reserved.</p>
+    <footer>
+        <p>&copy; 2026 AB Autos. All Rights Reserved.</p>
     </footer>
+
+    <script>
+    function filterGallery(category) {
+        const items = document.querySelectorAll('.gallery-item');
+        const btns = document.querySelectorAll('.filter-btn');
+        btns.forEach(b => b.classList.remove('active'));
+        event.target.classList.add('active');
+        items.forEach(item => {
+            if (category === 'all' || item.dataset.category === category) {
+                item.style.display = 'block';
+                item.style.animation = 'fadeIn 0.4s ease';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+    </script>
 </body>
 </html>

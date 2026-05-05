@@ -394,9 +394,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ------------------ Time Picker ------------------
   const pickupTimePopup = document.getElementById("pickup-time-popup");
-  const returnTimePopup = document.getElementById("return-time-popup");
+  const returnTimePopup = document.getElementById("return-time-popup")||document.createElement("div");
   const pickupTimeSpan = document.getElementById("pickup-time");
-  const returnTimeSpan = document.getElementById("return-time");
+  const returnTimeSpan = document.getElementById("return-time")||document.createElement("span");
 
   function generateTimes(){
     const times=[],suffix=["AM","PM"];
@@ -423,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
 
   function closeAllPopups(){ document.querySelectorAll(".popup").forEach(p=>p.classList.remove("active")); }
-  [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].forEach(picker=>{
+  [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].filter(Boolean).forEach(picker=>{
     picker.addEventListener("click", e=>{
       e.stopPropagation();
             const popupEl = picker.querySelector(".popup");
