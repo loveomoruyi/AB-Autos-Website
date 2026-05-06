@@ -3,84 +3,287 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - AB Autos</title>
+    <title>AB Autos - Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&family=Open+Sans:wght@300..800&family=Raleway:wght@100..900&family=Roboto:wght@100..900&display=swap');
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { background: #0A0A0A; color: #FAFAFA; font-family: Inter, sans-serif; min-height: 100vh; }
-        a { transition: color 0.3s; }
-        @media (max-width: 768px) {
-            .nav-links { flex-direction: column; gap: 0.5rem !important; }
-            .cards-grid { grid-template-columns: 1fr !important; }
-            .hero-title { font-size: 2.5rem !important; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0A0A0A;
+            color: #FAFAFA;
+            min-height: 100vh;
+        }
+        nav {
+            background: #0A0A0A;
+            border-bottom: 1px solid rgba(212,168,67,0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #D4A843;
+            text-decoration: none;
+        }
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        .nav-links a {
+            color: #888888;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #D4A843;
+        }
+        .hero {
+            background: linear-gradient(135deg, #0A0A0A 0%, #111111 50%, #0A0A0A 100%);
+            background-size: cover;
+            position: relative;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(212,168,67,0.1) 0%, transparent 70%);
+        }
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #D4A843, #C8C647);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        .form-section {
+            background: #111111;
+            border: 1px solid #1A1500;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+        }
+        .form-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #D4A843;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #FAFAFA;
+            font-weight: 500;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: #111111;
+            border: 1px solid rgba(212,168,67,0.3);
+            border-radius: 8px;
+            color: #FAFAFA;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #D4A843;
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .submit-btn {
+            background: #D4A843;
+            color: #FAFAFA;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 8px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: #111111;
+            border: 1px solid #1A1500;
+            border-radius: 12px;
+            padding: 2rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .service-card:hover {
+            border-color: #D4A843;
+            transform: translateY(-5px);
+        }
+        .service-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #D4A843;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .service-card p {
+            color: #CCCCCC;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
-    <nav style="background:#0A0A0A;border-bottom:1px solid #1A1500;padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:70px;position:sticky;top:0;z-index:1000;">
-        <a href="index.html" style="color:#D4A843;font-family:Montserrat,sans-serif;font-size:1.5rem;font-weight:800;text-decoration:none;">AB <span style="color:#FAFAFA;">Autos</span></a>
-        <div style="display:flex;gap:1.5rem;align-items:center;flex-wrap:wrap;">
-            <a href="index.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Home</a>
-            <a href="rental.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Rentals</a>
-            <a href="garage.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Garage</a>
-            <a href="gallery.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Gallery</a>
-            <a href="service.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Services</a>
-            <a href="tire-service.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Tires</a>
-            <a href="autobody.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Autobody</a>
-            <a href="dealership.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Dealership</a>
-            <a href="aboutus.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">About</a>
-            <a href="contact.html" style="color:#888888;text-decoration:none;font-family:Inter,sans-serif;font-size:0.9rem;transition:color 0.3s;" onmouseover="this.style.color='#D4A843'" onmouseout="this.style.color='#888888'">Contact</a>
+    <nav>
+        <div class="nav-container">
+            <a href="dealership.html" class="logo">AB Autos</a>
+            <ul class="nav-links">
+                <li><a href="dealership.html">Home</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="service.html">Service</a></li>
+            </ul>
         </div>
     </nav>
 
-    <!-- Hero Banner -->
-    <section style="position:relative;height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(135deg,#0A0A0A 0%,#111111 50%,#0A0A0A 100%);overflow:hidden;">
-        <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,165,233,0.15) 0%,transparent 70%);"></div>
-        <div style="position:relative;z-index:1;padding:2rem;">
-            <h1 class="hero-title" style="font-family:Montserrat,sans-serif;font-size:3.5rem;font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,#D4A843,#E8C547);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Services</h1>
-            <p style="font-family:Inter,sans-serif;font-size:1.2rem;color:#888888;max-width:600px;margin:0 auto;">Full Auto Services</p>
+    <section class="hero">
+        <h1>Service</h1>
+    </section>
+
+    <div class="content">
+        <div class="form-section">
+            <h2>Schedule a Service</h2>
+            <form>
+                <div class="form-group">
+                    <label for="service-date">Service Date</label>
+                    <input type="date" id="service-date" name="service-date">
+                </div>
+                <div class="form-group">
+                    <label for="service-description">Describe what needs to be worked on</label>
+                    <textarea id="service-description" name="service-description" placeholder="Please describe the issue or service needed for your car..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
         </div>
-    </section>
 
-    <!-- Description -->
-    <section style="max-width:900px;margin:3rem auto;padding:0 2rem;text-align:center;">
-        <p style="font-family:Inter,sans-serif;font-size:1.1rem;color:#888888;line-height:1.8;">AB Autos offers a comprehensive range of automotive services designed to keep your vehicle performing at its peak.</p>
-    </section>
-
-    <!-- Cards Grid -->
-    <section style="max-width:1100px;margin:2rem auto 4rem;padding:0 2rem;">
-        <div class="cards-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;">
-
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Maintenance Packages</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Regular maintenance packages including oil changes, filter replacements, and fluid checks.</p>
+        <h2 style="font-family: 'Montserrat', sans-serif; color: #D4A843; margin-bottom: 1.5rem; font-size: 1.5rem;">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Detailing</h3>
+                <p>Professional interior and exterior detailing services to keep your vehicle looking showroom fresh. Our team uses premium products and techniques to restore and protect your car's finish.</p>
             </div>
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Performance Tuning</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Unlock your vehicles full potential with our professional ECU tuning and upgrades.</p>
-            </div>
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Detailing Services</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Premium interior and exterior detailing to keep your car looking showroom fresh.</p>
-            </div>
-            <div style="background:#111111;border:1px solid #1A1500;border-radius:12px;padding:2rem;transition:transform 0.3s,border-color 0.3s;" onmouseover="this.style.transform='translateY(-5px)';this.style.borderColor='#D4A843'" onmouseout="this.style.transform='translateY(0)';this.style.borderColor='#1A1500'">
-                <h3 style="font-family:Montserrat,sans-serif;color:#D4A843;font-size:1.3rem;margin:0 0 1rem 0;">Inspection Services</h3>
-                <p style="font-family:Inter,sans-serif;color:#888888;font-size:1rem;line-height:1.6;margin:0;">Thorough pre-purchase and annual inspections for complete peace of mind.</p>
+            <div class="service-card">
+                <h3>Inspection</h3>
+                <p>Comprehensive vehicle inspections covering all major systems. Our certified technicians will thoroughly examine your vehicle and provide a detailed report of its condition.</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <!-- CTA Section -->
-    <section style="text-align:center;padding:4rem 2rem;background:#111111;border-top:1px solid #1A1500;">
-        <h2 style="font-family:Montserrat,sans-serif;font-size:2rem;color:#FAFAFA;margin-bottom:1rem;">Ready to Get Started?</h2>
-        <p style="font-family:Inter,sans-serif;color:#888888;margin-bottom:2rem;">Contact us today to learn more about our services services.</p>
-        <a href="contact.html" style="display:inline-block;background:#D4A843;color:#FAFAFA;font-family:Montserrat,sans-serif;font-weight:600;padding:0.8rem 2.5rem;border-radius:8px;text-decoration:none;font-size:1rem;transition:background 0.3s;" onmouseover="this.style.background='#B8922E'" onmouseout="this.style.background='#D4A843'">Contact Us</a>
-    </section>
-
-    <!-- Footer -->
-    <footer style="background:#0A0A0A;border-top:1px solid #1A1500;padding:2rem;text-align:center;">
-        <p style="font-family:Inter,sans-serif;color:#555555;font-size:0.9rem;">&copy; 2026 AB Autos. All Rights Reserved.</p>
-    </footer>
+<script>
+(function(){
+var a=document.createElement("audio");
+a.src="audio/beat.mp4";
+a.loop=true;
+a.volume=0.3;
+document.documentElement.appendChild(a);
+var b=document.createElement("button");
+b.id="music-toggle";
+b.innerHTML='<span style=\"position:relative;display:inline-block;\">\u266B<span style=\"position:absolute;top:-2px;left:0;font-size:22px;transform:rotate(-45deg);pointer-events:none;\">\u2014</span></span>';
+b.title="Toggle Music";
+b.setAttribute("style","position:fixed !important;bottom:30px !important;right:30px !important;z-index:2147483647 !important;width:55px !important;height:55px !important;border-radius:50% !important;border:2px solid #d4af37 !important;background:rgba(0,0,0,0.9) !important;color:#d4af37 !important;font-size:22px !important;font-weight:bold !important;cursor:pointer !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 4px 15px rgba(212,175,55,0.4) !important;font-family:sans-serif !important;transform:none !important;");
+document.documentElement.appendChild(b);
+var playing=false;
+var userClicked=false;
+function setOn(){playing=true;b.innerHTML="\u266B";b.style.setProperty("border-color","#00ff00","important");}
+function setOff(){playing=false;b.innerHTML='<span style=\"position:relative;display:inline-block;\">\u266B<span style=\"position:absolute;top:-2px;left:0;font-size:22px;transform:rotate(-45deg);pointer-events:none;\">\u2014</span></span>';b.style.setProperty("border-color","#d4af37","important");}
+b.addEventListener("click",function(e){
+e.stopPropagation();
+userClicked=true;
+if(playing){a.pause();setOff();}
+else{a.play().then(setOn).catch(function(){});}
+});
+// Aggressive autoplay - start muted then unmute
+  a.muted = true;
+  a.play().then(function(){
+    // Audio started muted, now try to unmute
+    a.muted = false;
+    a.volume = 0.3;
+    setOn();
+  }).catch(function(){
+    // Even muted play failed - try on interaction
+    var events=["click","touchstart","scroll","keydown","mousemove"];
+    function startOnInteraction(){
+      if(!playing && !userClicked){
+        a.muted = false;
+        a.volume = 0.3;
+        a.play().then(function(){
+          setOn();
+          events.forEach(function(evt){ document.removeEventListener(evt, startOnInteraction, true); });
+        }).catch(function(){});
+      }
+    }
+    events.forEach(function(evt){ document.addEventListener(evt, startOnInteraction, true); });
+  });
+  // Fallback: also try unmuted play after short delay
+  setTimeout(function(){
+    if(!playing && !userClicked){
+      a.muted = false;
+      a.volume = 0.3;
+      a.play().then(setOn).catch(function(){
+        var events=["click","touchstart","scroll","keydown","mousemove"];
+        function startOnInteraction2(){
+          if(!playing && !userClicked){
+            a.muted = false;
+            a.volume = 0.3;
+            a.play().then(function(){
+              setOn();
+              events.forEach(function(evt){ document.removeEventListener(evt, startOnInteraction2, true); });
+            }).catch(function(){});
+          }
+        }
+        events.forEach(function(evt){ document.addEventListener(evt, startOnInteraction2, true); });
+      });
+    }
+  }, 1000);
+})();
+</script>
 </body>
 </html>

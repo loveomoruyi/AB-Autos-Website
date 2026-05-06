@@ -113,15 +113,15 @@ choose from our diverse fleet of <br>
 well-maintained vehicles.</p>
 <button onclick="window.location.href='rental.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
       </div>
-      <div class="card-2">
+      <div class="card-2" style="background: linear-gradient(160deg, rgba(26,26,46,0.3) 0%, rgba(15,52,96,0.5) 30%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,1) 65%), url(image/Ab2.png) center/cover; position: relative;">
         <h2>Quality Vehicles for Sale</h2>
         <p>Transparent pricing, flexible payment options, and full documentation support.</p>
-<button onclick="window.location.href='scheduling.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Buy Now</button>
+<button onclick="window.location.href='inventory.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Buy Now</button>
       </div>
       <div class="card-3">
         <h2>Expert Auto Repairs</h2>
         <p>Certified technicians, modern equipment, and parts ensure your vehicle gets the care it deserves.</p>
-<button onclick="window.location.href='scheduling.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
+<button onclick="window.location.href='inventory.html'" style="padding:18px 40px;font-size:1.2rem;font-weight:700;cursor:pointer;">Book Now</button>
       </div>
     </div>
   </section>
@@ -363,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
 
     container.querySelectorAll(".days-grid button").forEach(btn=>{
-      btn.addEventListener("click", ()=>onSelect(Number(btn.dataset.day)));
+      btn.addEventListener("click", (e)=>{ e.stopPropagation(); onSelect(Number(btn.dataset.day)); });
     });
 
     container.querySelectorAll(".arrow-btn").forEach(btn=>{
@@ -428,6 +428,7 @@ document.addEventListener("DOMContentLoaded", () => {
   [document.getElementById("pickup-picker"), document.getElementById("return-picker"), document.getElementById("pickup-time-picker"), document.getElementById("return-time-picker")].filter(Boolean).forEach(picker=>{
     picker.addEventListener("click", e=>{
       e.stopPropagation();
+        if(e.target.closest(".days-grid")) return;
             const popupEl = picker.querySelector(".popup");
         const isActive = popupEl.classList.contains("active");
       closeAllPopups();
@@ -554,5 +555,78 @@ document.querySelector(".booking-form")?.addEventListener("submit", (e) => {
       });
     </script>
 
-  </body>
+  
+
+
+
+<!-- Background Music Player -->
+<script>
+(function(){
+  var a=document.createElement("audio");
+  a.id="bg-music";a.loop=true;a.volume=0.3;
+  a.src="audio/beat.mp4";
+  document.documentElement.appendChild(a);
+  var b=document.createElement("button");
+  b.id="music-toggle";
+  b.innerHTML="<span style=\"position:relative;display:inline-block;\">\u266B<span style=\"position:absolute;top:-2px;left:0;font-size:22px;transform:rotate(-45deg);pointer-events:none;\">\u2014</span></span>";
+  b.title="Toggle Music";
+  b.setAttribute("style","position:fixed !important;bottom:30px !important;right:30px !important;z-index:2147483647 !important;width:55px !important;height:55px !important;border-radius:50% !important;border:2px solid #d4af37 !important;background:rgba(0,0,0,0.9) !important;color:#d4af37 !important;font-size:22px !important;font-weight:bold !important;cursor:pointer !important;display:flex !important;align-items:center !important;justify-content:center !important;box-shadow:0 4px 15px rgba(212,175,55,0.4) !important;font-family:sans-serif !important;transform:none !important;");
+  document.documentElement.appendChild(b);
+  var playing=false;
+  var userClicked=false;
+  function setOn(){playing=true;b.innerHTML="\u266B";b.style.setProperty("border-color","#00ff00","important");}
+  function setOff(){playing=false;b.innerHTML="<span style=\"position:relative;display:inline-block;\">\u266B<span style=\"position:absolute;top:-2px;left:0;font-size:22px;transform:rotate(-45deg);pointer-events:none;\">\u2014</span></span>";b.style.setProperty("border-color","#d4af37","important");}
+  b.addEventListener("click",function(e){
+    e.stopPropagation();
+    userClicked=true;
+    if(playing){a.pause();setOff();}
+    else{a.play().then(setOn).catch(function(){});}
+  });
+// Aggressive autoplay - start muted then unmute
+  a.muted = true;
+  a.play().then(function(){
+    // Audio started muted, now try to unmute
+    a.muted = false;
+    a.volume = 0.3;
+    setOn();
+  }).catch(function(){
+    // Even muted play failed - try on interaction
+    var events=["click","touchstart","scroll","keydown","mousemove"];
+    function startOnInteraction(){
+      if(!playing && !userClicked){
+        a.muted = false;
+        a.volume = 0.3;
+        a.play().then(function(){
+          setOn();
+          events.forEach(function(evt){ document.removeEventListener(evt, startOnInteraction, true); });
+        }).catch(function(){});
+      }
+    }
+    events.forEach(function(evt){ document.addEventListener(evt, startOnInteraction, true); });
+  });
+  // Fallback: also try unmuted play after short delay (some browsers allow after page settles)
+  setTimeout(function(){
+    if(!playing && !userClicked){
+      a.muted = false;
+      a.volume = 0.3;
+      a.play().then(setOn).catch(function(){
+        // If still blocked, ensure interaction listeners are set
+        var events=["click","touchstart","scroll","keydown","mousemove"];
+        function startOnInteraction2(){
+          if(!playing && !userClicked){
+            a.muted = false;
+            a.volume = 0.3;
+            a.play().then(function(){
+              setOn();
+              events.forEach(function(evt){ document.removeEventListener(evt, startOnInteraction2, true); });
+            }).catch(function(){});
+          }
+        }
+        events.forEach(function(evt){ document.addEventListener(evt, startOnInteraction2, true); });
+      });
+    }
+  }, 1000);
+})();
+</script>
+</body>
 </html>
