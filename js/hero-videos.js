@@ -1,47 +1,56 @@
-/* =========================================
-   AB Autos - Hero Video Crossfade System
-   Sequence: car13 > car4 > car3 > car5 > car8 > car1
-   ========================================= */
+/* ==========================================
+    AB Autos - Hero Video Crossfade System
+    Sequence: loops through abautos_vidfiles collection
+    ========================================== */
 
 (function () {
   'use strict';
 
-  var CLIPS = ['car13.mp4', 'car4.mp4', 'car11.mp4', 'car5.mp4', 'car8.mp4', 'car1.mp4', 'car17.mp4'];
-  var PLAYBACK_RATE = 0.7;
-  var CLIP_DURATION = 10;
-  var FADE_DURATION = 1500;
+var CLIPS = [
+  '11898534_1080_1920_30fps.mp4',
+  '13035250_1920_1080_24fps.mp4',
+  '13171246_1920_1080_60fps.mp4',
+  '13460847_2160_3840_60fps.mp4',
+  '13461041_2160_3840_60fps.mp4',
+  '14228180-hd_1920_1080_60fps.mp4',
+  '15483080_1080_1920_30fps.mp4',
+  '6872070-uhd_3840_2160_25fps.mp4'
+];
+var PLAYBACK_RATE = 0.7;
+var CLIP_DURATION = 10;
+var FADE_DURATION = 1500;
 
-  var videoA = document.getElementById('hero-video-a');
-  var videoB = document.getElementById('hero-video-b');
+var videoA = document.getElementById('hero-video-a');
+var videoB = document.getElementById('hero-video-b');
 
-  if (!videoA || !videoB) return;
+if (!videoA || !videoB) return;
 
-  var videos = [videoA, videoB];
-  var active = 0;
-  var clipIndex = 0;
+var videos = [videoA, videoB];
+var active = 0;
+var clipIndex = 0;
 
-  videos.forEach(function (v) {
+videos.forEach(function (v) {
     v.muted = true;
     v.playsInline = true;
     v.preload = 'auto';
     v.loop = false;
     v.playbackRate = PLAYBACK_RATE;
-  });
+});
 
-  function enableTransitions() {
+function enableTransitions() {
     videos.forEach(function (v) {
-      v.style.transition = 'opacity ' + FADE_DURATION + 'ms ease-in-out';
+        v.style.transition = 'opacity ' + FADE_DURATION + 'ms ease-in-out';
     });
-  }
+}
 
-  function loadClip(videoEl, index) {
+function loadClip(videoEl, index) {
     var src = 'video/' + CLIPS[index % CLIPS.length];
     videoEl.src = src;
     videoEl.playbackRate = PLAYBACK_RATE;
     videoEl.load();
-  }
+}
 
-  function playNext() {
+function playNext() {
     var current = videos[active];
     var next = videos[1 - active];
     var nextClipIndex = (clipIndex + 1) % CLIPS.length;
@@ -49,46 +58,46 @@
     loadClip(next, nextClipIndex);
 
     function onReady() {
-      next.removeEventListener('canplaythrough', onReady);
-      next.play().then(function () {
-        next.playbackRate = PLAYBACK_RATE;
-        next.style.opacity = '1';
-        current.style.opacity = '0';
-        setTimeout(function () {
-          current.pause();
-        }, FADE_DURATION);
-        active = 1 - active;
-        clipIndex = nextClipIndex;
-      }).catch(function (e) {
-        console.warn('Video play failed:', e);
-      });
+        next.removeEventListener('canplaythrough', onReady);
+        next.play().then(function () {
+            next.playbackRate = PLAYBACK_RATE;
+            next.style.opacity = '1';
+            current.style.opacity = '0';
+            setTimeout(function () {
+                current.pause();
+            }, FADE_DURATION);
+            active = 1 - active;
+            clipIndex = nextClipIndex;
+        }).catch(function (e) {
+            console.warn('Video play failed:', e);
+        });
     }
 
     next.addEventListener('canplaythrough', onReady, { once: true });
     setTimeout(function () {
-      if (next.readyState >= 3) {
-        onReady();
-      }
+        if (next.readyState >= 3) {
+            onReady();
+        }
     }, 3000);
-  }
+}
 
-  loadClip(videoA, 0);
+loadClip(videoA, 0);
 
-  function onFirstReady() {
+function onFirstReady() {
     videoA.removeEventListener('canplaythrough', onFirstReady);
     videoA.play().then(function () {
-      videoA.playbackRate = PLAYBACK_RATE;
-      videoA.style.opacity = '1';
-      setTimeout(function() { enableTransitions(); setInterval(playNext, CLIP_DURATION * 1000); }, 200);
+        videoA.playbackRate = PLAYBACK_RATE;
+        videoA.style.opacity = '1';
+        setTimeout(function() { enableTransitions(); setInterval(playNext, CLIP_DURATION * 1000); }, 200);
     }).catch(function (e) {
-      console.warn('First video play failed:', e);
+        console.warn('First video play failed:', e);
     });
-  }
+}
 
-  videoA.addEventListener('canplaythrough', onFirstReady, { once: true });
+videoA.addEventListener('canplaythrough', onFirstReady, { once: true });
 
-  if (videoA.readyState >= 3) {
+if (videoA.readyState >= 3) {
     onFirstReady();
-  }
+}
 
 })();
