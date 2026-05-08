@@ -6,7 +6,7 @@
 (function () {
   'use strict';
 
-  var CLIPS = ['car13.mp4', 'car4.mp4', 'car3.mp4', 'car5.mp4', 'car8.mp4', 'car1.mp4'];
+  var CLIPS = ['car13.mp4', 'car4.mp4', 'car11.mp4', 'car5.mp4', 'car8.mp4', 'car1.mp4', 'car17.mp4'];
   var PLAYBACK_RATE = 0.7;
   var CLIP_DURATION = 10;
   var FADE_DURATION = 1500;

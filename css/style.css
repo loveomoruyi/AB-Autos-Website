@@ -39,7 +39,7 @@ html, body {
 .hero-section {
   width: 100%;
   height: auto;
-  min-height: 110dvh;
+  min-height: 92dvh;
   position: relative;
   overflow: hidden;
   background-color: #0A0A0A;
@@ -2546,7 +2546,6 @@ body.page-enter {
 }
 
 /* Hero section overlay with subtle blue tint */
-.hero-section::after,
 .hero-overlay {
     background: linear-gradient(135deg, rgba(5, 10, 25, 0.85) 0%, rgba(10, 15, 30, 0.75) 50%, rgba(212, 168, 67, 0.05) 100%) !important;
 }
@@ -2639,7 +2638,7 @@ header, .navbar, nav {
   border-bottom: 1px solid rgba(212, 168, 67, 0.2) !important;
   backdrop-filter: blur(10px);
 }
-.hero-section::after, .hero-overlay {
+.hero-overlay {
   background: linear-gradient(135deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.5) 50%, rgba(212,168,67,0.08) 100%) !important;
 }
 footer { background: #0A0A0A !important; border-top: 1px solid rgba(212, 168, 67, 0.2) !important; }
@@ -2809,3 +2808,6 @@ video.car-image.car-video {
     color: #D4A843 !important;
 }
 /* === END DATE PICKER DARK THEME FIX === */
+
+/* Fix: Disable hero-section::after to prevent search/location doubling during video transitions */
+.hero-section::after { display: none !important; }
