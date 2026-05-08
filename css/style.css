@@ -12,7 +12,7 @@
     --dark-surface-light: #1A1A1A;
     --dark-border: #1A1500;
     --text-primary: #F8FAFC;
-    --text-secondary: #94A3B8;
+    --text-secondary: #94A3B8
     --text-muted: #64748B;
 }
 
@@ -66,12 +66,12 @@ html, body {
   object-fit: cover;
   opacity: 0;
   z-index: 1;
-  transition: none;
+  transition: opacity 1.5s ease-in-out;
 }
 
 /* First video starts visible */
 #hero-video-a {
-  opacity: 0;
+  opacity: 1
   visibility: visible;
   z-index: 2;
 }
