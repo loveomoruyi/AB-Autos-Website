@@ -39,6 +39,7 @@ html, body {
 .hero-section {
   width: 100%;
   height: auto;
+  min-height: 110dvh;
   position: relative;
   overflow: hidden;
   background-color: #0A0A0A;
@@ -51,7 +52,9 @@ html, body {
   z-index: 0;
 }
 
-.hero-bg-video {
+.hero-bg-video,
+#hero-video-a,
+#hero-video-b {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -66,40 +69,19 @@ html, body {
   transition: none;
 }
 
-/* First video: ALWAYS visible on load, overrides any inline styles */
+/* First video starts visible */
 #hero-video-a {
-  opacity: 1 !important;
-  visibility: visible !important;
+  opacity: 0;
+  visibility: visible;
   z-index: 2;
 }
 
-/* When a video is active (playing and visible) */
-.hero-bg-video.active {
-  opacity: 1 !important;
-  visibility: visible !important;
-  z-index: 3;
-}
-
-/* Enable smooth fade transitions after initial load */
-.hero-bg-video.fade-ready {
-  transition: opacity 1.5s ease-in-out;
-}
-
-/* First video should not transition on initial load */
-#hero-video-a:not(.fade-ready) {
-  transition: none !important;
-}
-/* Force first video visible immediately on load - no transition delay */
-
-#hero-video-a.fade-ready {
-  transition: opacity 1.2s ease-in-out;
-}
-
-#hero-video-b.fade-ready {
+/* Second video behind first */
+#hero-video-b {
+  opacity: 0;
   visibility: visible;
-  transition: opacity 1.2s ease-in-out;
+  z-index: 2;
 }
-
 
 .hero-video-overlay {
   position: absolute;
@@ -108,6 +90,7 @@ html, body {
   background: linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.45) 100%);
   z-index: 1;
 }
+
 
    =========================== */
 .hero-header {

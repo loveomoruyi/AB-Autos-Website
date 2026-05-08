@@ -1,72 +1,96 @@
-// Hero Background Video Crossfade
-// Only May 1st downloaded videos (unique, no duplicates)
-// Bentley interior (car13) plays FIRST
-const CLIPS = [
-  'car13.mp4',
-  'car4.mp4',
-  'car3.mp4',
-  'car5.mp4',
-  'car8.mp4',
-  'car1.mp4'
-];
+/* =========================================
+   AB Autos - Hero Video Crossfade System
+   Sequence: car13 > car4 > car3 > car5 > car8 > car1
+   ========================================= */
 
-const PLAYBACK_RATE  = 0.3;
-const CLIP_DURATION  = 12;
-const FADE_DURATION  = 1500;
+(function () {
+  'use strict';
 
-const wrapper = document.querySelector('.hero-video-wrapper');
-if (wrapper) {
-  const videos = [createVideo(), createVideo()];
-  let active = 0;
-  let clipIndex = 0;
+  var CLIPS = ['car13.mp4', 'car4.mp4', 'car3.mp4', 'car5.mp4', 'car8.mp4', 'car1.mp4'];
+  var PLAYBACK_RATE = 0.7;
+  var CLIP_DURATION = 10;
+  var FADE_DURATION = 1500;
 
-  function createVideo() {
-    const v = document.createElement('video');
-    v.className = 'hero-bg-video';
+  var videoA = document.getElementById('hero-video-a');
+  var videoB = document.getElementById('hero-video-b');
+
+  if (!videoA || !videoB) return;
+
+  var videos = [videoA, videoB];
+  var active = 0;
+  var clipIndex = 0;
+
+  videos.forEach(function (v) {
     v.muted = true;
     v.playsInline = true;
     v.preload = 'auto';
-    v.style.opacity = '0';
-    v.style.transition = 'opacity ' + FADE_DURATION + 'ms ease-in-out';
-    wrapper.appendChild(v);
-    return v;
+    v.loop = false;
+    v.playbackRate = PLAYBACK_RATE;
+  });
+
+  function enableTransitions() {
+    videos.forEach(function (v) {
+      v.style.transition = 'opacity ' + FADE_DURATION + 'ms ease-in-out';
+    });
   }
 
   function loadClip(videoEl, index) {
-    videoEl.src = 'video/' + CLIPS[index % CLIPS.length];
+    var src = 'video/' + CLIPS[index % CLIPS.length];
+    videoEl.src = src;
     videoEl.playbackRate = PLAYBACK_RATE;
     videoEl.load();
   }
 
   function playNext() {
-    const current = videos[active];
-    const next = videos[1 - active];
-    const nextIndex = (clipIndex + 1) % CLIPS.length;
-    loadClip(next, nextIndex);
+    var current = videos[active];
+    var next = videos[1 - active];
+    var nextClipIndex = (clipIndex + 1) % CLIPS.length;
 
-    next.addEventListener('canplaythrough', function onReady() {
+    loadClip(next, nextClipIndex);
+
+    function onReady() {
       next.removeEventListener('canplaythrough', onReady);
-      next.play().then(function() {
+      next.play().then(function () {
         next.playbackRate = PLAYBACK_RATE;
         next.style.opacity = '1';
         current.style.opacity = '0';
-        setTimeout(function() {
+        setTimeout(function () {
           current.pause();
         }, FADE_DURATION);
         active = 1 - active;
-        clipIndex = nextIndex;
-      }).catch(function() {});
-    }, { once: true });
+        clipIndex = nextClipIndex;
+      }).catch(function (e) {
+        console.warn('Video play failed:', e);
+      });
+    }
+
+    next.addEventListener('canplaythrough', onReady, { once: true });
+    setTimeout(function () {
+      if (next.readyState >= 3) {
+        onReady();
+      }
+    }, 3000);
   }
 
-  loadClip(videos[0], 0);
-  videos[0].addEventListener('canplaythrough', function onFirst() {
-    videos[0].removeEventListener('canplaythrough', onFirst);
-    videos[0].play().then(function() {
-      videos[0].playbackRate = PLAYBACK_RATE;
-      videos[0].style.opacity = '1';
-    }).catch(function() {});
-  }, { once: true });
+  loadClip(videoA, 0);
+
+  function onFirstReady() {
+    videoA.removeEventListener('canplaythrough', onFirstReady);
+    videoA.play().then(function () {
+      videoA.playbackRate = PLAYBACK_RATE;
+      videoA.style.opacity = '1';
+      setTimeout(enableTransitions, 100);
+    }).catch(function (e) {
+      console.warn('First video play failed:', e);
+    });
+  }
+
+  videoA.addEventListener('canplaythrough', onFirstReady, { once: true });
+
+  if (videoA.readyState >= 3) {
+    onFirstReady();
+  }
 
   setInterval(playNext, CLIP_DURATION * 1000);
-}
+
+})();
