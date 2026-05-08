@@ -1,18 +1,17 @@
 /* ==========================================
     AB Autos - Hero Video Crossfade System
-    Sequence: loops through abautos_vidfiles collection
+    Sequence: Bentley interior first, then other luxury cars
     ========================================== */
 
 (function () {
   'use strict';
 
 var CLIPS = [
+  '13460847_2160_3840_60fps.mp4',
+  '13461041_2160_3840_60fps.mp4',
   '11898534_1080_1920_30fps.mp4',
   '13035250_1920_1080_24fps.mp4',
   '13171246_1920_1080_60fps.mp4',
-  '13460847_2160_3840_60fps.mp4',
-  '13461041_2160_3840_60fps.mp4',
-  '15483080_1080_1920_30fps.mp4',
   '6872070-uhd_3840_2160_25fps.mp4'
 ];
 var PLAYBACK_RATE = 0.7;
@@ -34,13 +33,9 @@ videos.forEach(function (v) {
     v.preload = 'auto';
     v.loop = false;
     v.playbackRate = PLAYBACK_RATE;
+    v.style.opacity = '0';
+    v.style.transition = 'opacity ' + FADE_DURATION + 'ms ease-in-out';
 });
-
-function enableTransitions() {
-    videos.forEach(function (v) {
-        v.style.transition = 'opacity ' + FADE_DURATION + 'ms ease-in-out';
-    });
-}
 
 function loadClip(videoEl, index) {
     var src = 'video/' + CLIPS[index % CLIPS.length];
@@ -87,7 +82,7 @@ function onFirstReady() {
     videoA.play().then(function () {
         videoA.playbackRate = PLAYBACK_RATE;
         videoA.style.opacity = '1';
-        setTimeout(function() { enableTransitions(); setInterval(playNext, CLIP_DURATION * 1000); }, 200);
+        setTimeout(function() { setInterval(playNext, CLIP_DURATION * 1000); }, 200);
     }).catch(function (e) {
         console.warn('First video play failed:', e);
     });
@@ -98,5 +93,11 @@ videoA.addEventListener('canplaythrough', onFirstReady, { once: true });
 if (videoA.readyState >= 3) {
     onFirstReady();
 }
+
+setTimeout(function() {
+    if (videoA.style.opacity !== '1') {
+        onFirstReady();
+    }
+}, 5000);
 
 })();
