@@ -555,7 +555,7 @@ h3 {
   }
 
   .text h1 {
-    font-size: 22px;
+    font-size: 48px;
   }
 
   .button-container {
@@ -659,7 +659,8 @@ h3 {
 
 .second-section {
   width: 100%;
-  height: 100vh;
+  height: auto;
+  padding-bottom: 40px;
   background-color: #0A0A0A;
 }
 
@@ -865,7 +866,7 @@ h3 {
 /* collection-section */
 .collection-section {
   width: 100%;
-  height: 100vh;
+  height: auto; padding-bottom: 50px;
   background-color: #111111;
   padding-top: 50px;
 }
@@ -1514,7 +1515,7 @@ h3 {
 /* planning section */
 .planning-section{
   width: 100%;
-  height: 100vh;
+  height: auto; padding-bottom: 50px;
   background-color: #0A0A0A;
   display: flex;
   justify-content: center;
@@ -1763,7 +1764,8 @@ h3 {
 /* need car section */
 .need-car-section{
   width: 100%;
-  height: 100vh;
+  height: auto;
+  padding: 40px 0;
   display: flex;
   flex-direction: column;
   align-items: center;

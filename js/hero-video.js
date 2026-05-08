@@ -1,11 +1,11 @@
 (function () {
 var videoSources = [
     "video/car4.mp4",
-    "video/car2.mp4",
     "video/car3.mp4",
     "video/car5.mp4",
-    "video/car7.mp4",
-    "video/car8.mp4"
+    "video/car8.mp4",
+    "video/car1.mp4",
+    "video/car13.mp4"
 ];
 
 var PLAYBACK_RATE = 0.55;
