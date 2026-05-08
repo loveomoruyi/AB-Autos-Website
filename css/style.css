@@ -90,8 +90,7 @@ html, body {
 
 .hero-header > ul {
   display: flex;
-    justify-content: center;
-    gap: 30px;
+  justify-content: space-between;
   align-items: center;
   transition: 0.4s ease;
 }
@@ -106,8 +105,8 @@ html, body {
 }
 .logo {
   display: block;
-  width: 220px;   /* set your logo width */
-  height: 90px;    /* set your logo height */
+  width: 150px;   /* set your logo width */
+  height: 62px;    /* set your logo height */
   /* background-image: url('./image/logo.png'); */
   background-size: contain;
   background-repeat: no-repeat;
@@ -178,8 +177,7 @@ html, body {
 .button-container {
   width: 92%;
   min-height: 27vh;
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: 60px;
   margin-top: 90px;
   border-radius: 20px;
   background-color: #fafafa;
@@ -2060,7 +2058,7 @@ footer {
 }
 
 .footer-logo img {
-  width: 220px;
+  width: 150px;
   height: auto;
   object-fit: contain;
   border-radius: 10px;
@@ -2269,7 +2267,7 @@ header ul li a:hover{
 }
 
 .logo{
-    width: 220px;
+    width: 150px;
     height: 150px;
     /* border: 1px solid red; */
     background-image: url(../image/6fe57389916ebe8b674628caacb1bc7f982a4e59.png);
