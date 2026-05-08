@@ -103,7 +103,8 @@ html, body {
 
 .hero-header > ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+         gap: 40px;
   align-items: center;
   transition: 0.4s ease;
 }
@@ -118,12 +119,13 @@ html, body {
 }
 .logo {
   display: block;
-  width: 175px;    /* set your logo width */
-  height: 72px;    /* set your logo height */
+  width: 200px;    /* set your logo width */
+  height: 85px;    /* set your logo height */
   /* background-image: url('./image/logo.png'); */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+       transform: scale(1.15);
 }
 
 /* Dropdown container */
