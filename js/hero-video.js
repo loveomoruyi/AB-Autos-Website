@@ -11,10 +11,10 @@ var videoSources = [
 var PLAYBACK_RATE = 0.55;
 var MAX_CLIP_DURATION = 12;
 var FADE_DURATION = 1500;
-var MIN_VIDEOS_BEFORE_REPEAT = 5;
 var currentVideoIndex = 0;
 var playedIndices = [];
 var clipTimer = null;
+var transitionInProgress = false;
 
 var videoA = document.getElementById("hero-video-a");
 var videoB = document.getElementById("hero-video-b");
@@ -32,44 +32,56 @@ var nextVideo = videoB;
 });
 
 function getNextVideoIndex() {
-    if (playedIndices.length >= videoSources.length) {
-        playedIndices = [];
-    }
     var nextIndex = (currentVideoIndex + 1) % videoSources.length;
-    var attempts = 0;
-    while (playedIndices.indexOf(nextIndex) !== -1 && attempts < videoSources.length) {
-        nextIndex = (nextIndex + 1) % videoSources.length;
-        attempts++;
-    }
     return nextIndex;
 }
 
 function startClipTimer() {
     clearTimeout(clipTimer);
-    var clipDuration = MAX_CLIP_DURATION;
-    if (videoSources[currentVideoIndex].indexOf("car7") !== -1) {
-        clipDuration = 8;
-    }
-    var realDuration = clipDuration / PLAYBACK_RATE;
+    var realDuration = MAX_CLIP_DURATION / PLAYBACK_RATE;
     clipTimer = setTimeout(function () {
-        if (!activeVideo.paused && !activeVideo.ended) {
+        if (!activeVideo.paused && !activeVideo.ended && !transitionInProgress) {
             crossfadeToNext();
         }
     }, realDuration * 1000);
 }
 
 function crossfadeToNext() {
+    if (transitionInProgress) return;
+    transitionInProgress = true;
     clearTimeout(clipTimer);
+
     var nextIndex = getNextVideoIndex();
     currentVideoIndex = nextIndex;
-    playedIndices.push(currentVideoIndex);
 
     nextVideo.src = videoSources[currentVideoIndex];
     nextVideo.load();
     nextVideo.playbackRate = PLAYBACK_RATE;
 
+    var loadTimeout = setTimeout(function() {
+        console.warn("Video load timeout, restarting active video");
+        transitionInProgress = false;
+        nextVideo.removeAttribute("src");
+        activeVideo.currentTime = 0;
+        activeVideo.play().catch(function(){});
+        startClipTimer();
+    }, 5000);
+
+    nextVideo.onerror = function() {
+        clearTimeout(loadTimeout);
+        console.warn("Video load error for " + videoSources[currentVideoIndex] + ", skipping");
+        transitionInProgress = false;
+        nextVideo.removeAttribute("src");
+        setTimeout(function() {
+            crossfadeToNext();
+        }, 500);
+    };
+
     nextVideo.oncanplay = function () {
+        clearTimeout(loadTimeout);
         nextVideo.oncanplay = null;
+        nextVideo.onerror = null;
+
         nextVideo.play().then(function () {
             nextVideo.style.visibility = "visible";
             nextVideo.classList.add("active");
@@ -79,21 +91,25 @@ function crossfadeToNext() {
                 activeVideo.pause();
                 activeVideo.style.visibility = "hidden";
                 activeVideo.removeAttribute("src");
-                activeVideo.load();
 
                 var temp = activeVideo;
                 activeVideo = nextVideo;
                 nextVideo = temp;
 
+                transitionInProgress = false;
                 startClipTimer();
             }, FADE_DURATION + 100);
         }).catch(function(e) {
             console.warn("Crossfade play failed:", e);
+            clearTimeout(loadTimeout);
+            transitionInProgress = false;
+            activeVideo.currentTime = 0;
+            activeVideo.play().catch(function(){});
+            startClipTimer();
         });
     };
 }
 
-// INITIALIZATION - Do NOT re-set src, HTML already has car4.mp4 loaded
 playedIndices.push(0);
 
 function enableTransitions() {
