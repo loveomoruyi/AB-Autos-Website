@@ -24,12 +24,10 @@ if (!videoA || !videoB) return;
 var activeVideo = videoA;
 var nextVideo = videoB;
 
-[videoA, videoB].forEach(function(v) {
-    v.removeAttribute("loop");
-    v.playbackRate = PLAYBACK_RATE;
-    v.muted = true;
-    v.playsInline = true;
-});
+// Only set playbackRate - don't touch muted/playsinline attributes 
+// as Chrome needs the HTML muted attribute for autoplay policy
+videoA.playbackRate = PLAYBACK_RATE;
+videoB.playbackRate = PLAYBACK_RATE;
 
 function getNextVideoIndex() {
     var nextIndex = (currentVideoIndex + 1) % videoSources.length;

@@ -68,12 +68,12 @@ html, body {
 
 .hero-bg-video.active {
   opacity: 1;
-  z-index: 1;
+  z-index: 2;
 }
 /* Force first video visible immediately on load - no transition delay */
 #hero-video-a {
   opacity: 1;
-  z-index: 1;
+  z-index: 2;
   transition: none;
 }
 #hero-video-a.fade-ready {
