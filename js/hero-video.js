@@ -79,7 +79,7 @@
     videoA.play().then(function () {
       videoA.playbackRate = PLAYBACK_RATE;
       videoA.style.opacity = '1';
-      setTimeout(enableTransitions, 100);
+      setTimeout(function() { enableTransitions(); setInterval(playNext, CLIP_DURATION * 1000); }, 200);
     }).catch(function (e) {
       console.warn('First video play failed:', e);
     });
@@ -90,7 +90,5 @@
   if (videoA.readyState >= 3) {
     onFirstReady();
   }
-
-  setInterval(playNext, CLIP_DURATION * 1000);
 
 })();
