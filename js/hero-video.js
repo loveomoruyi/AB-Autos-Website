@@ -63,7 +63,6 @@ function crossfadeToNext() {
     var nextIndex = getNextVideoIndex();
     currentVideoIndex = nextIndex;
     playedIndices.push(currentVideoIndex);
-    console.log("Crossfading to video " + (currentVideoIndex + 1) + ": " + videoSources[currentVideoIndex]);
 
     nextVideo.src = videoSources[currentVideoIndex];
     nextVideo.load();
@@ -72,62 +71,46 @@ function crossfadeToNext() {
     nextVideo.oncanplay = function () {
         nextVideo.oncanplay = null;
         nextVideo.play().then(function () {
+            nextVideo.style.visibility = "visible";
             nextVideo.classList.add("active");
             activeVideo.classList.remove("active");
 
             setTimeout(function () {
+                activeVideo.pause();
+                activeVideo.style.visibility = "hidden";
+                activeVideo.removeAttribute("src");
+                activeVideo.load();
+
                 var temp = activeVideo;
                 activeVideo = nextVideo;
                 nextVideo = temp;
 
-                nextVideo.pause();
-                nextVideo.removeAttribute("src");
-                nextVideo.load();
-
                 startClipTimer();
             }, FADE_DURATION + 100);
-        }).catch(function (err) {
-            console.warn("Video play failed:", err);
+        }).catch(function(e) {
+            console.warn("Crossfade play failed:", e);
         });
     };
 }
 
-videoA.addEventListener("ended", function () {
-    if (activeVideo === videoA) {
-        crossfadeToNext();
-    }
-});
-
-videoB.addEventListener("ended", function () {
-    if (activeVideo === videoB) {
-        crossfadeToNext();
-    }
-});
-
-[videoA, videoB].forEach(function(v) {
-    v.addEventListener("loadedmetadata", function () {
-        v.playbackRate = PLAYBACK_RATE;
-    });
-    v.addEventListener("ratechange", function () {
-        if (v.playbackRate !== PLAYBACK_RATE) {
-            v.playbackRate = PLAYBACK_RATE;
-        }
-    });
-});
-
-videoA.src = videoSources[0];
+// INITIALIZATION - Do NOT re-set src, HTML already has car4.mp4 loaded
 playedIndices.push(0);
-videoA.load();
-videoA.playbackRate = PLAYBACK_RATE;
+
+function enableTransitions() {
+    videoA.classList.add("fade-ready");
+    videoB.classList.add("fade-ready");
+}
+
 videoA.play().then(function () {
     startClipTimer();
+    setTimeout(enableTransitions, 200);
 }).catch(function (err) {
     console.warn("Initial video play failed:", err);
+    setTimeout(enableTransitions, 1000);
     document.addEventListener("click", function handler() {
-        videoA.play();
+        videoA.play().then(function() { startClipTimer(); });
         document.removeEventListener("click", handler);
     }, { once: true });
 });
 
-console.log("AB Autoz Hero Video: Initialized crossfade with " + videoSources.length + " videos, playbackRate=" + PLAYBACK_RATE);
 })();
