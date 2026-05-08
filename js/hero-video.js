@@ -1,130 +1,138 @@
 (function () {
-var videoSources = [
+  "use strict";
+
+  var CLIPS = [
     "video/car4.mp4",
     "video/car3.mp4",
     "video/car5.mp4",
     "video/car8.mp4",
     "video/car1.mp4",
-    "video/car13.mp4"
-];
+    "video/car11.mp4"
+  ];
 
-var PLAYBACK_RATE = 0.55;
-var MAX_CLIP_DURATION = 12;
-var FADE_DURATION = 1500;
-var currentVideoIndex = 0;
-var playedIndices = [];
-var clipTimer = null;
-var transitionInProgress = false;
+  var CLIP_DURATION = 12;
+  var PLAYBACK_RATE = 0.55;
+  var FADE_DURATION = 1500;
 
-var videoA = document.getElementById("hero-video-a");
-var videoB = document.getElementById("hero-video-b");
+  var videoA = document.getElementById("hero-video-a");
+  var videoB = document.getElementById("hero-video-b");
+  var clipIndex = 0;
+  var clipTimer = null;
+  var currentVideo = videoA;
+  var nextVideo = videoB;
+  var transitionInProgress = false;
 
-if (!videoA || !videoB) return;
+  videoA.playbackRate = PLAYBACK_RATE;
+  videoB.playbackRate = PLAYBACK_RATE;
+  videoA.removeAttribute("loop");
 
-var activeVideo = videoA;
-var nextVideo = videoB;
+  function getNextClipIndex() {
+    return (clipIndex + 1) % CLIPS.length;
+  }
 
-// Only set playbackRate - don't touch muted/playsinline attributes 
-// as Chrome needs the HTML muted attribute for autoplay policy
-videoA.playbackRate = PLAYBACK_RATE;
-videoB.playbackRate = PLAYBACK_RATE;
+  function startClipTimer() {
+    if (clipTimer) clearTimeout(clipTimer);
+    var realDuration = (CLIP_DURATION / PLAYBACK_RATE) * 1000;
+    clipTimer = setTimeout(crossfadeToNext, realDuration);
+  }
 
-function getNextVideoIndex() {
-    var nextIndex = (currentVideoIndex + 1) % videoSources.length;
-    return nextIndex;
-}
-
-function startClipTimer() {
-    clearTimeout(clipTimer);
-    var realDuration = MAX_CLIP_DURATION / PLAYBACK_RATE;
-    clipTimer = setTimeout(function () {
-        if (!activeVideo.paused && !activeVideo.ended && !transitionInProgress) {
-            crossfadeToNext();
-        }
-    }, realDuration * 1000);
-}
-
-function crossfadeToNext() {
+  function crossfadeToNext() {
     if (transitionInProgress) return;
     transitionInProgress = true;
-    clearTimeout(clipTimer);
 
-    var nextIndex = getNextVideoIndex();
-    currentVideoIndex = nextIndex;
+    clipIndex = getNextClipIndex();
+    var nextSrc = CLIPS[clipIndex];
 
-    nextVideo.src = videoSources[currentVideoIndex];
-    nextVideo.load();
+    nextVideo.src = nextSrc;
     nextVideo.playbackRate = PLAYBACK_RATE;
+    nextVideo.load();
 
     var loadTimeout = setTimeout(function() {
-        console.warn("Video load timeout, restarting active video");
-        transitionInProgress = false;
-        nextVideo.removeAttribute("src");
-        activeVideo.currentTime = 0;
-        activeVideo.play().catch(function(){});
-        startClipTimer();
+      console.warn("Video load timeout for:", nextSrc);
+      transitionInProgress = false;
+      crossfadeToNext();
     }, 5000);
 
-    nextVideo.onerror = function() {
-        clearTimeout(loadTimeout);
-        console.warn("Video load error for " + videoSources[currentVideoIndex] + ", skipping");
+    function onCanPlay() {
+      clearTimeout(loadTimeout);
+      nextVideo.removeEventListener("canplay", onCanPlay);
+      performCrossfade();
+    }
+
+    if (nextVideo.readyState >= 3) {
+      clearTimeout(loadTimeout);
+      performCrossfade();
+    } else {
+      nextVideo.addEventListener("canplay", onCanPlay, { once: true });
+    }
+  }
+
+  function performCrossfade() {
+    nextVideo.play().then(function() {
+      currentVideo.classList.remove("active");
+      currentVideo.classList.add("outgoing");
+
+      nextVideo.style.visibility = "visible";
+      nextVideo.classList.add("active");
+
+      setTimeout(function() {
+        currentVideo.classList.remove("outgoing", "fade-ready");
+        currentVideo.pause();
+        currentVideo.removeAttribute("src");
+        currentVideo.load();
+        currentVideo.style.visibility = "hidden";
+        currentVideo.style.opacity = "0";
+
+        var temp = currentVideo;
+        currentVideo = nextVideo;
+        nextVideo = temp;
+
+        currentVideo.classList.add("fade-ready");
+
         transitionInProgress = false;
-        nextVideo.removeAttribute("src");
-        setTimeout(function() {
-            crossfadeToNext();
-        }, 500);
-    };
+        startClipTimer();
+      }, FADE_DURATION + 100);
 
-    nextVideo.oncanplay = function () {
-        clearTimeout(loadTimeout);
-        nextVideo.oncanplay = null;
-        nextVideo.onerror = null;
+    }).catch(function(err) {
+      console.warn("Video play failed during crossfade:", err);
+      transitionInProgress = false;
+      startClipTimer();
+    });
+  }
 
-        nextVideo.play().then(function () {
-            nextVideo.style.visibility = "visible";
-            nextVideo.classList.add("active");
-            activeVideo.classList.remove("active");
-
-            setTimeout(function () {
-                activeVideo.pause();
-                activeVideo.style.visibility = "hidden";
-                activeVideo.removeAttribute("src");
-
-                var temp = activeVideo;
-                activeVideo = nextVideo;
-                nextVideo = temp;
-
-                transitionInProgress = false;
-                startClipTimer();
-            }, FADE_DURATION + 100);
-        }).catch(function(e) {
-            console.warn("Crossfade play failed:", e);
-            clearTimeout(loadTimeout);
-            transitionInProgress = false;
-            activeVideo.currentTime = 0;
-            activeVideo.play().catch(function(){});
-            startClipTimer();
-        });
-    };
-}
-
-playedIndices.push(0);
-
-function enableTransitions() {
+  function enableTransitions() {
     videoA.classList.add("fade-ready");
     videoB.classList.add("fade-ready");
-}
+  }
 
-videoA.play().then(function () {
+  function initializePlayback() {
+    videoA.classList.add("active");
     startClipTimer();
-    setTimeout(enableTransitions, 200);
-}).catch(function (err) {
-    console.warn("Initial video play failed:", err);
-    setTimeout(enableTransitions, 1000);
-    document.addEventListener("click", function handler() {
-        videoA.play().then(function() { startClipTimer(); });
-        document.removeEventListener("click", handler);
-    }, { once: true });
-});
+    setTimeout(enableTransitions, 300);
+  }
 
+  if (!videoA.paused && videoA.readyState >= 3) {
+    initializePlayback();
+  } else {
+    var playPromise = videoA.play();
+    if (playPromise !== undefined) {
+      playPromise.then(function() {
+        initializePlayback();
+      }).catch(function(err) {
+        console.warn("Initial autoplay failed:", err);
+        setTimeout(enableTransitions, 1000);
+        document.addEventListener("click", function handler() {
+          videoA.play().then(function() {
+            initializePlayback();
+          }).catch(function() {});
+          document.removeEventListener("click", handler);
+        }, { once: true });
+        setTimeout(function() {
+          videoA.play().then(function() {
+            initializePlayback();
+          }).catch(function() {});
+        }, 2000);
+      });
+    }
+  }
 })();
