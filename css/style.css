@@ -53,56 +53,42 @@ html, body {
 
 .hero-bg-video {
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
   min-width: 100%;
   min-height: 100%;
-  width: auto; height: auto;
+  width: auto;
+  height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
   opacity: 0;
-  transition: opacity 1.2s ease-in-out;
-  z-index: 0;
-}
-/* First video: visible immediately, no transition on load */
-#hero-video-a {
-  opacity: 1;
-  z-index: 2;
+  z-index: 1;
   transition: none;
 }
 
-/* Second video: hidden until needed */
-#hero-video-b {
-  opacity: 0;
-  z-index: 1;
-  visibility: hidden;
-}
-
-/* Active video: visible and on top */
-.hero-bg-video.active {
-  opacity: 1;
-  z-index: 3;
-  visibility: visible;
-}
-
-/* Outgoing video: stays visible but behind active, no transition on opacity */
-.hero-bg-video.outgoing {
-  opacity: 1;
+/* First video: ALWAYS visible on load, overrides any inline styles */
+#hero-video-a {
+  opacity: 1 !important;
+  visibility: visible !important;
   z-index: 2;
-  visibility: visible;
-  transition: none !important;
 }
 
-/* Enable smooth fade-in transitions after initial load */
+/* When a video is active (playing and visible) */
+.hero-bg-video.active {
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 3;
+}
+
+/* Enable smooth fade transitions after initial load */
 .hero-bg-video.fade-ready {
   transition: opacity 1.5s ease-in-out;
 }
 
-/* Override: outgoing should never transition opacity (stays at 1 until swap) */
-.hero-bg-video.outgoing.fade-ready {
+/* First video should not transition on initial load */
+#hero-video-a:not(.fade-ready) {
   transition: none !important;
 }
-
-
 /* Force first video visible immediately on load - no transition delay */
 
 #hero-video-a.fade-ready {
