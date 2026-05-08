@@ -2811,3 +2811,6 @@ video.car-image.car-video {
 
 /* Fix: Disable hero-section::after to prevent search/location doubling during video transitions */
 .hero-section::after { display: none !important; }
+
+/* Fix: Hide h3 labels inside button-container to prevent doubling */
+.button-container h3 { display: none; }
