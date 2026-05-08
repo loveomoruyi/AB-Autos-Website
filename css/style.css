@@ -2813,4 +2813,4 @@ video.car-image.car-video {
 .hero-section::after { display: none !important; }
 
 /* Fix: Hide h3 labels inside button-container to prevent doubling */
-.button-container h3 { display: none; }
+.booking-section h3, .button-container h3, .location h3, .return h3, .hero-section h3 { display: none !important; }
