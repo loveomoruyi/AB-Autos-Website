@@ -191,8 +191,8 @@ html, body {
 .button-container {
   width: 92%;
   min-height: auto;
-  margin-left: 60px;
-  margin-top: 40px;
+  
+  margin: 40px auto;
   border-radius: 20px;
   background-color: #fafafa;
   display: flex;
@@ -2485,6 +2485,7 @@ body.page-enter {
 
 /* ===== Signature Badge Styles ===== */
 .signature-badge {
+  display: none;
   position: fixed;
   left: 12px;
   background: rgba(5, 10, 25, 0.75);
@@ -2831,3 +2832,99 @@ video.car-image.car-video {
   pointer-events: none;
   background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.6) 70%, rgba(0,0,0,0.8) 100%) !important;
 }
+
+
+/* ==================== VISUAL ENHANCEMENTS ==================== */
+
+/* Center the booking section and button container */
+.booking-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 30px 20px;
+}
+
+.booking-section .button-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 30px auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Enhance the hero text */
+.hero-section .text {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0 20px;
+}
+
+.hero-section .text h1 {
+  text-align: center;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Improve the Show Cars button */
+.show-car button {
+  background: #D4A843;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 10px;
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.show-car button:hover {
+  background: #E8C547;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(212, 168, 67, 0.4);
+}
+
+/* Enhance the navigation */
+.hero-header {
+  backdrop-filter: blur(8px);
+  background: rgba(5, 10, 25, 0.6);
+  border-bottom: 1px solid rgba(212, 168, 67, 0.15);
+}
+
+/* Improve the search input styling */
+.big-input {
+  border: 2px solid #e0e0e0;
+  transition: all 0.3s ease;
+  font-size: 15px;
+}
+
+.big-input:focus {
+  border-color: #D4A843;
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+}
+
+/* Center the second-container / show-car button */
+.show-car {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Clean up spacing for hero section */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Improve the overall page font rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ==================== END VISUAL ENHANCEMENTS ==================== */
