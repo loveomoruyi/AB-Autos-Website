@@ -2856,6 +2856,7 @@ video.car-image.car-video {
 
 /* Enhance the hero text */
 .hero-section .text {
+  margin-top: 6%;
   text-align: center;
   width: 100%;
   display: flex;
@@ -2963,11 +2964,3 @@ body {
   box-shadow: 0 4px 15px rgba(212, 168, 67, 0.4);
 }
 
-/* Ensure the second-container stays within bounds */
-.second-container {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-}
