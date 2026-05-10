@@ -2977,3 +2977,226 @@ body {
 .card-1 {
   animation: fadeIn 1.5s ease-in forwards;
 }
+
+/* ===================================================
+   BLUE & BLACK ACCENT THEME
+   Applied site-wide for a sleek, modern aesthetic
+   =================================================== */
+
+/* --- 1) Navigation Bar: Blue underline/hover effect --- */
+.nav-links a,
+.hero-header > ul > li > a {
+  position: relative;
+  color: #ffffff !important;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.hero-header > ul > li > a:hover,
+a:hover,
+.nav-link:hover,
+.nav-link.active {
+  color: #1e90ff !important;
+}
+
+.nav-links a::after,
+.hero-header > ul > li > a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1e90ff, #00bfff);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-links a:hover::after,
+.hero-header > ul > li > a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+/* Override gold hover color for nav */
+a:hover, .nav-link:hover, .nav-link.active {
+  color: #1e90ff !important;
+}
+
+/* --- 2) CTA Buttons: Blue highlights with black background --- */
+.show-car button {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 12px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(30, 144, 255, 0.2);
+  transition: all 0.3s ease !important;
+}
+
+.show-car button:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 20px rgba(30, 144, 255, 0.5), inset 0 1px 0 rgba(30, 144, 255, 0.3) !important;
+  transform: translateY(-2px);
+  border-color: #00bfff !important;
+}
+
+.fleet-book-now {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.25);
+  transition: all 0.3s ease !important;
+}
+
+.fleet-book-now:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 18px rgba(30, 144, 255, 0.5) !important;
+  border-color: #00bfff !important;
+}
+
+/* Buy Now and other CTA buttons */
+.btn-primary, .book-btn, .submit-btn, button[type="submit"] {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b, #1e90ff) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(30, 144, 255, 0.4) !important;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.2);
+  transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover, .book-btn:hover, .submit-btn:hover, button[type="submit"]:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb, #00bfff) !important;
+  box-shadow: 0 4px 18px rgba(30, 144, 255, 0.5) !important;
+  border-color: #00bfff !important;
+}
+
+/* Card buttons (Book Now, Buy Now) */
+.card-1 button,
+.card-2 button,
+.card-3 button,
+.second-container button {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.25);
+  padding: 12px 28px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease !important;
+}
+
+.card-1 button:hover,
+.card-2 button:hover,
+.card-3 button:hover,
+.second-container button:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 18px rgba(30, 144, 255, 0.5) !important;
+  border-color: #00bfff !important;
+  transform: translateY(-2px);
+}
+
+/* --- 3) Hero Video Section: Blue gradient overlay --- */
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 22, 40, 0.6) 0%,
+    rgba(30, 144, 255, 0.08) 30%,
+    rgba(10, 22, 40, 0.05) 60%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Ensure text/content stays above the overlay */
+.hero-section .text,
+.hero-section .booking-section,
+.hero-section .hero-header,
+.hero-section .button-container,
+.hero-section .show-car {
+  position: relative;
+  z-index: 5;
+}
+
+/* Hero header blue accent border */
+.hero-header {
+  border-bottom: 1px solid rgba(30, 144, 255, 0.25) !important;
+}
+
+/* --- 4) Section Dividers: Blue-black gradient lines --- */
+.second-section::before,
+.collection-section::before,
+.planning-section::before {
+  content: '';
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  height: 3px;
+  margin: 0 auto 40px auto;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #0a1628 15%, 
+    #1e90ff 50%, 
+    #0a1628 85%, 
+    transparent 100%
+  );
+  border-radius: 2px;
+  opacity: 0.8;
+}
+
+/* Additional divider after hero section */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    #0a1628 15%, 
+    #1e90ff 50%, 
+    #0a1628 85%, 
+    transparent 100%
+  );
+  border-radius: 2px;
+  z-index: 10;
+  display: block !important;
+}
+
+/* Section heading accents */
+.second-section > h1,
+.collection-section h1,
+.planning-section h1 {
+  text-shadow: 0 0 20px rgba(30, 144, 255, 0.15);
+}
+
+/* Subtle blue glow on the nav bar */
+.hero-header,
+.navbar,
+header {
+  box-shadow: 0 2px 15px rgba(30, 144, 255, 0.1) !important;
+}
+
+/* Blue accent scrollbar (WebKit browsers) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #1a3a6b, #1e90ff);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2563eb, #00bfff);
+}
