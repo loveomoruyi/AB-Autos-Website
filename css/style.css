@@ -2928,3 +2928,29 @@ body {
 }
 
 /* ==================== END VISUAL ENHANCEMENTS ==================== */
+
+
+/* Fix Show Cars button width */
+.show-car {
+  display: flex;
+  justify-content: center;
+  width: auto;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.show-car button {
+  width: auto;
+  max-width: 300px;
+  padding: 16px 50px !important;
+  border-radius: 10px !important;
+}
+
+/* Ensure the second-container stays within bounds */
+.second-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
