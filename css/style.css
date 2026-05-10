@@ -688,8 +688,8 @@ h3 {
 }
 
 .second-container {
-  width: 92%;
-  height: 57vh;
+  width: 100%;
+  height: 65vh;
   margin: auto;
   margin-top: 5%;
   display: flex;
@@ -700,7 +700,7 @@ h3 {
 .card-2,
 .card-3 {
   width: 32%;
-  height: 57vh;
+  height: 65vh;
   border-radius: 20px;
   background-position: center;
   background-size: cover;
@@ -2856,7 +2856,7 @@ video.car-image.car-video {
 
 /* Enhance the hero text */
 .hero-section .text {
-  margin-top: 6%;
+  margin-top: 11%;
   text-align: center;
   width: 100%;
   display: flex;
