@@ -689,7 +689,7 @@ h3 {
 
 .second-container {
   width: 100%;
-  height: 65vh;
+  height: 55vh;
   margin: auto;
   margin-top: 5%;
   display: flex;
@@ -700,7 +700,7 @@ h3 {
 .card-2,
 .card-3 {
   width: 32%;
-  height: 65vh;
+  height: 55vh;
   border-radius: 20px;
   background-position: center;
   background-size: cover;
@@ -709,7 +709,7 @@ h3 {
 }
 
 .card-1 {
-  background-image: url(../image/ab\ 1.png);
+  background-image: url('../image/ab 1.png');
 }
 .card-2 {
   background-image: url(../image/Ab2.png);
@@ -858,7 +858,7 @@ h3 {
   .card-2,
   .card-3 {
     width: 95%;
-    height: 50vh;
+    height: 55vh;
     padding-top: 120px;
   }
 
@@ -955,7 +955,7 @@ h3 {
 
 .car-image {
   width: 95%;
-  height: 50vh;
+  height: 55vh;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -1199,7 +1199,7 @@ h3 {
 /* Each car card */
 .flex-fleet {
   width: 32%;
-  height: 65vh;
+  height: 55vh;
   border: 1px solid #1A1A1A;
   border-radius: 20px;
   overflow: hidden;
@@ -2671,7 +2671,7 @@ body { color: var(--text-white); background: var(--black-bg); }
 /* Car section video replacements - looping slow-motion placeholders */
 video.car-image.car-video {
   width: 95%;
-  height: 50vh;
+  height: 55vh;
   object-fit: cover;
   border-radius: 15px;
   position: relative;
@@ -2964,3 +2964,16 @@ body {
   box-shadow: 0 4px 15px rgba(212, 168, 67, 0.4);
 }
 
+/* Fade-in animation for card-1 image */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-1 {
+  animation: fadeIn 1.5s ease-in forwards;
+}
