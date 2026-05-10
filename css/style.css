@@ -3200,3 +3200,154 @@ header {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(180deg, #2563eb, #00bfff);
 }
+
+/* ---- 5) ADDITIONAL Blue Theme Fixes: Remaining Buttons & Section Dividers ---- */
+
+/* Fix: Step button (Sell my Car) - override gold/amber */
+.step-btn {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  background-color: #0a1628 !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 12px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(30, 144, 255, 0.2);
+  transition: all 0.3s ease !important;
+}
+
+.step-btn:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 20px rgba(30, 144, 255, 0.5), inset 0 1px 0 rgba(30, 144, 255, 0.3) !important;
+  transform: translateY(-2px);
+  border-color: #00bfff !important;
+}
+
+/* Fix: Form button 2 (Book Visit) - override gold/amber */
+.form-btn-2 {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  background-color: #0a1628 !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 12px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(30, 144, 255, 0.2);
+  transition: all 0.3s ease !important;
+}
+
+.form-btn-2:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 20px rgba(30, 144, 255, 0.5), inset 0 1px 0 rgba(30, 144, 255, 0.3) !important;
+  transform: translateY(-2px);
+  border-color: #00bfff !important;
+}
+
+/* Fix: Form button (navigation buttons) */
+.form-btn {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  background-color: #0a1628 !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 12px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(30, 144, 255, 0.2);
+  transition: all 0.3s ease !important;
+}
+
+.form-btn:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 20px rgba(30, 144, 255, 0.5), inset 0 1px 0 rgba(30, 144, 255, 0.3) !important;
+  transform: translateY(-2px);
+  border-color: #00bfff !important;
+}
+
+/* Fix: Back to Top button */
+.back-to-top {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.25);
+  transition: all 0.3s ease !important;
+}
+
+.back-to-top:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 18px rgba(30, 144, 255, 0.5) !important;
+  border-color: #00bfff !important;
+}
+
+/* Fix: Category buttons (Sedans, SUVs, Luxury) */
+.category-btn {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 10px rgba(30, 144, 255, 0.25);
+  transition: all 0.3s ease !important;
+}
+
+.category-btn:hover,
+.category-btn.active {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 18px rgba(30, 144, 255, 0.5) !important;
+  border-color: #00bfff !important;
+  color: #ffffff !important;
+}
+
+/* Fix: Arrow buttons (calendar navigation) */
+.arrow-btn {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  transition: all 0.3s ease !important;
+}
+
+.arrow-btn:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  border-color: #00bfff !important;
+}
+
+/* Broad catch-all: Any remaining section buttons with inline styles or no class */
+section button,
+.booking-section button,
+.second-section button,
+.steps-section button,
+.need-car-section button {
+  background: linear-gradient(135deg, #0a1628, #1a3a6b) !important;
+  color: #ffffff !important;
+  border: 1px solid #1e90ff !important;
+  box-shadow: 0 0 12px rgba(30, 144, 255, 0.3), inset 0 1px 0 rgba(30, 144, 255, 0.2);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease !important;
+}
+
+section button:hover,
+.booking-section button:hover,
+.second-section button:hover,
+.steps-section button:hover,
+.need-car-section button:hover {
+  background: linear-gradient(135deg, #1a3a6b, #2563eb) !important;
+  box-shadow: 0 4px 20px rgba(30, 144, 255, 0.5), inset 0 1px 0 rgba(30, 144, 255, 0.3) !important;
+  transform: translateY(-2px);
+  border-color: #00bfff !important;
+}
+
+/* ---- Fix: Missing Section Dividers ---- */
+.booking-section::before,
+.steps-section::before,
+.need-car-section::before {
+  content: '';
+  display: block;
+  width: 80%;
+  max-width: 900px;
+  height: 3px;
+  margin: 0 auto 40px auto;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #0a1628 15%,
+    #1e90ff 50%,
+    #0a1628 85%,
+    transparent 100%
+  );
+  border-radius: 2px;
+}
+
+/* Ensure all section position relative for ::before */
+.booking-section,
+.steps-section,
+.need-car-section {
+  position: relative;
+}
